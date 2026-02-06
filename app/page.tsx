@@ -21,14 +21,34 @@ const experiences = [
     title: "Frontend Developer (Senior Associate – Technology)",
     company: "TCZ Digital Pvt. Ltd.",
     period: "Dec 2021 – Present",
-    description: "Leading frontend development for high-impact dashboards and real-time bidding systems, focusing on performance, security, and scalability.",
-    highlights: [
-      "Royal Enfield (Internal Dashboard): Built frontend architecture from scratch using Next.js, Redux, and Firebase.",
-      "Developed a real-time bidding system for bikes with seamless Firebase integration.",
-      "Secured API payloads using hash validation and implemented Content Security Policy (CSP).",
-      "Royal Enfield (Ride Sure): Integrated platform with shared authentication and service booking.",
-      "Somani (Shipment Tracking): Developed analytics dashboards with visual data insights using React and Redux.",
-      "Optimized API response times and ensured data consistency across platforms."
+    projects: [
+      {
+        name: "Royal Enfield (Internal Dashboard)",
+        description: "Built a high-performance frontend architecture from scratch for internal operations.",
+        highlights: [
+          "Developed a real-time bidding system for bikes with seamless Firebase integration.",
+          "Secured API payloads using hash validation and implemented Content Security Policy (CSP).",
+          "Created reusable UI components and optimized app responsiveness."
+        ]
+      },
+      {
+        name: "Royal Enfield (Ride Sure)",
+        description: "Integrated the Ride Sure platform with the main Royal Enfield ecosystem.",
+        highlights: [
+          "Enabled shared authentication and service booking flows.",
+          "Integrated Google Analytics to monitor user engagement in real-time.",
+          "Optimized deployment readiness and streamlined backend communication."
+        ]
+      },
+      {
+        name: "Somani (Shipment Tracking Dashboard)",
+        description: "Designed and developed visual data insights for shipment logistics.",
+        highlights: [
+          "Created interactive data visualization components using React and Redux.",
+          "Collaborated with backend teams to optimize API response times.",
+          "Ensured data consistency across complex shipment tracking modules."
+        ]
+      }
     ]
   }
 ];
