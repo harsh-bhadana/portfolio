@@ -170,10 +170,10 @@ export default function Home() {
                   Email Me
                 </a>
                 <div className="flex items-center gap-4">
-                  <a href="#" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
+                  <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
                     <Linkedin className="w-6 h-6" />
                   </a>
-                  <a href="#" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
+                  <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
                     <Github className="w-6 h-6" />
                   </a>
                 </div>
