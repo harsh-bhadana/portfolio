@@ -112,7 +112,7 @@ export default function Home() {
 
       <main className="max-w-5xl mx-auto px-6 pt-32 relative z-10">
         {/* Hero Section */}
-        <section id="hero" className="py-20 md:py-40">
+        <section id="about" className="py-20 md:py-40">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

@@ -14,13 +14,39 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ["about", "experience", "skills", "projects", "contact"];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -29,27 +55,39 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`glass rounded-2xl px-8 py-3 flex items-center gap-12 transition-all duration-500 ${
+        className={`glass rounded-2xl px-4 py-2 flex items-center gap-2 transition-all duration-500 ${
           scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
         }`}
       >
-        <Link href="/" className="text-xl font-black tracking-tighter hover:scale-110 transition-transform">
+        <Link href="/" className="px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform mr-4">
           HB<span className="text-accent">.</span>
         </Link>
 
-        <div className="hidden md:flex gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-[10px] font-black uppercase tracking-widest text-foreground/50 hover:text-accent hover:scale-105 transition-all"
-            >
-              {link.name}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
+                  isActive ? "text-white" : "text-foreground/40 hover:text-foreground/70"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-bg"
+                    className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
 
-        <button className="md:hidden text-foreground">
+        <button className="md:hidden px-4 text-foreground">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
