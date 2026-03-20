@@ -59,6 +59,22 @@ const skills = [
   { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <Layers className="w-5 h-5" /> }
 ];
 
+const githubProjects = [
+  {
+    name: "Clicks",
+    description: "A high-performance, dark-themed photography gallery featuring infinite scroll and a premium lightbox experience. Built with a content-first philosophy.",
+    tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
+    github: "https://github.com/harsh-bhadana/clicks",
+    demo: "https://clicks-nine.vercel.app"
+  },
+  {
+    name: "NextJS Labs",
+    description: "A collection of experiments and demonstrations exploring modern Next.js and React 19 capabilities. Isolates unique edge-cases, performance optimization techniques, and new API specimens.",
+    tech: ["Next.js 15", "React 19", "Server Actions", "PPR"],
+    github: "https://github.com/harsh-bhadana/next-labs"
+  }
+];
+
 export default function Home() {
   return (
     <div className="bg-background text-foreground selection:bg-accent/30">
@@ -149,6 +165,66 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* GitHub Projects Section */}
+        <section id="projects" className="py-20">
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">Personal Projects</h2>
+            <div className="h-px flex-1 bg-border"></div>
+            <span className="text-accent font-mono">03</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {githubProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group p-8 rounded-3xl border border-border bg-white/[0.02] hover:bg-white/[0.04] transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
+                  <Github className="w-12 h-12" />
+                </div>
+                
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{project.name}</h3>
+                <p className="text-foreground/60 mb-8 leading-relaxed">
+                  {project.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {project.tech.map((t, i) => (
+                    <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-wider text-foreground/40">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-accent hover:underline"
+                  >
+                    GitHub <Github className="w-4 h-4" />
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-bold text-white hover:underline"
+                    >
+                      Live Demo <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>
