@@ -19,6 +19,7 @@ import {
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
 import AlwaysAnimatedIcon from "./components/AlwaysAnimatedIcon";
+import Footer from "./components/Footer";
 
 const experiences = [
   {
@@ -308,21 +309,9 @@ My toolbelt for building high-performance digital products.</p>
               </div>
             </div>
           </div>
-
-          <footer className="mt-20 flex flex-col md:flex-row justify-between items-center text-foreground/20 text-[10px] font-black uppercase tracking-[0.2em] gap-8 pb-10">
-            <p>© 2026 Harsh Bhadana / Built with Speed</p>
-            <div className="flex gap-12">
-              <div className="flex flex-col items-end">
-                <span className="opacity-40">Location</span>
-                <span className="text-foreground/60">Faridabad, India</span>
-              </div>
-              <div className="flex flex-col items-end">
-                <span className="opacity-40">Status</span>
-                <span className="text-accent">Open to Work</span>
-              </div>
-            </div>
-          </footer>
         </section>
+
+        <Footer />
       </main>
     </div>
   );
