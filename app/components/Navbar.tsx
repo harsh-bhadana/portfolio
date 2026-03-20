@@ -59,15 +59,15 @@ export default function Navbar() {
           scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
         }`}
       >
-        <Link href="/" className="px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform mr-4">
+        <a href="/" className="px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform mr-4">
           HB<span className="text-accent">.</span>
-        </Link>
+        </a>
 
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
@@ -82,7 +82,7 @@ export default function Navbar() {
                   />
                 )}
                 {link.name}
-              </Link>
+              </a>
             );
           })}
         </div>
