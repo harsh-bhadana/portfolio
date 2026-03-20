@@ -2,23 +2,20 @@
 
 import { motion } from "framer-motion";
 import {
-  ChevronRightIcon,
-  GithubIcon,
-  LinkedinIcon,
-  MailCheckIcon,
-  CpuIcon,
-  DatabaseIcon,
-  EarthIcon,
-  LayersIcon,
-  LinkIcon
-} from "lucide-animated";
-import {
-  Code2,
+  ChevronRight,
+  Github,
+  Linkedin,
+  Mail,
+  Cpu,
+  Database,
+  Globe,
+  Layers,
   ExternalLink,
+  Camera,
+  Sparkles,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
-import AlwaysAnimatedIcon from "./components/AlwaysAnimatedIcon";
 import Footer from "./components/Footer";
 
 const experiences = [
@@ -59,14 +56,15 @@ const experiences = [
 ];
 
 const skills = [
-  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: <AlwaysAnimatedIcon icon={EarthIcon} /> },
-  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: <AlwaysAnimatedIcon icon={DatabaseIcon} /> },
-  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <AlwaysAnimatedIcon icon={LayersIcon} /> }
+  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: <Globe size={24} /> },
+  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: <Database size={24} /> },
+  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <Layers size={24} /> }
 ];
 
 const githubProjects = [
   {
     name: "Clicks",
+    icon: Camera,
     description: "A high-performance, dark-themed photography gallery featuring infinite scroll and a premium lightbox experience. Built with a content-first philosophy.",
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
     github: "https://github.com/harsh-bhadana/clicks",
@@ -74,6 +72,23 @@ const githubProjects = [
   },
   {
     name: "NextJS Labs",
+    icon: ({ size, className }: { size?: number, className?: string }) => (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 128 128"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+      >
+        <circle cx="64" cy="64" r="64" fill="currentColor" fillOpacity="0.1" />
+        <path
+          d="M90.5 97.5L42.5 35.5H35.5V92.5H41V44.5L84 100.5C86.5 99.5 88.5 98.5 90.5 97.5Z"
+          fill="currentColor"
+        />
+        <path d="M85.5 35.5H91V92.5H85.5V35.5Z" fill="currentColor" />
+      </svg>
+    ),
     description: "A collection of experiments and demonstrations exploring modern Next.js and React 19 capabilities. Isolates unique edge-cases, performance optimization techniques, and new API specimens.",
     tech: ["Next.js 15", "React 19", "Server Actions", "PPR"],
     github: "https://github.com/harsh-bhadana/next-labs"
@@ -146,7 +161,7 @@ export default function Home() {
                 className="group px-10 py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center gap-2"
               >
                 View Experience
-                <ChevronRightIcon size={20} className="group-hover:translate-x-1 transition-transform" />
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#contact"
@@ -181,7 +196,7 @@ export default function Home() {
             {/* Header Card */}
             <div id="skills" className="md:col-span-8 p-10 rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <AlwaysAnimatedIcon icon={CpuIcon} size={160} />
+                <Cpu size={160} />
               </div>
               <span className="text-accent font-black tracking-widest uppercase text-[10px] mb-4 block">02 / Skills</span>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">Tech <span className="animate-gradient">Stack</span></h2>
@@ -231,7 +246,7 @@ My toolbelt for building high-performance digital products.</p>
                   }`}
               >
                 <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all">
-                  <AlwaysAnimatedIcon icon={GithubIcon} size={128} />
+                  <project.icon size={128} />
                 </div>
 
                 <div className="relative z-10 flex flex-col h-full">
@@ -256,7 +271,7 @@ My toolbelt for building high-performance digital products.</p>
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors"
                       >
-                        Source <AlwaysAnimatedIcon icon={GithubIcon} size={16} />
+                        Source <Github size={16} />
                       </a>
                       {project.demo && (
                         <a
@@ -265,7 +280,7 @@ My toolbelt for building high-performance digital products.</p>
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white hover:text-accent transition-colors"
                         >
-                          Live <AlwaysAnimatedIcon icon={LinkIcon} size={16} />
+                          Live <ExternalLink size={16} />
                         </a>
                       )}
                     </div>
@@ -275,7 +290,7 @@ My toolbelt for building high-performance digital products.</p>
             ))}
           </div>
         </section>
- 
+
         {/* Contact Section */}
         <section id="contact" className="py-40 snap-start">
           <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
@@ -284,7 +299,7 @@ My toolbelt for building high-performance digital products.</p>
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"
             />
- 
+
             <div className="relative z-10 text-center flex flex-col items-center">
               <span className="text-[10px] font-black tracking-[0.4em] uppercase mb-12 opacity-60">Get in touch</span>
               <h2 className="text-6xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.8] mix-blend-overlay">
@@ -293,17 +308,16 @@ My toolbelt for building high-performance digital products.</p>
               <div className="flex flex-wrap justify-center gap-8">
                 <a
                   href="mailto:harshbhadana40@gmail.com"
-                  className="px-12 py-6 rounded-2xl bg-white text-black font-black text-lg flex items-center gap-4 hover:scale-105 transition-transform shadow-xl"
+                  className="px-10 py-5 rounded-2xl bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2"
                 >
-                  <AlwaysAnimatedIcon icon={MailCheckIcon} size={24} />
-                  Email Me
+                  <Mail size={20} /> Email Me
                 </a>
                 <div className="flex items-center gap-4">
                   <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <AlwaysAnimatedIcon icon={LinkedinIcon} size={24} />
+                    <Linkedin size={24} />
                   </a>
                   <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <AlwaysAnimatedIcon icon={GithubIcon} size={24} />
+                    <Github size={24} />
                   </a>
                 </div>
               </div>

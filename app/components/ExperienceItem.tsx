@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparklesIcon } from "lucide-animated";
-import AlwaysAnimatedIcon from "./AlwaysAnimatedIcon";
+import { Sparkles } from "lucide-react";
 
 interface Project {
     name: string;
@@ -17,28 +16,19 @@ interface ExperienceItemProps {
     projects: Project[];
 }
 
-export default function ExperienceItem({
-    title,
-    company,
-    period,
-    projects,
-}: ExperienceItemProps) {
+export default function ExperienceItem({ title, company, period, projects }: ExperienceItemProps) {
     return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="p-10 rounded-[2.5rem] card-gradient mb-20 relative overflow-hidden group"
-        >
-            <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <div className="text-8xl font-black italic select-none">EXP</div>
-            </div>
-
-            {/* Company Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 relative z-10">
-                <div>
-                    <h3 className="text-3xl font-black text-white mb-2 leading-none">{title}</h3>
-                    <p className="text-accent text-lg font-bold italic tracking-tight">{company}</p>
+        <div className="mb-20 last:mb-0 group">
+            {/* Header info */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12">
+                <div className="flex items-center gap-6">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                        <Sparkles size={20} />
+                    </div>
+                    <div>
+                        <h3 className="text-3xl font-black text-white mb-2 leading-none">{title}</h3>
+                        <p className="text-accent text-lg font-bold italic tracking-tight">{company}</p>
+                    </div>
                 </div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-foreground/40 mt-6 md:mt-0">
                     {period}
@@ -46,27 +36,27 @@ export default function ExperienceItem({
             </div>
 
             {/* Projects List */}
-            <div className="space-y-16">
+            <div className="space-y-12 pl-4 md:pl-18 border-l border-white/5 ml-6 md:ml-6">
                 {projects.map((project, pIndex) => (
-                    <div key={pIndex} className="relative pl-10">
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent-secondary to-transparent rounded-full shadow-[0_0_15px_rgba(255,70,85,0.3)]" />
-                        <div className="absolute -left-1.5 top-0 w-4 h-4 rounded-full bg-accent border-4 border-[#0f0f0f] shadow-[0_0_10px_rgba(255,70,85,0.5)]" />
-                        
-                        <h4 className="text-2xl font-black text-white mb-4 leading-tight">{project.name}</h4>
-                        <p className="text-foreground/60 text-base mb-8 leading-relaxed max-w-3xl">
+                    <div key={pIndex} className="relative">
+                        <div className="absolute -left-10 top-2 w-4 h-4 rounded-full bg-accent/20 border-2 border-accent" />
+                        <h4 className="text-xl font-black text-white mb-4 uppercase tracking-wider">{project.name}</h4>
+                        <p className="text-foreground/40 text-sm font-medium mb-8 max-w-2xl leading-relaxed italic border-l-2 border-accent/20 pl-4">
                             {project.description}
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {project.highlights.map((highlight, hIndex) => (
-                                <div key={hIndex} className="flex gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group/highlight">
-                                    <AlwaysAnimatedIcon icon={SparklesIcon} size={16} className="text-accent group-hover/highlight:scale-110 transition-transform" />
-                                    <p className="text-xs text-foreground/50 leading-relaxed font-medium">{highlight}</p>
-                                </div>
+                                <li key={hIndex} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 group/li hover:border-accent/20 transition-all">
+                                    <div className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-accent opacity-40 group-hover/li:opacity-100 group-hover/li:scale-125 transition-all" />
+                                    <span className="text-xs text-foreground/60 font-medium leading-relaxed group-hover/li:text-foreground/80 transition-colors">
+                                        {highlight}
+                                    </span>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
                 ))}
             </div>
-        </motion.div>
+        </div>
     );
 }

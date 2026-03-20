@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, Github, Linkedin, Twitter, Globe, MapPin, Clock } from "lucide-react";
-import AlwaysAnimatedIcon from "./AlwaysAnimatedIcon";
-import { GithubIcon, LinkedinIcon } from "lucide-animated";
 
 export default function Footer() {
   const [time, setTime] = useState<string>("");
@@ -41,10 +39,10 @@ export default function Footer() {
             </a>
             <div className="flex gap-4">
               <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
-                <AlwaysAnimatedIcon icon={GithubIcon} size={20} className="text-foreground/60 group-hover:text-foreground" />
+                <Github size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
               <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
-                <AlwaysAnimatedIcon icon={LinkedinIcon} size={20} className="text-foreground/60 group-hover:text-foreground" />
+                <Linkedin size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
             </div>
           </div>
@@ -57,7 +55,12 @@ export default function Footer() {
               <p className="text-sm font-bold text-foreground/60">Faridabad, India</p>
             </div>
 
-
+            <div className="flex flex-col gap-4">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20 flex items-center gap-2">
+                <Clock size={12} className="text-accent" /> Local Time
+              </span>
+              <p className="text-sm font-bold text-foreground/60">{time || "Loading..."}</p>
+            </div>
 
             <div className="flex flex-col gap-4">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20">Status</span>
