@@ -77,18 +77,48 @@ const githubProjects = [
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground selection:bg-accent/30">
+    <div className="bg-background text-foreground selection:bg-accent/30 relative overflow-hidden">
+      {/* Background Blobs */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+            rotate: [0, 45, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-accent/20 bg-blob animate-float"
+        />
+        <motion.div
+          animate={{
+            x: [0, -100, 0],
+            y: [0, 100, 0],
+            rotate: [0, -45, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] rounded-full bg-accent-secondary/20 bg-blob"
+        />
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 150, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-accent-tertiary/20 bg-blob"
+        />
+      </div>
+
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 pt-32">
+      <main className="max-w-5xl mx-auto px-6 pt-32 relative z-10">
         {/* Hero Section */}
-        <section id="hero" className="py-20 md:py-32">
+        <section id="hero" className="py-20 md:py-40">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold tracking-widest uppercase mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-[10px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
@@ -96,24 +126,26 @@ export default function Home() {
               Available for new projects
             </div>
 
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 leading-[0.9]">
-              Harsh <span className="text-accent underline decoration-accent/20 underline-offset-8">Bhadana</span>
+            <h1 className="text-6xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.8] mix-blend-difference">
+              Harsh <br /> 
+              <span className="text-gradient">Bhadana</span>
             </h1>
 
-            <p className="max-w-2xl text-xl md:text-2xl text-foreground/60 font-medium leading-relaxed mb-10">
-              Senior Frontend Developer crafting high-performance, secure, and user-centric digital experiences with <span className="text-white">Next.js</span> and <span className="text-white">Redux</span>.
+            <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12">
+              Senior <span className="text-white italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-6">
               <a
                 href="#experience"
-                className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all transform hover:scale-105"
+                className="group px-10 py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center gap-2"
               >
                 View Experience
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#contact"
-                className="px-8 py-4 rounded-full border border-border font-semibold hover:bg-white/5 transition-all"
+                className="px-10 py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80"
               >
                 Get in Touch
               </a>
@@ -122,11 +154,12 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-20">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl font-bold tracking-tight">Professional Exp.</h2>
-            <div className="h-px flex-1 bg-border"></div>
-            <span className="text-accent font-mono">01</span>
+        <section id="experience" className="py-20 md:py-40">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
+            <div>
+              <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Professional <br /> <span className="text-white/20">Journey</span></h2>
+            </div>
           </div>
 
           <div>
@@ -136,49 +169,49 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills Section */}
-        <section id="skills" className="py-20">
-          <div className="flex items-center gap-4 mb-12">
-            <span className="text-accent font-mono">02</span>
-            <div className="h-px flex-1 bg-border"></div>
-            <h2 className="text-3xl font-bold tracking-tight">Tech Stack</h2>
-          </div>
+        {/* Skills & Projects Bento Grid */}
+        <section className="py-20 md:py-40">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
+            
+            {/* Header Card */}
+            <div id="skills" className="md:col-span-8 p-10 rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
+                <Cpu className="w-40 h-40" />
+              </div>
+              <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Expertise</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">Tech <span className="text-white/20">Stack</span></h2>
+              <p className="text-foreground/40 font-medium max-w-md">My toolbelt for building high-performance digital products.</p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Individual Skill Categories */}
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl border border-border bg-white/[0.02]"
+                className="md:col-span-4 p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-accent/40 transition-all group"
               >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
                   {skill.icon}
                 </div>
-                <h3 className="text-lg font-bold mb-4">{skill.category}</h3>
-                <ul className="space-y-2">
+                <h3 className="text-xl font-black mb-6 uppercase tracking-wider">{skill.category}</h3>
+                <div className="flex flex-wrap gap-2">
                   {skill.items.map((item, i) => (
-                    <li key={i} className="text-foreground/50 text-sm flex items-center gap-2">
-                      <ChevronRight className="w-3 h-3 text-accent" />
+                    <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-foreground/40">
                       {item}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </motion.div>
             ))}
-          </div>
-        </section>
 
-        {/* GitHub Projects Section */}
-        <section id="projects" className="py-20">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl font-bold tracking-tight">Personal Projects</h2>
-            <div className="h-px flex-1 bg-border"></div>
-            <span className="text-accent font-mono">03</span>
-          </div>
+            {/* Project Cards (Bento Style) */}
+            <div id="projects" className="md:col-span-12 mt-12 mb-6">
+              <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Latest <span className="text-white/20">Works</span></h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {githubProjects.map((project, index) => (
               <motion.div
                 key={index}
@@ -186,44 +219,50 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-8 rounded-3xl border border-border bg-white/[0.02] hover:bg-white/[0.04] transition-all relative overflow-hidden"
+                className={`group p-10 rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden ${
+                  index === 0 ? "md:col-span-7" : "md:col-span-5"
+                }`}
               >
-                <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
-                  <Github className="w-12 h-12" />
+                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all">
+                  <Github className="w-32 h-32" />
                 </div>
                 
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{project.name}</h3>
-                <p className="text-foreground/60 mb-8 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {project.tech.map((t, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-wider text-foreground/40">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                <div className="relative z-10 flex flex-col h-full">
+                  <h3 className="text-3xl md:text-4xl font-black mb-6 group-hover:text-accent transition-colors leading-none">{project.name}</h3>
+                  <p className="text-foreground/50 mb-10 leading-relaxed font-medium">
+                    {project.description}
+                  </p>
+                  
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.tech.map((t, i) => (
+                        <span key={i} className="px-3 py-1 rounded-lg bg-accent/10 border border-accent/20 text-[9px] font-black uppercase tracking-widest text-accent">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
 
-                <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-accent hover:underline"
-                  >
-                    GitHub <Github className="w-4 h-4" />
-                  </a>
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm font-bold text-white hover:underline"
-                    >
-                      Live Demo <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
+                    <div className="flex gap-6">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors"
+                      >
+                        Source <Github className="w-4 h-4" />
+                      </a>
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white hover:text-accent transition-colors"
+                        >
+                          Live <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -232,24 +271,31 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="py-40">
-          <div className="p-12 md:p-20 rounded-[3rem] bg-accent text-white relative overflow-hidden text-center">
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[0.9]">
-                LET&apos;S BUILD SOMETHING <br /> EXTRAORDINARY
+          <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
+            <motion.div 
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl" 
+            />
+            
+            <div className="relative z-10 text-center flex flex-col items-center">
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase mb-12 opacity-60">Get in touch</span>
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.8] mix-blend-overlay">
+                LET&apos;S GO <br /> BEYOND
               </h2>
-              <div className="flex flex-wrap justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-8">
                 <a
                   href="mailto:harshbhadana40@gmail.com"
-                  className="px-10 py-5 rounded-full bg-white text-black font-bold flex items-center gap-3 hover:scale-105 transition-transform"
+                  className="px-12 py-6 rounded-2xl bg-white text-black font-black text-lg flex items-center gap-4 hover:scale-105 transition-transform shadow-xl"
                 >
-                  <Mail className="w-5 h-5" />
-                  Email Me
+                  <Mail className="w-6 h-6" />
+                  HIRE ME
                 </a>
                 <div className="flex items-center gap-4">
-                  <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
+                  <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
                     <Linkedin className="w-6 h-6" />
                   </a>
-                  <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black/20 hover:bg-black/40 transition-colors">
+                  <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
                     <Github className="w-6 h-6" />
                   </a>
                 </div>
@@ -257,11 +303,17 @@ export default function Home() {
             </div>
           </div>
 
-          <footer className="mt-20 flex flex-col md:flex-row justify-between items-center text-foreground/40 text-sm gap-4">
-            <p>© 2026 Harsh Bhadana. Built with Passion & Caffeine.</p>
-            <div className="flex gap-8">
-              <span>Faridabad, Haryana</span>
-              <span>9999182025</span>
+          <footer className="mt-20 flex flex-col md:flex-row justify-between items-center text-foreground/20 text-[10px] font-black uppercase tracking-[0.2em] gap-8 pb-10">
+            <p>© 2026 Harsh Bhadana / Built with Speed</p>
+            <div className="flex gap-12">
+              <div className="flex flex-col items-end">
+                <span className="opacity-40">Location</span>
+                <span className="text-foreground/60">Faridabad, India</span>
+              </div>
+              <div className="flex flex-col items-end">
+                <span className="opacity-40">Status</span>
+                <span className="text-accent">Open to Work</span>
+              </div>
             </div>
           </footer>
         </section>

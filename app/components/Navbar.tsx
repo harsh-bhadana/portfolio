@@ -24,15 +24,16 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass py-4" : "bg-transparent py-6"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold tracking-tighter hover:text-accent transition-colors">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className={`glass rounded-2xl px-8 py-3 flex items-center gap-12 transition-all duration-500 ${
+          scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
+        }`}
+      >
+        <Link href="/" className="text-xl font-black tracking-tighter hover:scale-110 transition-transform">
           HB<span className="text-accent">.</span>
         </Link>
 
@@ -41,7 +42,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+              className="text-[10px] font-black uppercase tracking-widest text-foreground/50 hover:text-accent hover:scale-105 transition-all"
             >
               {link.name}
             </Link>
@@ -53,14 +54,14 @@ export default function Navbar() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
+            strokeWidth={2}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-5 h-5"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </button>
-      </div>
-    </motion.nav>
+      </motion.nav>
+    </div>
   );
 }
