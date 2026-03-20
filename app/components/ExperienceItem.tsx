@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SparklesIcon } from "lucide-animated";
+import AlwaysAnimatedIcon from "./AlwaysAnimatedIcon";
 
 interface Project {
     name: string;
@@ -56,8 +58,8 @@ export default function ExperienceItem({
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {project.highlights.map((highlight, hIndex) => (
-                                <div key={hIndex} className="flex gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                                    <span className="text-accent text-sm font-black">★</span>
+                                <div key={hIndex} className="flex gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group/highlight">
+                                    <AlwaysAnimatedIcon icon={SparklesIcon} size={16} className="text-accent group-hover/highlight:scale-110 transition-transform" />
                                     <p className="text-xs text-foreground/50 leading-relaxed font-medium">{highlight}</p>
                                 </div>
                             ))}

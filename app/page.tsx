@@ -2,19 +2,23 @@
 
 import { motion } from "framer-motion";
 import {
+  ChevronRightIcon,
+  GithubIcon,
+  LinkedinIcon,
+  MailCheckIcon,
+  CpuIcon,
+  DatabaseIcon,
+  EarthIcon,
+  LayersIcon,
+  LinkIcon
+} from "lucide-animated";
+import {
   Code2,
-  Cpu,
-  Layers,
-  Mail,
   ExternalLink,
-  Github,
-  Linkedin,
-  ChevronRight,
-  Database,
-  Globe
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
+import AlwaysAnimatedIcon from "./components/AlwaysAnimatedIcon";
 
 const experiences = [
   {
@@ -54,9 +58,9 @@ const experiences = [
 ];
 
 const skills = [
-  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: <Globe className="w-5 h-5" /> },
-  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: <Database className="w-5 h-5" /> },
-  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <Layers className="w-5 h-5" /> }
+  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: <AlwaysAnimatedIcon icon={EarthIcon} /> },
+  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: <AlwaysAnimatedIcon icon={DatabaseIcon} /> },
+  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <AlwaysAnimatedIcon icon={LayersIcon} /> }
 ];
 
 const githubProjects = [
@@ -127,7 +131,7 @@ export default function Home() {
             </div>
 
             <h1 className="text-6xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.8] mix-blend-difference">
-              Harsh <br /> 
+              Harsh <br />
               <span className="text-gradient">Bhadana</span>
             </h1>
 
@@ -141,7 +145,7 @@ export default function Home() {
                 className="group px-10 py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center gap-2"
               >
                 View Experience
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ChevronRightIcon size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#contact"
@@ -172,11 +176,11 @@ export default function Home() {
         {/* Skills & Projects Bento Grid */}
         <section className="py-20 md:py-40">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
-            
+
             {/* Header Card */}
             <div id="skills" className="md:col-span-8 p-10 rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Cpu className="w-40 h-40" />
+                <AlwaysAnimatedIcon icon={CpuIcon} size={160} />
               </div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Expertise</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">Tech <span className="text-white/20">Stack</span></h2>
@@ -219,20 +223,19 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`group p-10 rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden ${
-                  index === 0 ? "md:col-span-7" : "md:col-span-5"
-                }`}
+                className={`group p-10 rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden ${index === 0 ? "md:col-span-7" : "md:col-span-5"
+                  }`}
               >
                 <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all">
-                  <Github className="w-32 h-32" />
+                  <AlwaysAnimatedIcon icon={GithubIcon} size={128} />
                 </div>
-                
+
                 <div className="relative z-10 flex flex-col h-full">
                   <h3 className="text-3xl md:text-4xl font-black mb-6 group-hover:text-accent transition-colors leading-none">{project.name}</h3>
                   <p className="text-foreground/50 mb-10 leading-relaxed font-medium">
                     {project.description}
                   </p>
-                  
+
                   <div className="mt-auto">
                     <div className="flex flex-wrap gap-2 mb-8">
                       {project.tech.map((t, i) => (
@@ -249,7 +252,7 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors"
                       >
-                        Source <Github className="w-4 h-4" />
+                        Source <AlwaysAnimatedIcon icon={GithubIcon} size={16} />
                       </a>
                       {project.demo && (
                         <a
@@ -258,7 +261,7 @@ export default function Home() {
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white hover:text-accent transition-colors"
                         >
-                          Live <ExternalLink className="w-4 h-4" />
+                          Live <AlwaysAnimatedIcon icon={LinkIcon} size={16} />
                         </a>
                       )}
                     </div>
@@ -268,16 +271,16 @@ export default function Home() {
             ))}
           </div>
         </section>
-
+ 
         {/* Contact Section */}
         <section id="contact" className="py-40">
           <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
-            <motion.div 
+            <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl" 
+              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"
             />
-            
+ 
             <div className="relative z-10 text-center flex flex-col items-center">
               <span className="text-[10px] font-black tracking-[0.4em] uppercase mb-12 opacity-60">Get in touch</span>
               <h2 className="text-6xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.8] mix-blend-overlay">
@@ -288,15 +291,15 @@ export default function Home() {
                   href="mailto:harshbhadana40@gmail.com"
                   className="px-12 py-6 rounded-2xl bg-white text-black font-black text-lg flex items-center gap-4 hover:scale-105 transition-transform shadow-xl"
                 >
-                  <Mail className="w-6 h-6" />
-                  HIRE ME
+                  <AlwaysAnimatedIcon icon={MailCheckIcon} size={24} />
+                  Email Me
                 </a>
                 <div className="flex items-center gap-4">
                   <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <Linkedin className="w-6 h-6" />
+                    <AlwaysAnimatedIcon icon={LinkedinIcon} size={24} />
                   </a>
                   <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <Github className="w-6 h-6" />
+                    <AlwaysAnimatedIcon icon={GithubIcon} size={24} />
                   </a>
                 </div>
               </div>
