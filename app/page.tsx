@@ -116,7 +116,7 @@ export default function Home() {
 
       <main className="max-w-5xl mx-auto px-6 pt-32 relative z-10">
         {/* Hero Section */}
-        <section id="about" className="py-20 md:py-40">
+        <section id="about" className="py-20 md:py-40 snap-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -158,7 +158,7 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-20 md:py-40">
+        <section id="experience" className="py-20 md:py-40 snap-start">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
             <div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
@@ -174,7 +174,7 @@ export default function Home() {
         </section>
 
         {/* Skills & Projects Bento Grid */}
-        <section className="py-20 md:py-40">
+        <section className="py-20 md:py-40 snap-start">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
 
             {/* Header Card */}
@@ -273,7 +273,7 @@ export default function Home() {
         </section>
  
         {/* Contact Section */}
-        <section id="contact" className="py-40">
+        <section id="contact" className="py-40 snap-start">
           <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
             <motion.div
               animate={{ rotate: [0, 360] }}
