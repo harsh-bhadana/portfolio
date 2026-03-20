@@ -68,6 +68,21 @@ body {
   50% { transform: translateY(-20px) scale(1.05); }
 }
 
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background: linear-gradient(-45deg, var(--accent), var(--accent-secondary), var(--accent-tertiary), var(--accent));
+  background-size: 300% 300%;
+  animation: gradient-flow 5s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

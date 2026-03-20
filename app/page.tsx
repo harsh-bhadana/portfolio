@@ -162,7 +162,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
             <div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Professional <br /> <span className="text-white/20">Journey</span></h2>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-tight">Professional <br /> <span className="animate-gradient">Journey</span></h2>
             </div>
           </div>
 
@@ -182,9 +182,10 @@ export default function Home() {
               <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
                 <AlwaysAnimatedIcon icon={CpuIcon} size={160} />
               </div>
-              <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Expertise</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">Tech <span className="text-white/20">Stack</span></h2>
-              <p className="text-foreground/40 font-medium max-w-md">My toolbelt for building high-performance digital products.</p>
+              <span className="text-accent font-black tracking-widest uppercase text-[10px] mb-4 block">02 / Skills</span>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">Tech <span className="animate-gradient">Stack</span></h2>
+              <p className="text-foreground/40 text-xs font-medium leading-relaxed max-w-[200px]">
+My toolbelt for building high-performance digital products.</p>
             </div>
 
             {/* Individual Skill Categories */}
@@ -211,9 +212,11 @@ export default function Home() {
             ))}
 
             {/* Project Cards (Bento Style) */}
-            <div id="projects" className="md:col-span-12 mt-12 mb-6">
-              <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Latest <span className="text-white/20">Works</span></h2>
+            <div id="projects" className="md:col-span-12">
+              <div>
+                <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Latest <span className="animate-gradient">Works</span></h2>
+              </div>
             </div>
 
             {githubProjects.map((project, index) => (
