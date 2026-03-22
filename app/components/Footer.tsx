@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, Github, Linkedin, Twitter, Globe, MapPin, Clock, Instagram } from "lucide-react";
+import { ArrowUp, Github, Linkedin, MapPin, Instagram } from "lucide-react";
 
 export default function Footer() {
 
@@ -16,7 +15,7 @@ export default function Footer() {
 
       <div className="pt-20 flex flex-col gap-20">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-          <div className="flex flex-col gap-8">
+          <div className="flex items-center justify-between w-full">
             <a href="/" className="text-4xl font-black tracking-tighter hover:scale-105 transition-transform origin-left inline-block">
               HB<span className="text-accent">.</span>
             </a>
@@ -27,7 +26,7 @@ export default function Footer() {
               <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
                 <Linkedin size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
-              <a href="https://www.instagram.com/harsh_bhadana_/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
+              <a href="https://www.instagram.com/harshbhadana40/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
                 <Instagram size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
             </div>
@@ -52,12 +51,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10 border-t border-white/5">
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20">
+        <div className="flex justify-between items-center gap-4 pt-10 border-t border-white/5">
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20 leading-none">
               © 2026 Harsh Bhadana
             </p>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20 leading-none">
               Built with <span className="animate-gradient px-1">Speed</span>
             </p>
           </div>
