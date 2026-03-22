@@ -15,18 +15,18 @@ export default function Footer() {
 
       <div className="pt-20 flex flex-col gap-20">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-          <div className="flex items-center justify-between w-full">
-            <a href="/" className="text-4xl font-black tracking-tighter hover:scale-105 transition-transform origin-left inline-block">
+          <div className="flex md:flex-col items-center md:items-start justify-between md:justify-start w-full md:w-auto gap-8">
+            <a href="/" className="text-4xl font-black tracking-tighter hover:scale-105 transition-transform origin-left inline-block order-1 md:order-none">
               HB<span className="text-accent">.</span>
             </a>
-            <div className="flex gap-4">
-              <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
+            <div className="flex gap-4 order-2 md:order-none">
+              <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group shrink-0">
                 <Github size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
-              <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
+              <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group shrink-0">
                 <Linkedin size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
-              <a href="https://www.instagram.com/harshbhadana40/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
+              <a href="https://www.instagram.com/harshbhadana40/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group shrink-0">
                 <Instagram size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
             </div>
