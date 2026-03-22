@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { User, Briefcase, Zap, Layout, Mail } from "lucide-react";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "#about", Icon: User },
+  { name: "Experience", href: "#experience", Icon: Briefcase },
+  { name: "Skills", href: "#skills", Icon: Zap },
+  { name: "Projects", href: "#projects", Icon: Layout },
+  { name: "Contact", href: "#contact", Icon: Mail },
 ];
 
 export default function Navbar() {
@@ -50,19 +50,20 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 md:px-6">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`glass rounded-2xl px-4 py-2 flex items-center gap-2 transition-all duration-500 ${
+        className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
           scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
         }`}
       >
-        <a href="/" className="px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform mr-4">
+        <a href="/" className="px-2 md:px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
           HB<span className="text-accent">.</span>
         </a>
 
+        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
@@ -87,18 +88,36 @@ export default function Navbar() {
           })}
         </div>
 
-        <button className="md:hidden px-4 text-foreground">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
+        {/* Mobile Links (Icons Only) */}
+        <div className="flex md:hidden items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            const Icon = link.Icon;
+            return (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                whileHover="hover"
+                initial="initial"
+                className={`relative h-10 flex items-center px-3 transition-all duration-300 rounded-xl group ${
+                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-white/5"
+                }`}
+              >
+                <Icon size={18} className="flex-shrink-0" />
+                <motion.span
+                  variants={{
+                    initial: { width: 0, opacity: 0, marginLeft: 0 },
+                    hover: { width: "auto", opacity: 1, marginLeft: 8 }
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden whitespace-nowrap text-[10px] font-black uppercase tracking-widest"
+                >
+                  {link.name}
+                </motion.span>
+              </motion.a>
+            );
+          })}
+        </div>
       </motion.nav>
     </div>
   );

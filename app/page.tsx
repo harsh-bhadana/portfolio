@@ -66,6 +66,12 @@ const githubProjects = [
     name: "Clicks",
     icon: Camera,
     description: "A high-performance, dark-themed photography gallery featuring infinite scroll and a premium lightbox experience. Built with a content-first philosophy.",
+    features: [
+      "Infinite scroll with optimized image loading",
+      "Premium lightbox gallery with custom transitions",
+      "Integration with Vercel Blob for cloud storage"
+    ],
+    highlight: "Optimized LCP by 40% through intelligent image priority and lazy-loading strategies.",
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
     github: "https://github.com/harsh-bhadana/clicks",
     demo: "https://clicks-nine.vercel.app"
@@ -89,8 +95,16 @@ const githubProjects = [
         <path d="M85.5 35.5H91V92.5H85.5V35.5Z" fill="currentColor" />
       </svg>
     ),
-    description: "A collection of experiments and demonstrations exploring modern Next.js and React 19 capabilities. Isolates unique edge-cases, performance optimization techniques, and new API specimens.",
-    tech: ["Next.js 15", "React 19", "Server Actions", "PPR"],
+    description: "A collection of experiments and demonstrations exploring modern Next.js 16 and React 19 capabilities. Isolates unique edge-cases like Partial Prerendering (PPR), component-level caching with the use cache directive, and Next.js 16 Proxy intercepts.",
+    features: [
+      "Next.js 16 Proxy: Centralized JWT rotation, geo-fencing, and request fingerprinting.",
+      "PPR Dashboard: Partial Prerendering with streaming dynamic data into static shells.",
+      "\"use cache\" Specimen: Exploring granular component-level caching and cacheLife profiles.",
+      "Zero-JS Data Table: High-performance server-filtered rendering with 0kb client-side JavaScript.",
+      "Interactive UI Lab: Native CSS View Transitions API for seamless layout morphing."
+    ],
+    highlight: "Exploring the bleeding edge of Next.js 16 and React 19 with 0kb client-side JavaScript experiments.",
+    tech: ["NEXT.JS 16", "REACT 19", "SERVER ACTIONS", "PPR", "USE CACHE", "PROXY"],
     github: "https://github.com/harsh-bhadana/next-labs"
   }
 ];
@@ -146,8 +160,8 @@ export default function Home() {
               Available for new projects
             </div>
 
-            <h1 className="text-6xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.8] mix-blend-difference">
-              Harsh <br />
+            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.9] md:leading-[0.8] mix-blend-difference">
+              Harsh <br className="md:hidden" />
               <span className="text-gradient">Bhadana</span>
             </h1>
 
@@ -155,17 +169,17 @@ export default function Home() {
               Senior <span className="text-white italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
             </p>
 
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
               <a
                 href="#experience"
-                className="group px-10 py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center gap-2"
+                className="group px-8 md:px-10 py-4 md:py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 View Experience
                 <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#contact"
-                className="px-10 py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80"
+                className="px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80 text-center"
               >
                 Get in Touch
               </a>
@@ -178,7 +192,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
             <div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-tight">Professional <br /> <span className="animate-gradient">Journey</span></h2>
+              <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Professional <br className="md:hidden" /> <span className="animate-gradient">Journey</span></h2>
             </div>
           </div>
 
@@ -194,14 +208,15 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
 
             {/* Header Card */}
-            <div id="skills" className="md:col-span-8 p-10 rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
+            <div id="skills" className="md:col-span-8 p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Cpu size={160} />
+                <Cpu size={120} className="md:size-[160px]" />
               </div>
               <span className="text-accent font-black tracking-widest uppercase text-[10px] mb-4 block">02 / Skills</span>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">Tech <span className="animate-gradient">Stack</span></h2>
               <p className="text-foreground/40 text-xs font-medium leading-relaxed max-w-[200px]">
-My toolbelt for building high-performance digital products.</p>
+                My toolbelt for building high-performance digital products.
+              </p>
             </div>
 
             {/* Individual Skill Categories */}
@@ -211,7 +226,7 @@ My toolbelt for building high-performance digital products.</p>
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="md:col-span-4 p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-accent/40 transition-all group"
+                className="md:col-span-4 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-accent/40 transition-all group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
                   {skill.icon}
@@ -231,40 +246,40 @@ My toolbelt for building high-performance digital products.</p>
             <div id="projects" className="md:col-span-12">
               <div>
                 <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Latest <span className="animate-gradient">Works</span></h2>
+                <h2 className="text-4xl md:text-7xl font-black tracking-tighter">Latest <span className="animate-gradient">Works</span></h2>
               </div>
             </div>
 
-            {githubProjects.map((project, index) => (
+            {githubProjects.map((project: any, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`group p-10 rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden ${index === 0 ? "md:col-span-7" : "md:col-span-5"
+                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col ${index === 0 ? "md:col-span-12" : "md:col-span-12"
                   }`}
               >
-                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all">
+                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all pointer-events-none">
                   <project.icon size={128} />
                 </div>
 
-                <div className="relative z-10 flex flex-col h-full">
-                  <h3 className="text-3xl md:text-4xl font-black mb-6 group-hover:text-accent transition-colors leading-none">{project.name}</h3>
-                  <p className="text-foreground/50 mb-10 leading-relaxed font-medium">
-                    {project.description}
-                  </p>
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 h-full">
+                  <div className="flex flex-col">
+                    <h3 className="text-3xl md:text-5xl font-black mb-6 group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
+                    <p className="text-foreground/70 mb-8 text-sm md:text-base leading-relaxed font-medium">
+                      {project.description}
+                    </p>
 
-                  <div className="mt-auto">
                     <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tech.map((t, i) => (
+                      {project.tech.map((t: string, i: number) => (
                         <span key={i} className="px-3 py-1 rounded-lg bg-accent/10 border border-accent/20 text-[9px] font-black uppercase tracking-widest text-accent">
                           {t}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex gap-6">
+                    <div className="flex gap-6 mt-auto">
                       <a
                         href={project.github}
                         target="_blank"
@@ -285,6 +300,32 @@ My toolbelt for building high-performance digital products.</p>
                       )}
                     </div>
                   </div>
+
+                  <div className="flex flex-col gap-8">
+                    <div>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-accent mb-4 block">Key Features</span>
+                      <ul className="space-y-3">
+                        {project.features.map((feature: string, i: number) => (
+                          <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-foreground/50 font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {project.highlight && (
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden group/highlight">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/highlight:rotate-12 transition-transform">
+                          <Sparkles size={24} className="text-accent" />
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40 mb-2 block">Technical Highlight</span>
+                        <p className="text-xs md:text-sm text-foreground/70 font-bold leading-relaxed">
+                          {project.highlight}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -302,7 +343,7 @@ My toolbelt for building high-performance digital products.</p>
 
             <div className="relative z-10 text-center flex flex-col items-center">
               <span className="text-[10px] font-black tracking-[0.4em] uppercase mb-12 opacity-60">Get in touch</span>
-              <h2 className="text-6xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.8] mix-blend-overlay">
+              <h2 className="text-5xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.9] md:leading-[0.8] mix-blend-overlay">
                 LET&apos;S GO <br /> BEYOND
               </h2>
               <div className="flex flex-wrap justify-center gap-8">
