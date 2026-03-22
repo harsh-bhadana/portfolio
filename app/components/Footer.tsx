@@ -2,26 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, Github, Linkedin, Twitter, Globe, MapPin, Clock } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Twitter, Globe, MapPin, Clock, Instagram } from "lucide-react";
 
 export default function Footer() {
-  const [time, setTime] = useState<string>("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      };
-      setTime(new Intl.DateTimeFormat("en-US", options).format(new Date()));
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 60000); // Update every minute
-    return () => clearInterval(interval);
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,23 +27,20 @@ export default function Footer() {
               <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
                 <Linkedin size={20} className="text-foreground/60 group-hover:text-foreground" />
               </a>
+              <a href="https://www.instagram.com/harsh_bhadana_/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/40 transition-all group">
+                <Instagram size={20} className="text-foreground/60 group-hover:text-foreground" />
+              </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 w-full md:w-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full md:w-auto">
             <div className="flex flex-col gap-4">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20 flex items-center gap-2">
                 <MapPin size={12} className="text-accent" /> Location
               </span>
-              <p className="text-sm font-bold text-foreground/60">Faridabad, India</p>
+              <p className="text-sm font-bold text-foreground/60 line-clamp-1">Faridabad, IN</p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20 flex items-center gap-2">
-                <Clock size={12} className="text-accent" /> Local Time
-              </span>
-              <p className="text-sm font-bold text-foreground/60">{time || "Loading..."}</p>
-            </div>
 
             <div className="flex flex-col gap-4">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/20">Status</span>

@@ -15,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,7 +88,10 @@ export default function Navbar() {
           })}
         </div>
 
-        <button className="md:hidden px-4 text-foreground">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden px-4 text-foreground relative z-50"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -96,9 +100,42 @@ export default function Navbar() {
             stroke="currentColor"
             className="w-5 h-5"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            )}
           </svg>
         </button>
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{
+            opacity: isOpen ? 1 : 0,
+            height: isOpen ? "auto" : 0,
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="absolute top-full left-0 right-0 mt-2 md:hidden overflow-hidden"
+        >
+          <div className="glass rounded-2xl p-4 flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-colors ${
+                    isActive ? "bg-accent text-white" : "text-foreground/40 hover:bg-white/5"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
+          </div>
+        </motion.div>
       </motion.nav>
     </div>
   );
