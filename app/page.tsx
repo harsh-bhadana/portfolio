@@ -17,6 +17,7 @@ import {
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
 import Footer from "./components/Footer";
+import GitHubContribution from "./components/GitHubCalendar";
 
 const experiences = [
   {
@@ -111,7 +112,7 @@ const githubProjects = [
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground selection:bg-accent/30 relative overflow-hidden">
+    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-mandatory custom-scrollbar scroll-smooth">
       {/* Background Blobs */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -144,9 +145,9 @@ export default function Home() {
 
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 pt-32 relative z-10">
+      <main className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Hero Section */}
-        <section id="about" className="py-20 md:py-40 snap-start">
+        <section id="about" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -188,7 +189,7 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-20 md:py-40 snap-start">
+        <section id="experience" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
             <div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
@@ -204,7 +205,7 @@ export default function Home() {
         </section>
 
         {/* Skills & Projects Bento Grid */}
-        <section className="py-20 md:py-40 snap-start">
+        <section className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
 
             {/* Header Card */}
@@ -243,7 +244,7 @@ export default function Home() {
             ))}
 
             {/* Project Cards (Bento Style) */}
-            <div id="projects" className="md:col-span-12">
+            <div id="projects" className="md:col-span-12 mt-12">
               <div>
                 <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
                 <h2 className="text-4xl md:text-7xl font-black tracking-tighter">Latest <span className="animate-gradient">Works</span></h2>
@@ -332,8 +333,13 @@ export default function Home() {
           </div>
         </section>
 
+        {/* GitHub Contributions Section */}
+        <section className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+          <GitHubContribution />
+        </section>
+
         {/* Contact Section */}
-        <section id="contact" className="py-40 snap-start">
+        <section id="contact" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
           <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
             <motion.div
               animate={{ rotate: [0, 360] }}
