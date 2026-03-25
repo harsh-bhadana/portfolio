@@ -13,6 +13,7 @@ import {
   ExternalLink,
   Camera,
   Sparkles,
+  LayoutDashboard,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
@@ -63,6 +64,20 @@ const skills = [
 ];
 
 const githubProjects = [
+  {
+    name: "Event Logix",
+    icon: LayoutDashboard,
+    description: "A premium, role-based event orchestration ecosystem designed to bridge the gap between high-scale coordination, specialized staffing, and attendee engagement.",
+    features: [
+      "Triple-Role Adaptive Experience (Admin / Staff / Attendee)",
+      "Real-time Logic-Driven Analytics with Recharts Integrated Engine",
+      "Automated Background Workflows via Vercel Cron Jobs"
+    ],
+    highlight: "Engineered a robust 'Defensive Data Layer' with null-safety guards across Server Actions, achieving 100% stability against asynchronous data-drifting.",
+    tech: ["NEXT.JS 16", "MONGODB", "TYPESCRIPT", "FRAMER MOTION"],
+    github: "https://github.com/harsh-bhadana/event-logix",
+    demo: "https://event-logix.vercel.app"
+  },
   {
     name: "Clicks",
     icon: Camera,
