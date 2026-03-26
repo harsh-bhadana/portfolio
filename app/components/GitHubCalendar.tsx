@@ -66,18 +66,40 @@ export default function GitHubContribution() {
     return colors[level] || colors[0];
   };
 
-  // Group by weeks for the grid
-  const weeks: ContributionDay[][] = [];
-  let currentWeek: ContributionDay[] = [];
-
-  filteredContributions.forEach((day, index) => {
-    currentWeek.push(day);
-    const date = new Date(day.date);
-    if (date.getDay() === 6 || index === filteredContributions.length - 1) {
-      weeks.push(currentWeek);
-      currentWeek = [];
+  // Calculate padding for the first week to align with Sunday
+  const firstDay = filteredContributions.length > 0 ? new Date(filteredContributions[0].date) : new Date();
+  const firstDayOfWeek = firstDay.getDay(); // 0 is Sunday, 6 is Saturday
+  
+  const paddedContributions: (ContributionDay | { level: 0; count: 0; date: string; isPadding: true })[] = [];
+  
+  // Add padding for the start of the first week
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    const d = new Date(firstDay);
+    d.setDate(d.getDate() - (firstDayOfWeek - i));
+    paddedContributions.push({
+      level: 0,
+      count: 0,
+      date: `padding-start-${i}`,
+      isPadding: true
+    });
+  }
+  
+  // Add actual contributions
+  paddedContributions.push(...filteredContributions);
+  
+  // Add padding for the end of the last week
+  const lastDay = paddedContributions.length > 0 ? new Date(paddedContributions[paddedContributions.length - 1].date === "" ? new Date() : paddedContributions[paddedContributions.length - 1].date) : new Date();
+  const lastDayOfWeek = lastDay.getDay();
+  if (lastDayOfWeek < 6) {
+    for (let i = lastDayOfWeek + 1; i <= 6; i++) {
+      paddedContributions.push({
+        level: 0,
+        count: 0,
+        date: `padding-end-${i}`,
+        isPadding: true
+      });
     }
-  });
+  }
 
   return (
     <div className="w-full p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col items-center">
@@ -164,22 +186,22 @@ export default function GitHubContribution() {
               className="w-full flex justify-center overflow-x-auto custom-scrollbar pb-6"
             >
               <div className="grid grid-flow-col grid-rows-7 gap-2 md:gap-2.5">
-                {weeks.map((week, wIndex) =>
-                  week.map((day, dIndex) => (
-                    <motion.div
-                      key={day.date}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: (wIndex * 7 + dIndex) * 0.003 }}
-                      className="w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0"
-                      style={{ backgroundColor: getLevelColor(day.level) }}
-                    >
+                {paddedContributions.map((day, index) => (
+                  <motion.div
+                    key={day.date}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: index * 0.002 }}
+                    className="w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0"
+                    style={{ backgroundColor: getLevelColor(day.level) }}
+                  >
+                    {"isPadding" in day ? null : (
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-black border border-white/10 text-[8px] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
                         {day.count} commits on {new Date(day.date).toLocaleDateString()}
                       </div>
-                    </motion.div>
-                  ))
-                )}
+                    )}
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           )}
