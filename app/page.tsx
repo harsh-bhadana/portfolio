@@ -127,7 +127,7 @@ const githubProjects = [
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-mandatory custom-scrollbar scroll-smooth">
+    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth">
       {/* Background Blobs */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -387,7 +387,10 @@ export default function Home() {
           </div>
         </section>
 
-        <Footer />
+        {/* Footer Section */}
+        <section className="snap-start snap-always">
+          <Footer />
+        </section>
       </main>
     </div>
   );
