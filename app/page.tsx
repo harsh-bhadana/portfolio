@@ -74,6 +74,7 @@ const githubProjects = [
       "Automated Background Workflows via Vercel Cron Jobs"
     ],
     highlight: "Engineered a robust 'Defensive Data Layer' with null-safety guards across Server Actions, achieving 100% stability against asynchronous data-drifting.",
+    status: "In Progress",
     tech: ["NEXT.JS 16", "MONGODB", "TYPESCRIPT", "FRAMER MOTION"],
     github: "https://github.com/harsh-bhadana/event-logix",
     demo: "https://event-logix.vercel.app"
@@ -127,7 +128,7 @@ const githubProjects = [
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-mandatory custom-scrollbar scroll-smooth">
+    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth">
       {/* Background Blobs */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -282,7 +283,14 @@ export default function Home() {
 
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 h-full">
                   <div className="flex flex-col">
-                    <h3 className="text-3xl md:text-5xl font-black mb-6 group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
+                    <div className="flex items-center gap-3 mb-6 flex-wrap">
+                      <h3 className="text-3xl md:text-5xl font-black group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
+                      {project.status && (
+                        <span className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-[10px] font-black uppercase tracking-widest text-accent animate-pulse">
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-foreground/70 mb-8 text-sm md:text-base leading-relaxed font-medium">
                       {project.description}
                     </p>
@@ -387,7 +395,10 @@ export default function Home() {
           </div>
         </section>
 
-        <Footer />
+        {/* Footer Section */}
+        <section className="snap-start snap-always">
+          <Footer />
+        </section>
       </main>
     </div>
   );
