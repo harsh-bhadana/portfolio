@@ -21,7 +21,7 @@ export default function PhaseToggle() {
     }
     setIsAnimating(true);
     toggleTheme();
-    setTimeout(() => setIsAnimating(false), 1000);
+    setTimeout(() => setIsAnimating(false), 2000);
   };
 
   const icons = {
@@ -57,9 +57,9 @@ export default function PhaseToggle() {
         {isAnimating && (
           <motion.div
             initial={{ scale: 0, opacity: 0.8 }}
-            animate={{ scale: 150, opacity: 0 }}
+            animate={{ scale: 200, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 1.8, ease: [0.25, 1, 0.5, 1] }}
             style={{ 
               left: coords.x, 
               top: coords.y,
