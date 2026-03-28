@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, MotionValue, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
@@ -28,7 +28,7 @@ function DockItem({ mouseY, icon, label, href }: DockItemProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="relative">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="relative block">
       <motion.div
         ref={ref}
         onMouseEnter={() => setHovered(true)}
@@ -40,16 +40,18 @@ function DockItem({ mouseY, icon, label, href }: DockItemProps) {
           {icon}
         </motion.div>
       </motion.div>
-      {hovered && (
-        <motion.div
-          initial={{ opacity: 0, x: 10, y: "-50%" }}
-          animate={{ opacity: 1, x: 0, y: "-50%" }}
-          exit={{ opacity: 0, x: 10, y: "-50%" }}
-          className="absolute top-1/2 right-full mr-4 px-3 py-1 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-lg shadow-xl pointer-events-none whitespace-nowrap z-50"
-        >
-          {label}
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, x: 10, y: "-50%" }}
+            animate={{ opacity: 1, x: 0, y: "-50%" }}
+            exit={{ opacity: 0, x: 10, y: "-50%" }}
+            className="absolute top-1/2 right-[calc(100%+16px)] px-3 py-1 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-lg shadow-xl pointer-events-none whitespace-nowrap z-[70]"
+          >
+            {label}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </a>
   );
 }
