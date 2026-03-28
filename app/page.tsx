@@ -19,6 +19,11 @@ import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
 import Footer from "./components/Footer";
 import GitHubContribution from "./components/GitHubCalendar";
+import TextReveal from "./components/TextReveal";
+import Magnetic from "./components/Magnetic";
+import CustomCursor from "./components/CustomCursor";
+import FloatingDock from "./components/FloatingDock";
+import { useScroll, useSpring } from "framer-motion";
 
 const experiences = [
   {
@@ -127,8 +132,23 @@ const githubProjects = [
 ];
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth">
+      <CustomCursor />
+      <FloatingDock />
+      
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-accent z-[60] origin-left"
+        style={{ scaleX }}
+      />
       {/* Background Blobs */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -177,9 +197,14 @@ export default function Home() {
               Available for new projects
             </div>
 
-            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.9] md:leading-[0.8] mix-blend-difference">
-              Harsh <br className="md:hidden" />
-              <span className="text-gradient">Bhadana</span>
+            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-8 items-baseline mix-blend-difference py-4">
+              <TextReveal text="Harsh" wordByWord={false} />
+              <TextReveal
+                text="Bhadana"
+                wordByWord={false}
+                delay={0.5}
+                className="text-gradient pb-2"
+              />
             </h1>
 
             <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12">
@@ -187,19 +212,23 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
-              <a
-                href="#experience"
-                className="group px-8 md:px-10 py-4 md:py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-              >
-                View Experience
-                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#contact"
-                className="px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80 text-center"
-              >
-                Get in Touch
-              </a>
+              <Magnetic strength={0.2}>
+                <a
+                  href="#experience"
+                  className="group px-8 md:px-10 py-4 md:py-5 rounded-2xl bg-white text-black font-bold hover:bg-accent hover:text-white transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+                >
+                  View Experience
+                  <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.2}>
+                <a
+                  href="#contact"
+                  className="px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80 text-center flex items-center justify-center"
+                >
+                  Get in Touch
+                </a>
+              </Magnetic>
             </div>
           </motion.div>
         </section>
@@ -240,9 +269,20 @@ export default function Home() {
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: index * 0.1
+                    }
+                  }
+                }}
                 className="md:col-span-4 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-accent/40 transition-all group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
@@ -251,9 +291,16 @@ export default function Home() {
                 <h3 className="text-xl font-black mb-6 uppercase tracking-wider">{skill.category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skill.items.map((item, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-foreground/40">
+                    <motion.span 
+                      key={i} 
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.8 },
+                        visible: { opacity: 1, scale: 1 }
+                      }}
+                      className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-foreground/40"
+                    >
                       {item}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -272,9 +319,15 @@ export default function Home() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10, rotateX: 2, rotateY: 2 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col ${index === 0 ? "md:col-span-12" : "md:col-span-12"
+                transition={{ 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20
+                }}
+                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000 ${index === 0 ? "md:col-span-12" : "md:col-span-12"
                   }`}
               >
                 <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all pointer-events-none">
@@ -383,12 +436,16 @@ export default function Home() {
                   <Mail size={20} /> Email Me
                 </a>
                 <div className="flex items-center gap-4">
-                  <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <Linkedin size={24} />
-                  </a>
-                  <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all">
-                    <Github size={24} />
-                  </a>
+                  <Magnetic strength={0.3}>
+                    <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all flex items-center justify-center">
+                      <Linkedin size={24} />
+                    </a>
+                  </Magnetic>
+                  <Magnetic strength={0.3}>
+                    <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all flex items-center justify-center">
+                      <Github size={24} />
+                    </a>
+                  </Magnetic>
                 </div>
               </div>
             </div>

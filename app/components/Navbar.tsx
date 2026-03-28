@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { User, Briefcase, Zap, Layout, Mail } from "lucide-react";
+import Magnetic from "./Magnetic";
+import PhaseToggle from "./PhaseToggle";
 
 const navLinks = [
   { name: "About", href: "#about", Icon: User },
@@ -59,31 +61,38 @@ export default function Navbar() {
           scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
         }`}
       >
-        <a href="/" className="px-2 md:px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
-          HB<span className="text-accent">.</span>
-        </a>
+        <Magnetic strength={0.3}>
+          <a href="/" className="px-2 md:px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
+            HB<span className="text-accent">.</span>
+          </a>
+        </Magnetic>
+
+        <div className="h-4 w-px bg-white/10 mx-2" />
+        <PhaseToggle />
+        <div className="h-4 w-px bg-white/10 mx-2" />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
-                  isActive ? "text-white" : "text-foreground/40 hover:text-foreground/70"
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-bg"
-                    className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                {link.name}
-              </a>
+              <Magnetic key={link.name} strength={0.25}>
+                <a
+                  href={link.href}
+                  className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-foreground/40 hover:text-foreground/70"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-bg"
+                      className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  {link.name}
+                </a>
+              </Magnetic>
             );
           })}
         </div>

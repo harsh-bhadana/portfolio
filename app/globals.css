@@ -8,6 +8,29 @@
   --accent-tertiary: #00d4ff;
   --card: #0f0f0f;
   --border: rgba(255, 255, 255, 0.08);
+  --selection: rgba(255, 70, 85, 0.3);
+}
+
+[data-theme="solar"] {
+  --background: #fcfcfc;
+  --foreground: #1a1a1a;
+  --accent: #ff4655;
+  --accent-secondary: #5a00cc;
+  --accent-tertiary: #00b0d4;
+  --card: #f0f0f0;
+  --border: rgba(0, 0, 0, 0.08);
+  --selection: rgba(255, 70, 85, 0.1);
+}
+
+[data-theme="aether"] {
+  --background: #000000;
+  --foreground: #00d4ff;
+  --accent: #00d4ff;
+  --accent-secondary: #0070ff;
+  --accent-tertiary: #ffffff;
+  --card: #080808;
+  --border: rgba(0, 212, 255, 0.2);
+  --selection: rgba(0, 212, 255, 0.2);
 }
 
 @theme inline {
@@ -34,18 +57,24 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: 
+    background-color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
+    color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
+    border-color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
+    box-shadow 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
+    opacity 1.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer utilities {
   .glass {
-    background: rgba(15, 15, 15, 0.6);
+    background: color-mix(in srgb, var(--card) 60%, transparent);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border);
   }
   
   .card-gradient {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(135deg, var(--border) 0%, transparent 100%);
     border: 1px solid var(--border);
   }
 
