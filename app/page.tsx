@@ -22,6 +22,7 @@ import GitHubContribution from "./components/GitHubCalendar";
 import TextReveal from "./components/TextReveal";
 import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
+import FloatingDock from "./components/FloatingDock";
 import { useScroll, useSpring } from "framer-motion";
 
 const experiences = [
@@ -141,6 +142,7 @@ export default function Home() {
   return (
     <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth">
       <CustomCursor />
+      <FloatingDock />
       
       {/* Scroll Progress Bar */}
       <motion.div
