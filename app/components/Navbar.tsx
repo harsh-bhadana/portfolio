@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { User, Briefcase, Zap, Layout, Mail } from "lucide-react";
 import Magnetic from "./Magnetic";
+import PhaseToggle from "./PhaseToggle";
 
 const navLinks = [
   { name: "About", href: "#about", Icon: User },
@@ -65,6 +66,10 @@ export default function Navbar() {
             HB<span className="text-accent">.</span>
           </a>
         </Magnetic>
+
+        <div className="h-4 w-px bg-white/10 mx-2" />
+        <PhaseToggle />
+        <div className="h-4 w-px bg-white/10 mx-2" />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
