@@ -3,16 +3,25 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { Moon, Sun, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function PhaseToggle() {
   const { theme, toggleTheme } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setCoords({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      });
+    }
     setIsAnimating(true);
     toggleTheme();
-    setTimeout(() => setIsAnimating(false), 800);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
   const icons = {
@@ -24,6 +33,7 @@ export default function PhaseToggle() {
   return (
     <div className="relative">
       <motion.button
+        ref={buttonRef}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleToggle}
@@ -47,10 +57,16 @@ export default function PhaseToggle() {
         {isAnimating && (
           <motion.div
             initial={{ scale: 0, opacity: 0.8 }}
-            animate={{ scale: 100, opacity: 0 }}
+            animate={{ scale: 150, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-accent pointer-events-none z-[100] blur-[100px]"
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            style={{ 
+              left: coords.x, 
+              top: coords.y,
+              position: 'fixed',
+              transform: 'translate(-50%, -50%)' 
+            }}
+            className="w-4 h-4 rounded-full bg-accent pointer-events-none z-[100] blur-[100px]"
           />
         )}
       </AnimatePresence>
