@@ -197,13 +197,13 @@ export default function Home() {
               Available for new projects
             </div>
 
-            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[0.9] md:leading-[0.8] flex flex-wrap gap-x-8 items-baseline mix-blend-difference">
+            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-8 items-baseline mix-blend-difference py-4">
               <TextReveal text="Harsh" wordByWord={false} />
               <TextReveal
                 text="Bhadana"
                 wordByWord={false}
                 delay={0.5}
-                className="text-gradient"
+                className="text-gradient pb-2"
               />
             </h1>
 

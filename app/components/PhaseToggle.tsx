@@ -43,15 +43,14 @@ export default function PhaseToggle() {
         </AnimatePresence>
       </motion.button>
 
-      {/* Phase Shift Overlay */}
       <AnimatePresence>
         {isAnimating && (
           <motion.div
-            initial={{ scale: 0, opacity: 0.5 }}
-            animate={{ scale: 40, opacity: 0 }}
+            initial={{ scale: 0, opacity: 0.8 }}
+            animate={{ scale: 100, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "circOut" }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-accent pointer-events-none z-[100] blur-3xl"
+            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-accent pointer-events-none z-[100] blur-[100px]"
           />
         )}
       </AnimatePresence>
