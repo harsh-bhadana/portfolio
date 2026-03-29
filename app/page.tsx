@@ -14,6 +14,10 @@ import {
   Camera,
   Sparkles,
   LayoutDashboard,
+  Zap,
+  Paintbrush,
+  FileCode,
+  ArrowUpRight,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
@@ -23,7 +27,8 @@ import TextReveal from "./components/TextReveal";
 import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
-import { useScroll, useSpring } from "framer-motion";
+import { useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const experiences = [
   {
@@ -100,20 +105,41 @@ const githubProjects = [
   }
 ];
 
-const featureLab = {
-  name: "NextJS Labs",
-  description: "A technical laboratory exploring the bleeding edge of Next.js 16 and React 19.",
-  details: [
-    { title: "Next.js 16 Proxy", desc: "Centralized JWT rotation, geo-fencing, and request fingerprinting." },
-    { title: "PPR Dashboard", desc: "Partial Prerendering streaming dynamic data into static shells." },
-    { title: "use cache Specimen", desc: "Granular component-level caching and cacheLife profiles." },
-    { title: "Zero-JS Data Table", desc: "High-performance server-filtered rendering with 0kb client JS." }
-  ],
-  tech: ["NEXT.JS 16", "REACT 19", "SERVER ACTIONS", "PPR", "USE CACHE", "PROXY"],
-  githubLink: "https://github.com/harsh-bhadana/next-labs"
-};
+const featureLabs = [
+  {
+    category: "The Rendering Lab",
+    icon: Cpu,
+    tagline: "Breaking the core of Next.js data fetching.",
+    items: [
+      { name: "Zero-JS Data Table", path: "app/the-rendering/zero-js-table/page.tsx", badge: "0KB CLIENT JS", desc: "High-performance grid using Server Components and asynchronous searchParams for fetching and filtering." },
+      { name: "PPR Dashboard", path: "app/the-rendering/ppr-dashboard/page.tsx", badge: "EXPERIMENTAL PPR", desc: "Utilizing Partial Prerendering to serve static shells instantly while streaming dynamic user data into Suspense holes." },
+      { name: "The use cache Specimen", path: "app/the-rendering/use-cache-specimen/page.tsx", badge: "V16.0.0", desc: "Exploring component-level caching with the new \"use cache\" directive and granular cacheLife profiles." },
+      { name: "Specimen 03: The proxy.ts Interceptor", path: "app/the-rendering/proxy-specimen/page.tsx", badge: "SECURITY HOOK", desc: "Centralized layer for JWT rotation, geo-fencing, and request fingerprinting using the Next.js Proxy layer." },
+      { name: "Infinite Scroll Native", path: "app/the-rendering/infinite-scroll/page.tsx", badge: "SERVER ACTIONS", desc: "Server-side infinite scrolling implemented with Server Actions and useActionState without external libraries." }
+    ]
+  },
+  {
+    category: "The Performance Lab",
+    icon: Zap,
+    tagline: "Pushing responsiveness to 60fps limits.",
+    items: [
+      { name: "Specimen 06: The Memo-Free UI", path: "app/performance-lab/memo-free/page.tsx", badge: "REACT COMPILER", desc: "A high-density dashboard proving 60fps performance via the React Compiler Babel plugin without useMemo or useCallback." },
+      { name: "Search-as-you-go", path: "app/performance-lab/search-as-you-go/page.tsx", badge: "CONCURRENT REACT", desc: "Maintaining a snappy UI during heavy 10,000+ item filtering using useDeferredValue with initialValue support." },
+      { name: "Optimistic \"Like\" Button", path: "app/performance-lab/optimistic-like/page.tsx", badge: "NO LATENCY", desc: "Leveraging useOptimistic to create instantaneous feedback loops for database mutations." }
+    ]
+  },
+  {
+    category: "Interactive & UI Lab",
+    icon: Paintbrush,
+    tagline: "Bridging the gap to native experience.",
+    items: [
+      { name: "View Transition Gallery", path: "app/interactive-ui-lab/view-transitions/page.tsx", badge: "NATIVE API", desc: "Seamless layout morphing across Next.js routing using the native CSS View Transitions API." }
+    ]
+  }
+];
 
 export default function Home() {
+  const [activeLabIndex, setActiveLabIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -318,88 +344,132 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Feature Lab / Deep Dive (NextJS Labs) */}
-        <section id="labs" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
-          <div className="w-full max-w-6xl mx-auto">
-            <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between border-b border-foreground/10 pb-10">
-              <div className="max-w-2xl">
-                <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
-                <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Deep <span className="animate-gradient not-italic">Dive</span></h2>
-                <p className="text-foreground/50 text-xl font-medium leading-relaxed">
-                  Exploring the architectural frontier of <span className="text-foreground font-black">Next.js 16</span> and <span className="text-foreground font-black">React 19</span>.
-                </p>
+        {/* Feature Lab / Deep Dive (Condensed IDE Explorer Style) */}
+        <section id="labs" className="min-h-screen flex flex-col justify-center py-24 snap-start snap-always max-w-6xl mx-auto overflow-hidden">
+          <div className="mb-12">
+            <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Specimen <span className="animate-gradient not-italic">Exploration</span></h2>
+            <p className="text-foreground/50 text-xl font-medium leading-relaxed max-w-2xl">
+              Exploring the architectural frontier of <span className="text-foreground font-black">Next.js 16</span> and <span className="text-foreground font-black">React 19</span> through isolated research specimens.
+            </p>
+          </div>
+
+          <div className="rounded-[3rem] bg-black/40 border border-foreground/10 overflow-hidden shadow-2xl relative group h-[700px] flex flex-col">
+            <div className="flex items-center justify-between px-8 py-5 border-b border-foreground/5 bg-foreground/[0.03] shrink-0">
+              <div className="flex items-center gap-6">
+                <div className="flex gap-2">
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56]" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f]" />
+                </div>
+                <div className="h-4 w-px bg-foreground/10 mx-2" />
+                <span className="text-[10px] font-mono text-foreground/40 tracking-[0.3em] uppercase">terminal_research_v16.0.0</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-[10px] font-mono text-accent animate-pulse font-black uppercase tracking-widest px-3 py-1 bg-accent/10 rounded-lg">LIVE_MONITORING</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-              {/* Terminal Preview */}
-              <div className="lg:col-span-7 rounded-[2.5rem] bg-black/40 border border-foreground/10 p-2 relative group overflow-hidden">
-                <div className="flex items-center gap-2 px-6 py-4 border-b border-foreground/5 bg-foreground/[0.02]">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-400 opacity-50" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-400 opacity-50" />
-                    <div className="w-3 h-3 rounded-full bg-green-400 opacity-50" />
-                  </div>
-                  <span className="text-[10px] font-mono text-foreground/30 ml-4 tracking-widest uppercase">nextlabs-specimen-v16.0.0</span>
-                </div>
-                <div className="p-8 font-mono text-[13px] md:text-base leading-relaxed overflow-hidden">
-                  <div className="flex gap-4 mb-4">
-                    <span className="text-green-400 shrink-0">$</span>
-                    <span className="text-foreground/90 italic underline decoration-accent/40 decoration-2">inspect --architecture --ppr --use-cache</span>
-                  </div>
-                  <div className="space-y-6">
-                    {featureLab.details.map((item, i) => (
-                      <motion.div 
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 + (i * 0.1) }}
-                        className="flex gap-4 group/item"
+            <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-hidden items-stretch">
+              {/* Sidebar Explorer */}
+              <div className="lg:col-span-4 border-r border-foreground/5 bg-foreground/[0.01] p-6 space-y-8 overflow-y-auto custom-scrollbar">
+                {featureLabs.map((lab, i) => {
+                  const isActive = activeLabIndex === i;
+                  return (
+                    <div key={i} className="space-y-4">
+                      <button 
+                        onClick={() => setActiveLabIndex(i)}
+                        className={`flex items-center gap-3 w-full text-left transition-all group ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
                       >
-                        <span className="text-accent/40 font-black shrink-0">0{i+1}:</span>
-                        <div>
-                          <p className="text-accent font-black uppercase text-xs mb-1 tracking-widest group-hover/item:text-white transition-colors cursor-default">{item.title}</p>
-                          <p className="text-foreground/40 font-medium italic mb-2 leading-none">{item.desc}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Floating "use cache" directive simulation */}
-                <div className="absolute bottom-8 right-8 px-6 py-3 rounded-xl bg-accent text-white font-mono text-[10px] font-black tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-                  <Sparkles size={14} className="animate-pulse" />
-                  &quot;use cache&quot;;
-                </div>
+                        <lab.icon size={16} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">{lab.category}</span>
+                        {isActive && (
+                          <motion.div layoutId="active-lab-dot" className="w-1 h-1 rounded-full bg-accent ml-auto" />
+                        )}
+                      </button>
+                      
+                      {/* Sub-items (Only show indented list for files) */}
+                      <div className={`space-y-2 border-l border-foreground/5 ml-2 pl-4 transition-all duration-500 overflow-hidden ${isActive ? "opacity-100 max-h-96" : "opacity-30 max-h-0 pointer-events-none"}`}>
+                        {lab.items.map((item, j) => (
+                          <div key={j} className="flex items-center gap-3 py-1">
+                            <FileCode size={12} className="text-foreground/20" />
+                            <span className="text-[10px] font-bold text-foreground/40">{item.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Lab Highlights */}
-              <div className="lg:col-span-5 flex flex-col justify-between py-4">
-                <div className="space-y-8">
-                  <div className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/30 transition-all">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-accent mb-4 block underline">Research Focus</span>
-                    <p className="text-foreground font-black text-2xl md:text-3xl tracking-tighter leading-none mb-6 italic">Zero-JS <span className="text-accent">Static shells</span> with hydration-free dynamics.</p>
-                    <p className="text-foreground/40 text-sm italic font-medium">Achieving near-zero LCP through Partial Prerendering and granular component-level streaming.</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {featureLab.tech.map((t, i) => (
-                      <span key={i} className="px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <Magnetic strength={0.2}>
-                  <a href={featureLab.githubLink} target="_blank" rel="noopener noreferrer" className="group mt-12 px-10 py-6 rounded-3xl bg-foreground text-background font-black uppercase tracking-widest text-xs flex items-center justify-center gap-4 hover:bg-accent hover:text-white transition-all transform hover:scale-[1.02]">
-                    Inspect Lab Repository
-                    <Github size={20} className="group-hover:rotate-12 transition-transform" />
-                  </a>
-                </Magnetic>
+              {/* Lab Content Area (Editor View) */}
+              <div className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={activeLabIndex}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="space-y-10"
+                  >
+                    <div className="border-l-4 border-accent pl-8 py-2">
+                      <h3 className="text-3xl font-black italic tracking-tighter mb-4 uppercase">{featureLabs[activeLabIndex].category}</h3>
+                      <p className="text-foreground/40 font-medium text-lg leading-none">{featureLabs[activeLabIndex].tagline}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {featureLabs[activeLabIndex].items.map((item, j) => (
+                        <motion.div 
+                          key={j}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: j * 0.1 }}
+                          whileHover={{ y: -5 }}
+                          className="p-6 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden"
+                        >
+                          <div className="absolute top-0 right-0 p-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                             <ArrowUpRight size={20} className="text-accent" />
+                          </div>
+                          <div className="flex items-center gap-3 mb-4 flex-wrap">
+                             <span className="text-[8px] font-black tracking-widest uppercase bg-accent/20 px-2.5 py-1 rounded-md text-accent">{item.badge}</span>
+                             <span className="text-[8px] font-mono font-bold text-foreground/20 italic">{item.path.split('/').pop()}</span>
+                          </div>
+                          <h4 className="text-lg font-black mb-3 group-hover/card:text-white transition-colors tracking-tight leading-none">{item.name}</h4>
+                          <p className="text-foreground/40 text-[10px] font-bold leading-relaxed mb-4 italic">{item.desc}</p>
+                          <div className="text-[8px] font-mono text-foreground/20 flex items-center gap-2 font-bold cursor-default mt-auto">
+                             <span className="w-1 h-1 rounded-full bg-accent animate-pulse" />
+                             specimens/{item.path}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Sticky "use cache" Footer Indicator */}
+            <div className="p-4 border-t border-foreground/5 bg-foreground/[0.02] flex items-center justify-between text-[9px] font-mono font-bold text-foreground/20 tracking-widest px-10 backdrop-blur-3xl shrink-0">
+              <div className="flex items-center gap-6">
+                <span className="text-accent animate-pulse uppercase">active_sector: {featureLabs[activeLabIndex].category.split(' ').pop()}</span>
+                <span>STATUS: 200 OK</span>
+                <span className="hidden md:inline">COMPILER: REACT_FORGET_V19</span>
+              </div>
+              <div className="flex items-center gap-2 text-foreground/40 italic">
+                &quot;use cache&quot;; <Sparkles size={10} className="text-accent" />
               </div>
             </div>
           </div>
+          
+          <Magnetic strength={0.2}>
+            <a href="https://github.com/harsh-bhadana/next-labs" target="_blank" rel="noopener noreferrer" className="group mt-12 mx-auto px-10 py-5 rounded-full bg-foreground text-background font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-6 hover:bg-accent hover:text-white transition-all transform hover:scale-[1.02] border-2 border-transparent hover:border-white/20">
+              Inspect Extended Laboratory
+              <Github size={20} className="group-hover:rotate-[360deg] transition-transform duration-700" />
+            </a>
+          </Magnetic>
         </section>
+
 
         {/* Tech Stack Section */}
         <section id="skills" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
