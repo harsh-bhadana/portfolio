@@ -61,8 +61,14 @@ export default function GitHubContribution() {
 
   const totalCommits = filteredContributions.reduce((sum, day) => sum + day.count, 0);
 
-  const getLevelColor = (level: number) => {
-    return `var(--gh-l${level})`;
+  // Explicitly defined classes for Tailwind v4 compiler visibility
+  const getLevelClass = (level: number) => {
+    if (level === 0) return "bg-[var(--gh-l0)]";
+    if (level === 1) return "bg-[var(--gh-l1)]";
+    if (level === 2) return "bg-[var(--gh-l2)]";
+    if (level === 3) return "bg-[var(--gh-l3)]";
+    if (level === 4) return "bg-[var(--gh-l4)]";
+    return "bg-[var(--gh-l0)]";
   };
 
   // Calculate padding for the first week to align with Sunday
@@ -87,7 +93,8 @@ export default function GitHubContribution() {
   paddedContributions.push(...filteredContributions);
   
   // Add padding for the end of the last week
-  const lastDay = paddedContributions.length > 0 ? new Date(paddedContributions[paddedContributions.length - 1].date === "" ? new Date() : paddedContributions[paddedContributions.length - 1].date) : new Date();
+  const lastContribution = filteredContributions[filteredContributions.length - 1];
+  const lastDay = lastContribution ? new Date(lastContribution.date) : new Date();
   const lastDayOfWeek = lastDay.getDay();
   if (lastDayOfWeek < 6) {
     for (let i = lastDayOfWeek + 1; i <= 6; i++) {
@@ -178,10 +185,9 @@ export default function GitHubContribution() {
           ) : (
             <motion.div
               key={monthRange}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
               className="w-full flex justify-center overflow-x-auto custom-scrollbar pb-6"
             >
               <div className="grid grid-flow-col grid-rows-7 gap-2 md:gap-2.5">
@@ -191,8 +197,8 @@ export default function GitHubContribution() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: index * 0.002 }}
-                    className="w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0"
-                    style={{ backgroundColor: getLevelColor(day.level) }}
+                    className={`w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0 ${getLevelClass(day.level)} border border-foreground/5`}
+                    whileHover={{ scale: 1.2, zIndex: 10 }}
                   >
                     {"isPadding" in day ? null : (
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-card border border-foreground/10 text-[8px] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
@@ -213,8 +219,7 @@ export default function GitHubContribution() {
           {[0, 1, 2, 3, 4].map((level) => (
             <div
               key={level}
-              className="w-3 h-3 rounded-[2px]"
-              style={{ backgroundColor: getLevelColor(level) }}
+              className={`w-3 h-3 rounded-[2px] ${getLevelClass(level)}`}
             />
           ))}
         </div>
