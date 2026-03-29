@@ -58,7 +58,7 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
-          scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
+          scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
         }`}
       >
         <Magnetic strength={0.3}>
@@ -67,9 +67,9 @@ export default function Navbar() {
           </a>
         </Magnetic>
 
-        <div className="h-4 w-px bg-white/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-2" />
         <PhaseToggle />
-        <div className="h-4 w-px bg-white/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-2" />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
@@ -109,7 +109,7 @@ export default function Navbar() {
                 whileHover="hover"
                 initial="initial"
                 className={`relative h-10 flex items-center px-3 transition-all duration-300 rounded-xl group ${
-                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-white/5"
+                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/5"
                 }`}
               >
                 <Icon size={18} className="flex-shrink-0" />

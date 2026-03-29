@@ -189,7 +189,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-[10px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 text-accent text-[10px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
@@ -208,7 +208,7 @@ export default function Home() {
             </h1>
 
             <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12">
-              Senior <span className="text-white italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
+              Senior <span className="text-accent italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
             </p>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
@@ -224,7 +224,7 @@ export default function Home() {
               <Magnetic strength={0.2}>
                 <a
                   href="#contact"
-                  className="px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-white/10 font-bold hover:bg-white/5 transition-all text-foreground/80 text-center flex items-center justify-center"
+                  className="px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-foreground/10 font-bold hover:bg-foreground/5 transition-all text-foreground/80 text-center flex items-center justify-center"
                 >
                   Get in Touch
                 </a>
@@ -283,7 +283,7 @@ export default function Home() {
                     }
                   }
                 }}
-                className="md:col-span-4 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-accent/40 transition-all group"
+                className="md:col-span-4 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
                   {skill.icon}
@@ -297,7 +297,7 @@ export default function Home() {
                         hidden: { opacity: 0, scale: 0.8 },
                         visible: { opacity: 1, scale: 1 }
                       }}
-                      className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-foreground/40"
+                      className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-black uppercase tracking-widest text-foreground/60"
                     >
                       {item}
                     </motion.span>
@@ -327,7 +327,7 @@ export default function Home() {
                   stiffness: 300,
                   damping: 20
                 }}
-                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000 ${index === 0 ? "md:col-span-12" : "md:col-span-12"
+                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000 ${index === 0 ? "md:col-span-12" : "md:col-span-12"
                   }`}
               >
                 <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all pointer-events-none">
@@ -370,7 +370,7 @@ export default function Home() {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white hover:text-accent transition-colors"
+                          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors"
                         >
                           Live <ExternalLink size={16} />
                         </a>
@@ -392,7 +392,7 @@ export default function Home() {
                     </div>
 
                     {project.highlight && (
-                      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden group/highlight">
+                      <div className="p-6 rounded-2xl bg-foreground/5 border border-foreground/10 relative overflow-hidden group/highlight">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/highlight:rotate-12 transition-transform">
                           <Sparkles size={24} className="text-accent" />
                         </div>
@@ -420,7 +420,7 @@ export default function Home() {
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"
+              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-foreground/10 blur-3xl"
             />
 
             <div className="relative z-10 text-center flex flex-col items-center">
