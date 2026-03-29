@@ -362,11 +362,6 @@ export default function Home() {
                   <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]" />
                   <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f]" />
                 </div>
-                <div className="h-4 w-px bg-foreground/10 mx-2" />
-                <span className="text-[10px] font-mono text-foreground/40 tracking-[0.3em] uppercase">terminal_research_v16.0.0</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-[10px] font-mono text-accent animate-pulse font-black uppercase tracking-widest px-3 py-1 bg-accent/10 rounded-lg">LIVE_MONITORING</span>
               </div>
             </div>
 
@@ -520,28 +515,7 @@ export default function Home() {
               </motion.div>
             ))}
 
-            {/* Stack Highlights Footer Card */}
-            <div className="md:col-span-12 p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] card-gradient flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden group mt-10">
-              <div className="absolute top-0 right-0 p-16 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Cpu size={200} />
-              </div>
-              <div className="relative z-10 max-w-xl">
-                <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-6 uppercase italic underline decoration-accent/40">Continuously <span className="not-italic">Evolving</span></h3>
-                <p className="text-foreground/60 text-lg font-medium leading-relaxed">
-                  Beyond languages and libraries, I focus on building <span className="text-foreground font-black">Architecture First</span> systems that are maintainable, performant, and future-proof.
-                </p>
-              </div>
-              <div className="relative z-10 flex gap-4">
-                 <div className="p-6 rounded-3xl bg-accent/20 border border-accent/40 text-center animate-float">
-                   <p className="text-4xl font-black text-white italic">0%</p>
-                   <p className="text-[9px] font-black uppercase tracking-widest text-accent mt-1">Lints Errors</p>
-                 </div>
-                 <div className="p-6 rounded-3xl bg-foreground/10 border border-foreground/20 text-center animate-float" style={{ animationDelay: "1s" }}>
-                   <p className="text-4xl font-black text-white italic">100</p>
-                   <p className="text-[9px] font-black uppercase tracking-widest text-foreground/40 mt-1">Lighthouse</p>
-                 </div>
-              </div>
-            </div>
+
           </div>
         </section>
 
