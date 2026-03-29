@@ -2,15 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { User, Briefcase, Zap, Layout, Mail } from "lucide-react";
+import { User, Briefcase, Layout, Beaker, Zap, Mail } from "lucide-react";
 import Magnetic from "./Magnetic";
 import PhaseToggle from "./PhaseToggle";
 
 const navLinks = [
   { name: "About", href: "#about", Icon: User },
   { name: "Experience", href: "#experience", Icon: Briefcase },
-  { name: "Skills", href: "#skills", Icon: Zap },
   { name: "Projects", href: "#projects", Icon: Layout },
+  { name: "Labs", href: "#labs", Icon: Beaker },
+  { name: "Skills", href: "#skills", Icon: Zap },
   { name: "Contact", href: "#contact", Icon: Mail },
 ];
 
@@ -38,7 +39,7 @@ export default function Navbar() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = ["about", "experience", "skills", "projects", "contact"];
+    const sections = ["about", "experience", "projects", "labs", "skills", "contact"];
     sections.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
@@ -58,7 +59,7 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
-          scrolled ? "shadow-2xl shadow-accent/10 border-white/20" : "border-white/10"
+          scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
         }`}
       >
         <Magnetic strength={0.3}>
@@ -67,9 +68,9 @@ export default function Navbar() {
           </a>
         </Magnetic>
 
-        <div className="h-4 w-px bg-white/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-2" />
         <PhaseToggle />
-        <div className="h-4 w-px bg-white/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-2" />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
@@ -109,7 +110,7 @@ export default function Navbar() {
                 whileHover="hover"
                 initial="initial"
                 className={`relative h-10 flex items-center px-3 transition-all duration-300 rounded-xl group ${
-                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-white/5"
+                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/5"
                 }`}
               >
                 <Icon size={18} className="flex-shrink-0" />

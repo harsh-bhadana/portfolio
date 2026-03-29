@@ -61,9 +61,14 @@ export default function GitHubContribution() {
 
   const totalCommits = filteredContributions.reduce((sum, day) => sum + day.count, 0);
 
-  const getLevelColor = (level: number) => {
-    const colors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
-    return colors[level] || colors[0];
+  // Explicitly mapped to Tailwind theme colors for v4 compiler visibility
+  const getLevelClass = (level: number) => {
+    if (level === 0) return "bg-gh-0";
+    if (level === 1) return "bg-gh-1";
+    if (level === 2) return "bg-gh-2";
+    if (level === 3) return "bg-gh-3";
+    if (level === 4) return "bg-gh-4";
+    return "bg-gh-0";
   };
 
   // Calculate padding for the first week to align with Sunday
@@ -88,7 +93,8 @@ export default function GitHubContribution() {
   paddedContributions.push(...filteredContributions);
   
   // Add padding for the end of the last week
-  const lastDay = paddedContributions.length > 0 ? new Date(paddedContributions[paddedContributions.length - 1].date === "" ? new Date() : paddedContributions[paddedContributions.length - 1].date) : new Date();
+  const lastContribution = filteredContributions[filteredContributions.length - 1];
+  const lastDay = lastContribution ? new Date(lastContribution.date) : new Date();
   const lastDayOfWeek = lastDay.getDay();
   if (lastDayOfWeek < 6) {
     for (let i = lastDayOfWeek + 1; i <= 6; i++) {
@@ -102,7 +108,7 @@ export default function GitHubContribution() {
   }
 
   return (
-    <div className="w-full p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all relative overflow-hidden flex flex-col items-center">
+    <div className="w-full p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col items-center">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
       <div className="mb-8 text-center w-full">
@@ -118,14 +124,14 @@ export default function GitHubContribution() {
           <div className="flex gap-2">
             <button
               onClick={prevMonth}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors"
               aria-label="Previous Period"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextMonth}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors"
               aria-label="Next Period"
             >
               <ChevronRight size={20} />
@@ -133,9 +139,9 @@ export default function GitHubContribution() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-white/5 border border-white/10 w-fit mx-auto">
+        <div className="flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 w-fit mx-auto">
           <span className="text-xs font-bold text-foreground/70">{monthRange}</span>
-          <div className="w-px h-3 bg-white/10" />
+          <div className="w-px h-3 bg-foreground/10" />
           <span className="text-[10px] font-black uppercase tracking-widest text-accent">
             {totalCommits} Commits
           </span>
@@ -179,10 +185,9 @@ export default function GitHubContribution() {
           ) : (
             <motion.div
               key={monthRange}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
               className="w-full flex justify-center overflow-x-auto custom-scrollbar pb-6"
             >
               <div className="grid grid-flow-col grid-rows-7 gap-2 md:gap-2.5">
@@ -192,11 +197,11 @@ export default function GitHubContribution() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: index * 0.002 }}
-                    className="w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0"
-                    style={{ backgroundColor: getLevelColor(day.level) }}
+                    className={`w-5 h-5 md:w-6 md:h-6 rounded-[4px] md:rounded-[6px] relative group shrink-0 ${getLevelClass(day.level)} border border-foreground/5`}
+                    whileHover={{ scale: 1.2, zIndex: 10 }}
                   >
                     {"isPadding" in day ? null : (
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-black border border-white/10 text-[8px] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-card border border-foreground/10 text-[8px] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
                         {day.count} commits on {new Date(day.date).toLocaleDateString()}
                       </div>
                     )}
@@ -208,14 +213,13 @@ export default function GitHubContribution() {
         </AnimatePresence>
       </div>
 
-      <div className="mt-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-foreground/30">
+      <div className="mt-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50">
         <span>Less</span>
         <div className="flex gap-1.5">
           {[0, 1, 2, 3, 4].map((level) => (
             <div
               key={level}
-              className="w-3 h-3 rounded-[2px]"
-              style={{ backgroundColor: getLevelColor(level) }}
+              className={`w-3 h-3 rounded-[2px] ${getLevelClass(level)}`}
             />
           ))}
         </div>
