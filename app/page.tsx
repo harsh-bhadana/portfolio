@@ -97,39 +97,21 @@ const githubProjects = [
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
     github: "https://github.com/harsh-bhadana/clicks",
     demo: "https://clicks-nine.vercel.app"
-  },
-  {
-    name: "NextJS Labs",
-    icon: ({ size, className }: { size?: number, className?: string }) => (
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 128 128"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-      >
-        <circle cx="64" cy="64" r="64" fill="currentColor" fillOpacity="0.1" />
-        <path
-          d="M90.5 97.5L42.5 35.5H35.5V92.5H41V44.5L84 100.5C86.5 99.5 88.5 98.5 90.5 97.5Z"
-          fill="currentColor"
-        />
-        <path d="M85.5 35.5H91V92.5H85.5V35.5Z" fill="currentColor" />
-      </svg>
-    ),
-    description: "A collection of experiments and demonstrations exploring modern Next.js 16 and React 19 capabilities. Isolates unique edge-cases like Partial Prerendering (PPR), component-level caching with the use cache directive, and Next.js 16 Proxy intercepts.",
-    features: [
-      "Next.js 16 Proxy: Centralized JWT rotation, geo-fencing, and request fingerprinting.",
-      "PPR Dashboard: Partial Prerendering with streaming dynamic data into static shells.",
-      "\"use cache\" Specimen: Exploring granular component-level caching and cacheLife profiles.",
-      "Zero-JS Data Table: High-performance server-filtered rendering with 0kb client-side JavaScript.",
-      "Interactive UI Lab: Native CSS View Transitions API for seamless layout morphing."
-    ],
-    highlight: "Exploring the bleeding edge of Next.js 16 and React 19 with 0kb client-side JavaScript experiments.",
-    tech: ["NEXT.JS 16", "REACT 19", "SERVER ACTIONS", "PPR", "USE CACHE", "PROXY"],
-    github: "https://github.com/harsh-bhadana/next-labs"
   }
 ];
+
+const featureLab = {
+  name: "NextJS Labs",
+  description: "A technical laboratory exploring the bleeding edge of Next.js 16 and React 19.",
+  details: [
+    { title: "Next.js 16 Proxy", desc: "Centralized JWT rotation, geo-fencing, and request fingerprinting." },
+    { title: "PPR Dashboard", desc: "Partial Prerendering streaming dynamic data into static shells." },
+    { title: "use cache Specimen", desc: "Granular component-level caching and cacheLife profiles." },
+    { title: "Zero-JS Data Table", desc: "High-performance server-filtered rendering with 0kb client JS." }
+  ],
+  tech: ["NEXT.JS 16", "REACT 19", "SERVER ACTIONS", "PPR", "USE CACHE", "PROXY"],
+  githubLink: "https://github.com/harsh-bhadana/next-labs"
+};
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -249,20 +231,182 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills & Projects Bento Grid */}
-        <section className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
+        {/* Latest Works Section */}
+        <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+          <div className="mb-20">
+            <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Creation</span>
+            <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Latest <br /> <span className="animate-gradient">Works</span></h2>
+          </div>
 
-            {/* Header Card */}
-            <div id="skills" className="md:col-span-8 p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] card-gradient flex flex-col justify-end relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Cpu size={120} className="md:size-[160px]" />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+            {githubProjects.map((project: any, index: number) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10, rotateX: 2, rotateY: 2 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 300, damping: 20 }}
+                className="md:col-span-12 group p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000"
+              >
+                <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-all pointer-events-none">
+                  <project.icon size={160} />
+                </div>
+
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <h3 className="text-4xl md:text-6xl font-black group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
+                      {project.status && (
+                        <span className="px-4 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-[10px] font-black uppercase tracking-[0.2em] text-accent animate-pulse">
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-foreground/70 mb-10 text-lg md:text-xl leading-relaxed font-medium">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-3 mb-10">
+                      {project.tech.map((t: string, i: number) => (
+                        <span key={i} className="px-4 py-2 rounded-xl bg-accent/10 border border-accent/20 text-[10px] font-black uppercase tracking-widest text-accent">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-8 mt-auto">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
+                        Repo <Github size={20} />
+                      </a>
+                      {project.demo && (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors">
+                          Demo <ExternalLink size={20} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-10">
+                    <div>
+                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block">Architecture Highlights</span>
+                      <ul className="space-y-4">
+                        {project.features.map((feature: string, i: number) => (
+                          <li key={i} className="flex items-start gap-4 text-sm md:text-base text-foreground/50 font-medium leading-normal">
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {project.highlight && (
+                      <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10 relative overflow-hidden group/highlight">
+                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover/highlight:rotate-12 transition-transform">
+                          <Sparkles size={32} className="text-accent" />
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 mb-3 block">Technical Deep Dive</span>
+                        <p className="text-sm md:text-lg text-foreground/80 font-black leading-tight">
+                          {project.highlight}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Feature Lab / Deep Dive (NextJS Labs) */}
+        <section id="labs" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+          <div className="w-full max-w-6xl mx-auto">
+            <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between border-b border-foreground/10 pb-10">
+              <div className="max-w-2xl">
+                <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
+                <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Deep <span className="animate-gradient not-italic">Dive</span></h2>
+                <p className="text-foreground/50 text-xl font-medium leading-relaxed">
+                  Exploring the architectural frontier of <span className="text-foreground font-black">Next.js 16</span> and <span className="text-foreground font-black">React 19</span>.
+                </p>
               </div>
-              <span className="text-accent font-black tracking-widest uppercase text-[10px] mb-4 block">02 / Skills</span>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">Tech <span className="animate-gradient">Stack</span></h2>
-              <p className="text-foreground/40 text-xs font-medium leading-relaxed max-w-[200px]">
-                My toolbelt for building high-performance digital products.
-              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+              {/* Terminal Preview */}
+              <div className="lg:col-span-7 rounded-[2.5rem] bg-black/40 border border-foreground/10 p-2 relative group overflow-hidden">
+                <div className="flex items-center gap-2 px-6 py-4 border-b border-foreground/5 bg-foreground/[0.02]">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-400 opacity-50" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400 opacity-50" />
+                    <div className="w-3 h-3 rounded-full bg-green-400 opacity-50" />
+                  </div>
+                  <span className="text-[10px] font-mono text-foreground/30 ml-4 tracking-widest uppercase">nextlabs-specimen-v16.0.0</span>
+                </div>
+                <div className="p-8 font-mono text-[13px] md:text-base leading-relaxed overflow-hidden">
+                  <div className="flex gap-4 mb-4">
+                    <span className="text-green-400 shrink-0">$</span>
+                    <span className="text-foreground/90 italic underline decoration-accent/40 decoration-2">inspect --architecture --ppr --use-cache</span>
+                  </div>
+                  <div className="space-y-6">
+                    {featureLab.details.map((item, i) => (
+                      <motion.div 
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + (i * 0.1) }}
+                        className="flex gap-4 group/item"
+                      >
+                        <span className="text-accent/40 font-black shrink-0">0{i+1}:</span>
+                        <div>
+                          <p className="text-accent font-black uppercase text-xs mb-1 tracking-widest group-hover/item:text-white transition-colors cursor-default">{item.title}</p>
+                          <p className="text-foreground/40 font-medium italic mb-2 leading-none">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Floating "use cache" directive simulation */}
+                <div className="absolute bottom-8 right-8 px-6 py-3 rounded-xl bg-accent text-white font-mono text-[10px] font-black tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                  <Sparkles size={14} className="animate-pulse" />
+                  &quot;use cache&quot;;
+                </div>
+              </div>
+
+              {/* Lab Highlights */}
+              <div className="lg:col-span-5 flex flex-col justify-between py-4">
+                <div className="space-y-8">
+                  <div className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/30 transition-all">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-accent mb-4 block underline">Research Focus</span>
+                    <p className="text-foreground font-black text-2xl md:text-3xl tracking-tighter leading-none mb-6 italic">Zero-JS <span className="text-accent">Static shells</span> with hydration-free dynamics.</p>
+                    <p className="text-foreground/40 text-sm italic font-medium">Achieving near-zero LCP through Partial Prerendering and granular component-level streaming.</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {featureLab.tech.map((t, i) => (
+                      <span key={i} className="px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                <Magnetic strength={0.2}>
+                  <a href={featureLab.githubLink} target="_blank" rel="noopener noreferrer" className="group mt-12 px-10 py-6 rounded-3xl bg-foreground text-background font-black uppercase tracking-widest text-xs flex items-center justify-center gap-4 hover:bg-accent hover:text-white transition-all transform hover:scale-[1.02]">
+                    Inspect Lab Repository
+                    <Github size={20} className="group-hover:rotate-12 transition-transform" />
+                  </a>
+                </Magnetic>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Tech Stack Section */}
+        <section id="skills" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(180px,auto)]">
+            <div className="md:col-span-12 mb-10">
+              <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">04 / Proficiencies</span>
+              <h2 className="text-4xl md:text-7xl font-black tracking-tighter">The Tool <span className="animate-gradient italic">Belt</span></h2>
             </div>
 
             {/* Individual Skill Categories */}
@@ -273,7 +417,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={{
-                  hidden: { opacity: 0, y: 20 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: {
                     opacity: 1,
                     y: 0,
@@ -283,13 +427,13 @@ export default function Home() {
                     }
                   }
                 }}
-                className="md:col-span-4 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group"
+                className="md:col-span-4 p-8 md:p-10 rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group flex flex-col"
               >
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 rounded-3xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-10 group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500">
                   {skill.icon}
                 </div>
-                <h3 className="text-xl font-black mb-6 uppercase tracking-wider">{skill.category}</h3>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="text-2xl font-black mb-8 uppercase tracking-widest leading-none">{skill.category}</h3>
+                <div className="flex flex-wrap gap-2 mt-auto">
                   {skill.items.map((item, i) => (
                     <motion.span 
                       key={i} 
@@ -297,7 +441,7 @@ export default function Home() {
                         hidden: { opacity: 0, scale: 0.8 },
                         visible: { opacity: 1, scale: 1 }
                       }}
-                      className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-black uppercase tracking-widest text-foreground/60"
+                      className="px-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 hover:text-accent transition-colors"
                     >
                       {item}
                     </motion.span>
@@ -306,106 +450,28 @@ export default function Home() {
               </motion.div>
             ))}
 
-            {/* Project Cards (Bento Style) */}
-            <div id="projects" className="md:col-span-12 mt-12">
-              <div>
-                <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">03 / Creation</span>
-                <h2 className="text-4xl md:text-7xl font-black tracking-tighter">Latest <span className="animate-gradient">Works</span></h2>
+            {/* Stack Highlights Footer Card */}
+            <div className="md:col-span-12 p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] card-gradient flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden group mt-10">
+              <div className="absolute top-0 right-0 p-16 opacity-5 group-hover:opacity-10 transition-opacity">
+                <Cpu size={200} />
+              </div>
+              <div className="relative z-10 max-w-xl">
+                <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-6 uppercase italic underline decoration-accent/40">Continuously <span className="not-italic">Evolving</span></h3>
+                <p className="text-foreground/60 text-lg font-medium leading-relaxed">
+                  Beyond languages and libraries, I focus on building <span className="text-foreground font-black">Architecture First</span> systems that are maintainable, performant, and future-proof.
+                </p>
+              </div>
+              <div className="relative z-10 flex gap-4">
+                 <div className="p-6 rounded-3xl bg-accent/20 border border-accent/40 text-center animate-float">
+                   <p className="text-4xl font-black text-white italic">0%</p>
+                   <p className="text-[9px] font-black uppercase tracking-widest text-accent mt-1">Lints Errors</p>
+                 </div>
+                 <div className="p-6 rounded-3xl bg-foreground/10 border border-foreground/20 text-center animate-float" style={{ animationDelay: "1s" }}>
+                   <p className="text-4xl font-black text-white italic">100</p>
+                   <p className="text-[9px] font-black uppercase tracking-widest text-foreground/40 mt-1">Lighthouse</p>
+                 </div>
               </div>
             </div>
-
-            {githubProjects.map((project: any, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10, rotateX: 2, rotateY: 2 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20
-                }}
-                className={`group p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000 ${index === 0 ? "md:col-span-12" : "md:col-span-12"
-                  }`}
-              >
-                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-20 group-hover:scale-110 transition-all pointer-events-none">
-                  <project.icon size={128} />
-                </div>
-
-                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 h-full">
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-3 mb-6 flex-wrap">
-                      <h3 className="text-3xl md:text-5xl font-black group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
-                      {project.status && (
-                        <span className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-[10px] font-black uppercase tracking-widest text-accent animate-pulse">
-                          {project.status}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-foreground/70 mb-8 text-sm md:text-base leading-relaxed font-medium">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tech.map((t: string, i: number) => (
-                        <span key={i} className="px-3 py-1 rounded-lg bg-accent/10 border border-accent/20 text-[9px] font-black uppercase tracking-widest text-accent">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex gap-6 mt-auto">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors"
-                      >
-                        Source <Github size={16} />
-                      </a>
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors"
-                        >
-                          Live <ExternalLink size={16} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-8">
-                    <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-accent mb-4 block">Key Features</span>
-                      <ul className="space-y-3">
-                        {project.features.map((feature: string, i: number) => (
-                          <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-foreground/50 font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {project.highlight && (
-                      <div className="p-6 rounded-2xl bg-foreground/5 border border-foreground/10 relative overflow-hidden group/highlight">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/highlight:rotate-12 transition-transform">
-                          <Sparkles size={24} className="text-accent" />
-                        </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40 mb-2 block">Technical Highlight</span>
-                        <p className="text-xs md:text-sm text-foreground/70 font-bold leading-relaxed">
-                          {project.highlight}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </section>
 

@@ -2,15 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { User, Briefcase, Zap, Layout, Mail } from "lucide-react";
+import { User, Briefcase, Layout, Beaker, Zap, Mail } from "lucide-react";
 import Magnetic from "./Magnetic";
 import PhaseToggle from "./PhaseToggle";
 
 const navLinks = [
   { name: "About", href: "#about", Icon: User },
   { name: "Experience", href: "#experience", Icon: Briefcase },
-  { name: "Skills", href: "#skills", Icon: Zap },
   { name: "Projects", href: "#projects", Icon: Layout },
+  { name: "Labs", href: "#labs", Icon: Beaker },
+  { name: "Skills", href: "#skills", Icon: Zap },
   { name: "Contact", href: "#contact", Icon: Mail },
 ];
 
@@ -38,7 +39,7 @@ export default function Navbar() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = ["about", "experience", "skills", "projects", "contact"];
+    const sections = ["about", "experience", "projects", "labs", "skills", "contact"];
     sections.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
