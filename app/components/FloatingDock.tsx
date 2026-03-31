@@ -28,7 +28,13 @@ function DockItem({ mouseY, icon, label, href }: DockItemProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="relative block">
+    <motion.a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="relative block"
+      variants={itemVariants}
+    >
       <motion.div
         ref={ref}
         onMouseEnter={() => setHovered(true)}
@@ -52,9 +58,38 @@ function DockItem({ mouseY, icon, label, href }: DockItemProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </a>
+    </motion.a>
   );
 }
+
+const containerVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+      delay: 0.8,
+      staggerChildren: 0.1,
+      delayChildren: 1.0,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 200,
+      damping: 15
+    }
+  },
+};
 
 const dockItems = [
   { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/in/harsh-bhadana-2a1793231/" },
@@ -69,6 +104,9 @@ export default function FloatingDock() {
   return (
     <div className="fixed right-8 top-1/2 -translate-y-1/2 z-[60] hidden md:block">
       <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
         onMouseMove={(e) => mouseY.set(e.pageY)}
         onMouseLeave={() => mouseY.set(Infinity)}
         className="flex flex-col items-center gap-4 px-3 py-4 rounded-3xl bg-black/20 border border-white/10 backdrop-blur-xl shadow-2xl"

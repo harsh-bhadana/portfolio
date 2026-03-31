@@ -57,7 +57,12 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                transition={{ 
+          type: "spring", 
+          stiffness: 100, 
+          damping: 20,
+          delay: 0.6
+        }}
         className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
           scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
         }`}
