@@ -57,16 +57,17 @@ export default function PhaseToggle() {
         {isAnimating && (
           <motion.div
             initial={{ scale: 0, opacity: 0.8 }}
-            animate={{ scale: 200, opacity: 0 }}
+            animate={{ scale: 150, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.8, ease: [0.25, 1, 0.5, 1] }}
+            transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
             style={{ 
               left: coords.x, 
               top: coords.y,
               position: 'fixed',
-              transform: 'translate(-50%, -50%)' 
+              transform: 'translate(-50%, -50%)',
+              willChange: "transform, opacity"
             }}
-            className="w-4 h-4 rounded-full bg-accent pointer-events-none z-[100] blur-[100px]"
+            className="w-4 h-4 rounded-full bg-accent pointer-events-none z-[100] blur-[60px]"
           />
         )}
       </AnimatePresence>

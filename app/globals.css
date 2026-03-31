@@ -87,11 +87,9 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: 
-    background-color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
-    color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
-    border-color 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
-    box-shadow 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
-    opacity 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+    color 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+    border-color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer utilities {
