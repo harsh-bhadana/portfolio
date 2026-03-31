@@ -29,6 +29,7 @@ import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useTheme } from "./context/ThemeContext";
 
 const experiences = [
   {
@@ -139,6 +140,7 @@ const featureLabs = [
 ];
 
 export default function Home() {
+  const { theme } = useTheme();
   const [activeLabIndex, setActiveLabIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -157,8 +159,26 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-[60] origin-left"
         style={{ scaleX }}
       />
-      {/* Background Blobs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* Theme-Specific Background Image with Cross-fade */}
+      <AnimatePresence>
+        <motion.div
+          key={theme}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="fixed inset-0 z-0 pointer-events-none"
+          style={{
+            backgroundImage: `url('/backgrounds/${theme}.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            filter: "brightness(0.9) contrast(1.05) blur(8px)",
+          }}
+        />
+      </AnimatePresence>
+
+      {/* Decorative Background Blobs (Adjusted for better blending) */}
+      <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden mix-blend-overlay">
         <motion.div
           animate={{
             x: [0, 100, 0],
@@ -166,7 +186,7 @@ export default function Home() {
             rotate: [0, 45, 0],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-accent/20 bg-blob animate-float"
+          className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-accent/15 bg-blob animate-float"
         />
         <motion.div
           animate={{
@@ -175,7 +195,7 @@ export default function Home() {
             rotate: [0, -45, 0],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] rounded-full bg-accent-secondary/20 bg-blob"
+          className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] rounded-full bg-accent-secondary/15 bg-blob"
         />
         <motion.div
           animate={{
@@ -183,7 +203,7 @@ export default function Home() {
             y: [0, 150, 0],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-accent-tertiary/20 bg-blob"
+          className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-accent-tertiary/15 bg-blob"
         />
       </div>
 
