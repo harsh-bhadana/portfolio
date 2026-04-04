@@ -57,7 +57,12 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                transition={{ 
+          type: "spring", 
+          stiffness: 100, 
+          damping: 20,
+          delay: 0.6
+        }}
         className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
           scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
         }`}
@@ -80,16 +85,25 @@ export default function Navbar() {
               <Magnetic key={link.name} strength={0.25}>
                 <a
                   href={link.href}
-                  className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
+                  className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 flex items-center gap-2 ${
                     isActive ? "text-white" : "text-foreground/40 hover:text-foreground/70"
                   }`}
                 >
                   {isActive && (
-                    <motion.div
-                      layoutId="nav-bg"
-                      className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
+                    <>
+                      <motion.div
+                        layoutId="nav-bg"
+                        className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                      <motion.span
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <link.Icon size={14} />
+                      </motion.span>
+                    </>
                   )}
                   {link.name}
                 </a>
