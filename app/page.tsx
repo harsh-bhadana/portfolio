@@ -16,7 +16,6 @@ import {
   LayoutDashboard,
   Zap,
   Paintbrush,
-  FileCode,
   ArrowUpRight,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
@@ -394,24 +393,14 @@ export default function Home() {
                     <div key={i} className="space-y-4">
                       <button 
                         onClick={() => setActiveLabIndex(i)}
-                        className={`flex items-center gap-3 w-full text-left transition-all group ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
+                        className={`flex items-center gap-4 w-full text-left transition-all group py-2 ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
                       >
-                        <lab.icon size={16} />
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">{lab.category}</span>
+                        <lab.icon size={22} />
+                        <span className="text-sm font-black uppercase tracking-[0.2em]">{lab.category}</span>
                         {isActive && (
-                          <motion.div layoutId="active-lab-dot" className="w-1 h-1 rounded-full bg-accent ml-auto" />
+                          <motion.div layoutId="active-lab-dot" className="w-2 h-2 rounded-full bg-accent ml-auto" />
                         )}
                       </button>
-                      
-                      {/* Sub-items (Only show indented list for files) */}
-                      <div className={`space-y-2 border-l border-foreground/5 ml-2 pl-4 transition-all duration-500 overflow-hidden ${isActive ? "opacity-100 max-h-96" : "opacity-30 max-h-0 pointer-events-none"}`}>
-                        {lab.items.map((item, j) => (
-                          <div key={j} className="flex items-center gap-3 py-1">
-                            <FileCode size={12} className="text-foreground/20" />
-                            <span className="text-[10px] font-bold text-foreground/40">{item.name}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   );
                 })}
@@ -441,19 +430,19 @@ export default function Home() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: j * 0.1 }}
                           whileHover={{ y: -5 }}
-                          className="p-6 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden"
+                          className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden flex flex-col"
                         >
-                          <div className="absolute top-0 right-0 p-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
-                             <ArrowUpRight size={20} className="text-accent" />
+                          <div className="absolute top-0 right-0 p-8 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                             <ArrowUpRight size={24} className="text-accent" />
                           </div>
-                          <div className="flex items-center gap-3 mb-4 flex-wrap">
-                             <span className="text-[8px] font-black tracking-widest uppercase bg-accent/20 px-2.5 py-1 rounded-md text-accent">{item.badge}</span>
-                             <span className="text-[8px] font-mono font-bold text-foreground/20 italic">{item.path.split('/').pop()}</span>
+                          <div className="flex items-center gap-3 mb-6 flex-wrap">
+                             <span className="text-[10px] font-black tracking-widest uppercase bg-accent/20 px-3 py-1.5 rounded-md text-accent">{item.badge}</span>
+                             <span className="text-[10px] font-mono font-bold text-foreground/30 italic">{item.path.split('/').pop()}</span>
                           </div>
-                          <h4 className="text-lg font-black mb-3 group-hover/card:text-white transition-colors tracking-tight leading-none">{item.name}</h4>
-                          <p className="text-foreground/40 text-[10px] font-bold leading-relaxed mb-4 italic">{item.desc}</p>
-                          <div className="text-[8px] font-mono text-foreground/20 flex items-center gap-2 font-bold cursor-default mt-auto">
-                             <span className="w-1 h-1 rounded-full bg-accent animate-pulse" />
+                          <h4 className="text-xl md:text-2xl font-black mb-4 group-hover/card:text-white transition-colors tracking-tight leading-tight">{item.name}</h4>
+                          <p className="text-foreground/50 text-sm font-bold leading-relaxed mb-8 italic">{item.desc}</p>
+                          <div className="text-[10px] font-mono text-foreground/30 flex items-center gap-3 font-bold cursor-default mt-auto">
+                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                              specimens/{item.path}
                           </div>
                         </motion.div>
