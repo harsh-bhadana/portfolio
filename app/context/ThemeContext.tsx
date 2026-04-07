@@ -73,7 +73,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 500);
+      }, 1600);
     }, 600);
   };
 
@@ -95,11 +95,30 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
               transition={{ delay: 0.3, duration: 0.3 }}
               className="text-2xl md:text-5xl font-black tracking-[0.4em] text-center px-4"
             >
-              {targetTheme === "aurora" ? (
-                <><span className="text-[#ff2a5f]">UNLOCKING</span> THE FUN SIDE</>
-              ) : (
-                <><span className="text-white opacity-50">RESTORING</span> NORMALCY</>
-              )}
+              {[...(targetTheme === "aurora" ? "UNLOCKING THE FUN SIDE" : "RESTORING NORMALCY").split("")].map((char, i) => {
+                const isPrefix = i < 9;
+                const fromFont = targetTheme === "aurora" ? "var(--font-geist-sans)" : "var(--font-super-funky)";
+                const toFont = targetTheme === "aurora" ? "var(--font-super-funky)" : "var(--font-geist-sans)";
+                const colorClass = isPrefix 
+                  ? (targetTheme === "aurora" ? "text-[#ff2a5f]" : "text-white opacity-50")
+                  : "text-white";
+                return (
+                  <motion.span
+                    key={i}
+                    initial={{ fontFamily: fromFont }}
+                    animate={{ fontFamily: toFont }}
+                    transition={{ delay: 0.8 + i * 0.04, duration: 0 }}
+                    className={colorClass}
+                    style={{ 
+                      display: "inline-block", 
+                      whiteSpace: "pre", 
+                      verticalAlign: "middle" 
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                )
+              })}
             </motion.div>
           </motion.div>
         )}
