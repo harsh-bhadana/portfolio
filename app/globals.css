@@ -12,7 +12,6 @@
   --glass-bg: rgba(15, 15, 15, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --blob-blend: screen;
-  --bg-image: url('/backgrounds/eclipse.png');
   --gh-l0: #161b22;
   --gh-l1: #0e4429;
   --gh-l2: #006d32;
@@ -32,7 +31,6 @@
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(0, 0, 0, 0.1);
   --blob-blend: multiply;
-  --bg-image: url('/backgrounds/solar.png');
   --gh-l0: #ebedf0;
   --gh-l1: #9be9a8;
   --gh-l2: #40c463;

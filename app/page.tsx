@@ -166,23 +166,7 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-[60] origin-left"
         style={{ scaleX }}
       />
-      {/* Theme-Specific Background Image with Cross-fade */}
-      <AnimatePresence>
-        <motion.div
-          key={theme}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="fixed inset-0 z-0 pointer-events-none"
-          style={{
-            backgroundImage: `url('/backgrounds/${theme}.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "brightness(0.9) contrast(1.05) blur(8px)",
-          }}
-        />
-      </AnimatePresence>
+
 
       {/* Decorative Background Blobs (Adjusted for better blending) */}
       <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden mix-blend-overlay">
