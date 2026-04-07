@@ -6,13 +6,18 @@ import UseAnimations from "react-useanimations";
 import githubAnim from "react-useanimations/lib/github";
 import mailAnim from "react-useanimations/lib/mail";
 import linkedinAnim from "react-useanimations/lib/linkedin";
-import activityAnim from "react-useanimations/lib/activity";
-import exploreAnim from "react-useanimations/lib/explore";
-import folderAnim from "react-useanimations/lib/folder";
-import videoAnim from "react-useanimations/lib/video";
-import editAnim from "react-useanimations/lib/edit";
-import settingsAnim from "react-useanimations/lib/settings";
 import arrowUpAnim from "react-useanimations/lib/arrowUp";
+
+import { 
+  AnimatedDashboard, 
+  AnimatedCPU, 
+  AnimatedDatabase, 
+  AnimatedLayers, 
+  AnimatedCamera, 
+  AnimatedZap, 
+  AnimatedPaintbrush, 
+  AnimatedGlobe 
+} from "./AnimatedTechnicalIcons";
 
 interface ThemeIconProps {
   icon: React.ElementType;
@@ -25,27 +30,33 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
   const { theme } = useTheme();
 
   if (theme === "aurora") {
-    // Generate a random gradient configuration for the SVG drop shadow to make it extremely "colorful"
     const randomColor1 = ["#ff2a5f", "#00e5ff", "#ffaa00"][Math.floor(Math.random() * 3)];
     
-    // Map the incoming Lucide icon to a "proper" Lottie-based animated icon based on name
     const iconName = (Icon as any)?.displayName || (Icon as any)?.name || "";
     const nameLower = iconName.toLowerCase();
     
-    let anim = settingsAnim; // fallback
-    if (nameLower.includes("github")) anim = githubAnim;
-    else if (nameLower.includes("mail")) anim = mailAnim;
-    else if (nameLower.includes("linkedin")) anim = linkedinAnim;
-    else if (nameLower.includes("dashboard") || nameLower.includes("cpu") || nameLower.includes("zap")) anim = activityAnim;
-    else if (nameLower.includes("globe")) anim = exploreAnim;
-    else if (nameLower.includes("database") || nameLower.includes("layers")) anim = folderAnim;
-    else if (nameLower.includes("camera")) anim = videoAnim;
-    else if (nameLower.includes("paintbrush")) anim = editAnim;
-    else if (nameLower.includes("external") || nameLower.includes("upright")) anim = arrowUpAnim;
+    // Prioritize Bespoke Full-Motion Technical SVG Icons
+    let CustomAnimComp = null;
+    if (nameLower.includes("dashboard")) CustomAnimComp = AnimatedDashboard;
+    else if (nameLower.includes("cpu")) CustomAnimComp = AnimatedCPU;
+    else if (nameLower.includes("database")) CustomAnimComp = AnimatedDatabase;
+    else if (nameLower.includes("layers")) CustomAnimComp = AnimatedLayers;
+    else if (nameLower.includes("camera")) CustomAnimComp = AnimatedCamera;
+    else if (nameLower.includes("zap")) CustomAnimComp = AnimatedZap;
+    else if (nameLower.includes("paintbrush")) CustomAnimComp = AnimatedPaintbrush;
+    else if (nameLower.includes("globe")) CustomAnimComp = AnimatedGlobe;
+
+    // Fallback to react-useanimations for generic generic standard stuff
+    let lottieAnim = null;
+    if (!CustomAnimComp) {
+      if (nameLower.includes("github")) lottieAnim = githubAnim;
+      else if (nameLower.includes("mail")) lottieAnim = mailAnim;
+      else if (nameLower.includes("linkedin")) lottieAnim = linkedinAnim;
+      else if (nameLower.includes("external") || nameLower.includes("upright")) lottieAnim = arrowUpAnim;
+    }
 
     return (
       <div className={`relative flex items-center justify-center ${className}`} style={{ width: size, height: size }}>
-        {/* Colorful Glow Effect Behind */}
         <motion.div
           animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay }}
@@ -53,19 +64,25 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
           style={{ background: `radial-gradient(circle, ${randomColor1} 0%, transparent 70%)` }}
         />
         
-        {/* Proper Lottie-Animated Icon */}
         <div className="relative z-10 flex items-center justify-center" style={{ color: randomColor1, filter: `drop-shadow(0 0 6px ${randomColor1})` }}>
-          <UseAnimations
-            animation={anim}
-            size={Math.max(size * 1.2, 24)} // Animated icons usually have some internal padding
-            strokeColor={randomColor1}
-            pathCss={`stroke: ${randomColor1}; fill: ${randomColor1};`}
-          />
+          {CustomAnimComp ? (
+            <CustomAnimComp size={Math.max(size * 1.2, 24)} color={randomColor1} />
+          ) : lottieAnim ? (
+            <UseAnimations
+              animation={lottieAnim}
+              size={Math.max(size * 1.2, 24)}
+              strokeColor={randomColor1}
+              pathCss={`stroke: ${randomColor1}; fill: ${randomColor1};`}
+            />
+          ) : (
+            <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+               <Icon size={size} color={randomColor1} strokeWidth={2.5} />
+            </motion.div>
+          )}
         </div>
       </div>
     );
   }
 
-  // Default / Minimalistic Eclipse Icon
   return <Icon size={size} className={className} />;
 }
