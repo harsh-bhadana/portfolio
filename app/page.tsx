@@ -16,9 +16,9 @@ import {
   LayoutDashboard,
   Zap,
   Paintbrush,
-  FileCode,
   ArrowUpRight,
 } from "lucide-react";
+import ThemeIcon from "./components/ThemeIcon";
 import Navbar from "./components/Navbar";
 import ExperienceItem from "./components/ExperienceItem";
 import Footer from "./components/Footer";
@@ -28,7 +28,7 @@ import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./context/ThemeContext";
 
 const experiences = [
@@ -69,9 +69,9 @@ const experiences = [
 ];
 
 const skills = [
-  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: <Globe size={24} /> },
-  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: <Database size={24} /> },
-  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: <Layers size={24} /> }
+  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: Globe },
+  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: Database },
+  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: Layers }
 ];
 
 const githubProjects = [
@@ -142,6 +142,14 @@ const featureLabs = [
 export default function Home() {
   const { theme } = useTheme();
   const [activeLabIndex, setActiveLabIndex] = useState(0);
+  const scrollThrottleRef = useRef<number>(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [activeLabIndex]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -159,23 +167,7 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-[60] origin-left"
         style={{ scaleX }}
       />
-      {/* Theme-Specific Background Image with Cross-fade */}
-      <AnimatePresence>
-        <motion.div
-          key={theme}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="fixed inset-0 z-0 pointer-events-none"
-          style={{
-            backgroundImage: `url('/backgrounds/${theme}.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "brightness(0.9) contrast(1.05) blur(8px)",
-          }}
-        />
-      </AnimatePresence>
+
 
       {/* Decorative Background Blobs (Adjusted for better blending) */}
       <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden mix-blend-overlay">
@@ -296,7 +288,7 @@ export default function Home() {
                 className="md:col-span-12 group p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000"
               >
                 <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-all pointer-events-none">
-                  <project.icon size={160} />
+                  <ThemeIcon icon={project.icon} size={160} />
                 </div>
 
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
@@ -323,11 +315,11 @@ export default function Home() {
 
                     <div className="flex gap-8 mt-auto">
                       <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
-                        Repo <Github size={20} />
+                        Repo <ThemeIcon icon={Github} size={20} />
                       </a>
                       {project.demo && (
                         <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors">
-                          Demo <ExternalLink size={20} />
+                          Demo <ThemeIcon icon={ExternalLink} size={20} />
                         </a>
                       )}
                     </div>
@@ -394,31 +386,45 @@ export default function Home() {
                     <div key={i} className="space-y-4">
                       <button 
                         onClick={() => setActiveLabIndex(i)}
-                        className={`flex items-center gap-3 w-full text-left transition-all group ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
+                        className={`flex items-center gap-4 w-full text-left transition-all group py-2 ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
                       >
-                        <lab.icon size={16} />
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">{lab.category}</span>
+                        <ThemeIcon icon={lab.icon} size={22} />
+                        <span className="text-sm font-black uppercase tracking-[0.2em]">{lab.category}</span>
                         {isActive && (
-                          <motion.div layoutId="active-lab-dot" className="w-1 h-1 rounded-full bg-accent ml-auto" />
+                          <motion.div layoutId="active-lab-dot" className="w-2 h-2 rounded-full bg-accent ml-auto" />
                         )}
                       </button>
-                      
-                      {/* Sub-items (Only show indented list for files) */}
-                      <div className={`space-y-2 border-l border-foreground/5 ml-2 pl-4 transition-all duration-500 overflow-hidden ${isActive ? "opacity-100 max-h-96" : "opacity-30 max-h-0 pointer-events-none"}`}>
-                        {lab.items.map((item, j) => (
-                          <div key={j} className="flex items-center gap-3 py-1">
-                            <FileCode size={12} className="text-foreground/20" />
-                            <span className="text-[10px] font-bold text-foreground/40">{item.name}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   );
                 })}
               </div>
 
               {/* Lab Content Area (Editor View) */}
-              <div className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]">
+              <div 
+                ref={scrollContainerRef}
+                className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]"
+                onWheel={(e) => {
+                  const now = Date.now();
+                  if (now - scrollThrottleRef.current < 1000) return;
+
+                  const el = e.currentTarget;
+                  if (e.deltaY > 0) {
+                    if (el.scrollHeight - el.scrollTop - el.clientHeight < 5) {
+                      if (activeLabIndex < featureLabs.length - 1) {
+                        scrollThrottleRef.current = now;
+                        setActiveLabIndex(prev => prev + 1);
+                      }
+                    }
+                  } else if (e.deltaY < 0) {
+                    if (el.scrollTop < 5) {
+                      if (activeLabIndex > 0) {
+                        scrollThrottleRef.current = now;
+                        setActiveLabIndex(prev => prev - 1);
+                      }
+                    }
+                  }
+                }}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={activeLabIndex}
@@ -441,19 +447,19 @@ export default function Home() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: j * 0.1 }}
                           whileHover={{ y: -5 }}
-                          className="p-6 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden"
+                          className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden flex flex-col"
                         >
-                          <div className="absolute top-0 right-0 p-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
-                             <ArrowUpRight size={20} className="text-accent" />
+                          <div className="absolute top-0 right-0 p-8 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                             <ArrowUpRight size={24} className="text-accent" />
                           </div>
-                          <div className="flex items-center gap-3 mb-4 flex-wrap">
-                             <span className="text-[8px] font-black tracking-widest uppercase bg-accent/20 px-2.5 py-1 rounded-md text-accent">{item.badge}</span>
-                             <span className="text-[8px] font-mono font-bold text-foreground/20 italic">{item.path.split('/').pop()}</span>
+                          <div className="flex items-center gap-3 mb-6 flex-wrap">
+                             <span className="text-[10px] font-black tracking-widest uppercase bg-accent/20 px-3 py-1.5 rounded-md text-accent">{item.badge}</span>
+                             <span className="text-[10px] font-mono font-bold text-foreground/30 italic">{item.path.split('/').pop()}</span>
                           </div>
-                          <h4 className="text-lg font-black mb-3 group-hover/card:text-white transition-colors tracking-tight leading-none">{item.name}</h4>
-                          <p className="text-foreground/40 text-[10px] font-bold leading-relaxed mb-4 italic">{item.desc}</p>
-                          <div className="text-[8px] font-mono text-foreground/20 flex items-center gap-2 font-bold cursor-default mt-auto">
-                             <span className="w-1 h-1 rounded-full bg-accent animate-pulse" />
+                          <h4 className="text-xl md:text-2xl font-black mb-4 group-hover/card:text-white transition-colors tracking-tight leading-tight">{item.name}</h4>
+                          <p className="text-foreground/50 text-sm font-bold leading-relaxed mb-8 italic">{item.desc}</p>
+                          <div className="text-[10px] font-mono text-foreground/30 flex items-center gap-3 font-bold cursor-default mt-auto">
+                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                              specimens/{item.path}
                           </div>
                         </motion.div>
@@ -480,7 +486,7 @@ export default function Home() {
           <Magnetic strength={0.2}>
             <a href="https://github.com/harsh-bhadana/next-labs" target="_blank" rel="noopener noreferrer" className="group mt-12 mx-auto px-10 py-5 rounded-full bg-foreground text-background font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-6 hover:bg-accent hover:text-white transition-all transform hover:scale-[1.02] border-2 border-transparent hover:border-white/20">
               Inspect Extended Laboratory
-              <Github size={20} className="group-hover:rotate-[360deg] transition-transform duration-700" />
+              <ThemeIcon icon={Github} size={20} className="group-hover:rotate-[360deg] transition-transform duration-700" />
             </a>
           </Magnetic>
         </section>
@@ -515,7 +521,7 @@ export default function Home() {
                 className="md:col-span-4 p-8 md:p-10 rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group flex flex-col"
               >
                 <div className="w-16 h-16 rounded-3xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-10 group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                  {skill.icon}
+                  <ThemeIcon icon={skill.icon as React.ElementType} size={24} />
                 </div>
                 <h3 className="text-2xl font-black mb-8 uppercase tracking-widest leading-none">{skill.category}</h3>
                 <div className="flex flex-wrap gap-2 mt-auto">
@@ -563,17 +569,17 @@ export default function Home() {
                   href="mailto:harshbhadana40@gmail.com"
                   className="px-10 py-5 rounded-2xl bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2"
                 >
-                  <Mail size={20} /> Email Me
+                  <ThemeIcon icon={Mail} size={20} /> Email Me
                 </a>
                 <div className="flex items-center gap-4">
                   <Magnetic strength={0.3}>
                     <a href="https://www.linkedin.com/in/harsh-bhadana-2a1793231/" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all flex items-center justify-center">
-                      <Linkedin size={24} />
+                      <ThemeIcon icon={Linkedin} size={24} />
                     </a>
                   </Magnetic>
                   <Magnetic strength={0.3}>
                     <a href="https://github.com/harsh-bhadana" target="_blank" rel="noopener noreferrer" className="p-5 rounded-2xl border-2 border-white/20 hover:bg-white/10 transition-all flex items-center justify-center">
-                      <Github size={24} />
+                      <ThemeIcon icon={Github} size={24} />
                     </a>
                   </Magnetic>
                 </div>

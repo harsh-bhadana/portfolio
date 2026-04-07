@@ -12,7 +12,6 @@
   --glass-bg: rgba(15, 15, 15, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --blob-blend: screen;
-  --bg-image: url('/backgrounds/eclipse.png');
   --gh-l0: #161b22;
   --gh-l1: #0e4429;
   --gh-l2: #006d32;
@@ -20,44 +19,23 @@
   --gh-l4: #39d353;
 }
 
-[data-theme="solar"] {
-  --background: #fcfcfc;
-  --foreground: #1a1a1a;
-  --accent: #ff4655;
-  --accent-secondary: #5a00cc;
-  --accent-tertiary: #00b0d4;
-  --card: #f0f0f0;
-  --border: rgba(0, 0, 0, 0.08);
-  --selection: rgba(255, 70, 85, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --blob-blend: multiply;
-  --bg-image: url('/backgrounds/solar.png');
-  --gh-l0: #ebedf0;
-  --gh-l1: #9be9a8;
-  --gh-l2: #40c463;
-  --gh-l3: #30a14e;
-  --gh-l4: #216e39;
-}
-
-[data-theme="aether"] {
-  --background: #000000;
-  --foreground: #00d4ff;
-  --accent: #00d4ff;
-  --accent-secondary: #0070ff;
-  --accent-tertiary: #ffffff;
-  --card: #080808;
-  --border: rgba(0, 212, 255, 0.2);
-  --selection: rgba(0, 212, 255, 0.2);
-  --glass-bg: rgba(8, 8, 8, 0.6);
-  --glass-border: rgba(0, 212, 255, 0.2);
+[data-theme="aurora"] {
+  --background: #1a0b2e;
+  --foreground: #f8f8ff;
+  --accent: #ff2a5f;
+  --accent-secondary: #00e5ff;
+  --accent-tertiary: #ffaa00;
+  --card: #241442;
+  --border: rgba(255, 255, 255, 0.1);
+  --selection: rgba(255, 42, 95, 0.3);
+  --glass-bg: rgba(26, 11, 46, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.15);
   --blob-blend: screen;
-  --bg-image: url('/backgrounds/aether.png');
-  --gh-l0: #080808;
-  --gh-l1: #004d61;
-  --gh-l2: #007fa1;
-  --gh-l3: #00b0d4;
-  --gh-l4: #00d4ff;
+  --gh-l0: #1a0b2e;
+  --gh-l1: #4a154b;
+  --gh-l2: #7b1d69;
+  --gh-l3: #bd2773;
+  --gh-l4: #ff2a5f;
 }
 
 @theme inline {
@@ -144,4 +122,44 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Custom Red Line Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+/* Dynamic Aurora Fonts */
+[data-font="bangers"] {
+  --font-sans: var(--font-bangers);
+  font-family: var(--font-bangers);
+}
+
+[data-font="chewy"] {
+  --font-sans: var(--font-chewy);
+  font-family: var(--font-chewy);
+}
+
+[data-font="luckiest"] {
+  --font-sans: var(--font-luckiest);
+  font-family: var(--font-luckiest);
 }
