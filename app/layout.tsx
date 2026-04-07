@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bangers, Chewy, Luckiest_Guy } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -10,6 +10,24 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const fontBangers = Bangers({
+  weight: "400",
+  variable: "--font-bangers",
+  subsets: ["latin"],
+});
+
+const fontChewy = Chewy({
+  weight: "400",
+  variable: "--font-chewy",
+  subsets: ["latin"],
+});
+
+const fontLuckiest = Luckiest_Guy({
+  weight: "400",
+  variable: "--font-luckiest",
   subsets: ["latin"],
 });
 
@@ -26,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fontBangers.variable} ${fontChewy.variable} ${fontLuckiest.variable} antialiased`}
       >
         <ThemeProvider>
           {children}
