@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import { Moon, Sun, Sparkles } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function PhaseToggle() {
@@ -27,7 +27,6 @@ export default function PhaseToggle() {
   const icons = {
     eclipse: <Moon size={18} />,
     solar: <Sun size={18} />,
-    aether: <Sparkles size={18} />,
   };
 
   return (
