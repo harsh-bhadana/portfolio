@@ -2,11 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import UseAnimations from "react-useanimations";
-import githubAnim from "react-useanimations/lib/github";
-import mailAnim from "react-useanimations/lib/mail";
-import linkedinAnim from "react-useanimations/lib/linkedin";
-import arrowUpAnim from "react-useanimations/lib/arrowUp";
 
 import { 
   AnimatedDashboard, 
@@ -16,7 +11,11 @@ import {
   AnimatedCamera, 
   AnimatedZap, 
   AnimatedPaintbrush, 
-  AnimatedGlobe 
+  AnimatedGlobe,
+  AnimatedGithub,
+  AnimatedMail,
+  AnimatedLinkedin,
+  AnimatedExternalLink
 } from "./AnimatedTechnicalIcons";
 
 interface ThemeIconProps {
@@ -35,7 +34,7 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
     const iconName = (Icon as any)?.displayName || (Icon as any)?.name || "";
     const nameLower = iconName.toLowerCase();
     
-    // Prioritize Bespoke Full-Motion Technical SVG Icons
+    // Prioritize Bespoke Full-Motion SVG Icons
     let CustomAnimComp = null;
     if (nameLower.includes("dashboard")) CustomAnimComp = AnimatedDashboard;
     else if (nameLower.includes("cpu")) CustomAnimComp = AnimatedCPU;
@@ -45,15 +44,10 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
     else if (nameLower.includes("zap")) CustomAnimComp = AnimatedZap;
     else if (nameLower.includes("paintbrush")) CustomAnimComp = AnimatedPaintbrush;
     else if (nameLower.includes("globe")) CustomAnimComp = AnimatedGlobe;
-
-    // Fallback to react-useanimations for generic generic standard stuff
-    let lottieAnim = null;
-    if (!CustomAnimComp) {
-      if (nameLower.includes("github")) lottieAnim = githubAnim;
-      else if (nameLower.includes("mail")) lottieAnim = mailAnim;
-      else if (nameLower.includes("linkedin")) lottieAnim = linkedinAnim;
-      else if (nameLower.includes("external") || nameLower.includes("upright")) lottieAnim = arrowUpAnim;
-    }
+    else if (nameLower.includes("github")) CustomAnimComp = AnimatedGithub;
+    else if (nameLower.includes("mail")) CustomAnimComp = AnimatedMail;
+    else if (nameLower.includes("linkedin")) CustomAnimComp = AnimatedLinkedin;
+    else if (nameLower.includes("external") || nameLower.includes("upright")) CustomAnimComp = AnimatedExternalLink;
 
     return (
       <div className={`relative flex items-center justify-center ${className}`} style={{ width: size, height: size }}>
@@ -64,19 +58,12 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
           style={{ background: `radial-gradient(circle, ${randomColor1} 0%, transparent 70%)` }}
         />
         
-        <div className="relative z-10 flex items-center justify-center" style={{ color: randomColor1, filter: `drop-shadow(0 0 6px ${randomColor1})` }}>
+        <div className="relative z-10 flex items-center justify-center text-current" style={{ filter: `drop-shadow(0 0 6px ${randomColor1})` }}>
           {CustomAnimComp ? (
-            <CustomAnimComp size={Math.max(size * 1.2, 24)} color={randomColor1} />
-          ) : lottieAnim ? (
-            <UseAnimations
-              animation={lottieAnim}
-              size={Math.max(size * 1.2, 24)}
-              strokeColor={randomColor1}
-              pathCss={`stroke: ${randomColor1}; fill: ${randomColor1};`}
-            />
+            <CustomAnimComp size={Math.max(size * 1.2, 24)} color="currentColor" />
           ) : (
             <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-               <Icon size={size} color={randomColor1} strokeWidth={2.5} />
+               <Icon size={size} color="currentColor" strokeWidth={2.5} />
             </motion.div>
           )}
         </div>
