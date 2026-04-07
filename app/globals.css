@@ -148,18 +148,15 @@ body {
   scrollbar-color: var(--accent) transparent;
 }
 
+/* Smooth Theme Transitions */
+*, ::before, ::after {
+  transition-property: background-color, border-color, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
 /* Dynamic Aurora Fonts */
-[data-font="bangers"] {
-  --font-sans: var(--font-bangers);
-  font-family: var(--font-bangers);
-}
-
-[data-font="chewy"] {
-  --font-sans: var(--font-chewy);
-  font-family: var(--font-chewy);
-}
-
-[data-font="luckiest"] {
-  --font-sans: var(--font-luckiest);
-  font-family: var(--font-luckiest);
+html[data-font="super-funky"] body {
+  --font-sans: var(--font-super-funky);
+  font-family: var(--font-super-funky) !important;
 }
