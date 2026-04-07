@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "eclipse" | "solar";
+type Theme = "eclipse" | "aurora";
 
 interface ThemeContextType {
   theme: Theme;
@@ -30,7 +30,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    const themes: Theme[] = ["eclipse", "solar"];
+    const themes: Theme[] = ["eclipse", "aurora"];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     setTheme(themes[nextIndex]);

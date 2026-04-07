@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Palette } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function PhaseToggle() {
@@ -26,7 +26,7 @@ export default function PhaseToggle() {
 
   const icons = {
     eclipse: <Moon size={18} />,
-    solar: <Sun size={18} />,
+    aurora: <Palette size={18} />,
   };
 
   return (
