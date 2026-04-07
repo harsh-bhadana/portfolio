@@ -125,3 +125,27 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Custom Red Line Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}

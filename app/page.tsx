@@ -27,7 +27,7 @@ import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./context/ThemeContext";
 
 const experiences = [
@@ -141,6 +141,14 @@ const featureLabs = [
 export default function Home() {
   const { theme } = useTheme();
   const [activeLabIndex, setActiveLabIndex] = useState(0);
+  const scrollThrottleRef = useRef<number>(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [activeLabIndex]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -407,7 +415,31 @@ export default function Home() {
               </div>
 
               {/* Lab Content Area (Editor View) */}
-              <div className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]">
+              <div 
+                ref={scrollContainerRef}
+                className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]"
+                onWheel={(e) => {
+                  const now = Date.now();
+                  if (now - scrollThrottleRef.current < 1000) return;
+
+                  const el = e.currentTarget;
+                  if (e.deltaY > 0) {
+                    if (el.scrollHeight - el.scrollTop - el.clientHeight < 5) {
+                      if (activeLabIndex < featureLabs.length - 1) {
+                        scrollThrottleRef.current = now;
+                        setActiveLabIndex(prev => prev + 1);
+                      }
+                    }
+                  } else if (e.deltaY < 0) {
+                    if (el.scrollTop < 5) {
+                      if (activeLabIndex > 0) {
+                        scrollThrottleRef.current = now;
+                        setActiveLabIndex(prev => prev - 1);
+                      }
+                    }
+                  }
+                }}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={activeLabIndex}
