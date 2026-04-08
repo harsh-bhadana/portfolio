@@ -42,7 +42,7 @@ export default function ExperienceItem({ title, company, period, projects }: Exp
             </div>
 
             {/* Projects List */}
-            <div className="space-y-12 pl-4 md:pl-18 border-l border-foreground/5 ml-6 md:ml-6">
+            <div className="space-y-12 pl-6 md:pl-18 border-l border-foreground/5 ml-6 md:ml-6">
                 {projects.map((project, pIndex) => (
                     <motion.div 
                         key={pIndex} 
@@ -52,7 +52,7 @@ export default function ExperienceItem({ title, company, period, projects }: Exp
                         transition={{ delay: pIndex * 0.1 }}
                         className="relative"
                     >
-                        <div className="absolute -left-10 top-2 w-4 h-4 rounded-full bg-accent/20 border-2 border-accent" />
+                        <div className="absolute -left-[1.85rem] md:-left-[4.85rem] top-3 w-3 h-3 rounded-full bg-accent/20 border border-accent" />
                         <h4 className="text-lg md:text-xl font-black text-foreground mb-4 uppercase tracking-wider">{project.name}</h4>
                         <p className="text-foreground/60 text-sm font-medium mb-8 max-w-2xl leading-relaxed italic border-l-2 border-accent/20 pl-4">
                             {project.description}

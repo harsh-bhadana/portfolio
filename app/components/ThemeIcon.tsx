@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
 
 import { 
   AnimatedDashboard, 
@@ -27,9 +28,16 @@ interface ThemeIconProps {
 
 export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay = 0 }: ThemeIconProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [randomColor, setRandomColor] = useState("#ff2a5f");
+
+  useEffect(() => {
+    setMounted(true);
+    setRandomColor(["#ff2a5f", "#00e5ff", "#ffaa00"][Math.floor(Math.random() * 3)]);
+  }, []);
 
   if (theme === "aurora") {
-    const randomColor1 = ["#ff2a5f", "#00e5ff", "#ffaa00"][Math.floor(Math.random() * 3)];
+    const randomColor1 = randomColor;
     
     const iconName = (Icon as any)?.displayName || (Icon as any)?.name || "";
     const nameLower = iconName.toLowerCase();

@@ -17,6 +17,10 @@ import {
   Zap,
   Paintbrush,
   ArrowUpRight,
+  Key,
+  Shield,
+  User,
+  Users,
 } from "lucide-react";
 import ThemeIcon from "./components/ThemeIcon";
 import Navbar from "./components/Navbar";
@@ -88,7 +92,12 @@ const githubProjects = [
     status: "In Progress",
     tech: ["NEXT.JS 16", "MONGODB", "TYPESCRIPT", "FRAMER MOTION"],
     github: "https://github.com/harsh-bhadana/event-logix",
-    demo: "https://event-logix.vercel.app"
+    demo: "https://event-logix.vercel.app",
+    demoCredentials: [
+      { role: "Admin", email: "admin@example.com", password: "password123", icon: Shield },
+      { role: "Staff", email: "staff@example.com", password: "password123", icon: Users },
+      { role: "User", email: "user@example.com", password: "password123", icon: User }
+    ]
   },
   {
     name: "Clicks",
@@ -158,7 +167,7 @@ export default function Home() {
   });
 
   return (
-    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth">
+    <div className="bg-background text-foreground selection:bg-accent/30 relative h-screen overflow-y-auto snap-y snap-proximity custom-scrollbar scroll-smooth scroll-pt-32 md:scroll-pt-0">
       <CustomCursor />
       <FloatingDock />
       
@@ -203,7 +212,7 @@ export default function Home() {
 
       <main className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Hero Section */}
-        <section id="about" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+        <section id="about" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -217,13 +226,13 @@ export default function Home() {
               Available for new projects
             </div>
 
-            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-8 items-baseline mix-blend-difference py-4">
-              <TextReveal text="Harsh" wordByWord={false} />
+            <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-4 md:gap-x-8 items-baseline mix-blend-difference py-4">
+              <TextReveal text="Harsh" wordByWord={false} className="text-6xl sm:text-7xl md:text-[10rem]" />
               <TextReveal
                 text="Bhadana"
                 wordByWord={false}
                 delay={0.5}
-                className="text-gradient pb-2"
+                className="text-6xl sm:text-7xl md:text-[10rem] text-gradient pb-2"
               />
             </h1>
 
@@ -254,7 +263,7 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+        <section id="experience" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
             <div>
               <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
@@ -270,7 +279,7 @@ export default function Home() {
         </section>
 
         {/* Latest Works Section */}
-        <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+        <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
           <div className="mb-20">
             <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Creation</span>
             <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Latest <br /> <span className="animate-gradient">Works</span></h2>
@@ -285,16 +294,16 @@ export default function Home() {
                 whileHover={{ y: -10, rotateX: 2, rotateY: 2 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, type: "spring", stiffness: 300, damping: 20 }}
-                className="md:col-span-12 group p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000"
+                className="md:col-span-12 group p-6 md:p-12 rounded-[2rem] md:rounded-[4rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col perspective-1000"
               >
                 <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-all pointer-events-none">
                   <ThemeIcon icon={project.icon} size={160} />
                 </div>
 
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 h-full">
                   <div className="flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <h3 className="text-4xl md:text-6xl font-black group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
+                    <div className="flex items-center gap-4 mb-6 md:mb-8">
+                      <h3 className="text-3xl md:text-6xl font-black group-hover:text-accent transition-colors leading-none tracking-tighter">{project.name}</h3>
                       {project.status && (
                         <span className="px-4 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-[10px] font-black uppercase tracking-[0.2em] text-accent animate-pulse">
                           {project.status}
@@ -312,6 +321,7 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
+
 
                     <div className="flex gap-8 mt-auto">
                       <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
@@ -349,6 +359,30 @@ export default function Home() {
                         </p>
                       </div>
                     )}
+
+                    {project.demoCredentials && (
+                      <div className="p-6 rounded-3xl bg-accent/5 border border-accent/20 relative overflow-hidden group/creds">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/creds:rotate-12 transition-transform">
+                          <Key size={24} className="text-accent" />
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block font-bold">Demo Access Portal</span>
+                        <div className="space-y-3">
+                          {project.demoCredentials.map((cred: any, i: number) => (
+                            <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-all border border-transparent hover:border-accent/20">
+                              <div className="flex items-center gap-3">
+                                <cred.icon size={12} className="text-accent" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-foreground/50">{cred.role}</span>
+                              </div>
+                              <div className="flex items-center gap-3 text-[10px] font-mono">
+                                <span className="text-foreground/70">{cred.email}</span>
+                                <span className="text-foreground/30">•</span>
+                                <span className="text-foreground/70">{cred.password}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -357,7 +391,7 @@ export default function Home() {
         </section>
 
         {/* Feature Lab / Deep Dive (Condensed IDE Explorer Style) */}
-        <section id="labs" className="min-h-screen flex flex-col justify-center py-24 snap-start snap-always max-w-6xl mx-auto overflow-hidden">
+        <section id="labs" className="min-h-screen flex flex-col justify-center py-24 snap-start snap-always max-w-6xl mx-auto overflow-hidden scroll-mt-32">
           <div className="mb-12">
             <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Specimen <span className="animate-gradient not-italic">Exploration</span></h2>
@@ -366,7 +400,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-[3rem] bg-black/40 border border-foreground/10 overflow-hidden shadow-2xl relative group h-[700px] flex flex-col">
+          <div className="rounded-[2.5rem] md:rounded-[3rem] bg-black/40 border border-foreground/10 overflow-hidden shadow-2xl relative group h-auto md:h-[700px] flex flex-col">
             <div className="flex items-center justify-between px-8 py-5 border-b border-foreground/5 bg-foreground/[0.03] shrink-0">
               <div className="flex items-center gap-6">
                 <div className="flex gap-2">
@@ -379,19 +413,19 @@ export default function Home() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-hidden items-stretch">
               {/* Sidebar Explorer */}
-              <div className="lg:col-span-4 border-r border-foreground/5 bg-foreground/[0.01] p-6 space-y-8 overflow-y-auto custom-scrollbar">
+              <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-foreground/5 bg-foreground/[0.01] p-4 md:p-6 flex lg:flex-col gap-4 lg:gap-8 overflow-x-auto lg:overflow-y-auto custom-scrollbar shrink-0">
                 {featureLabs.map((lab, i) => {
                   const isActive = activeLabIndex === i;
                   return (
-                    <div key={i} className="space-y-4">
+                    <div key={i} className="space-y-4 shrink-0 lg:shrink">
                       <button 
                         onClick={() => setActiveLabIndex(i)}
-                        className={`flex items-center gap-4 w-full text-left transition-all group py-2 ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
+                        className={`flex items-center gap-3 md:gap-4 w-full text-left transition-all group py-2 ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
                       >
-                        <ThemeIcon icon={lab.icon} size={22} />
-                        <span className="text-sm font-black uppercase tracking-[0.2em]">{lab.category}</span>
+                        <ThemeIcon icon={lab.icon} size={20} />
+                        <span className="text-[10px] md:text-sm font-black uppercase tracking-[0.2em] whitespace-nowrap">{lab.category}</span>
                         {isActive && (
-                          <motion.div layoutId="active-lab-dot" className="w-2 h-2 rounded-full bg-accent ml-auto" />
+                          <motion.div layoutId="active-lab-dot" className="hidden lg:block w-2 h-2 rounded-full bg-accent ml-auto" />
                         )}
                       </button>
                     </div>
@@ -402,7 +436,7 @@ export default function Home() {
               {/* Lab Content Area (Editor View) */}
               <div 
                 ref={scrollContainerRef}
-                className="lg:col-span-8 p-10 lg:p-12 overflow-y-auto custom-scrollbar bg-foreground/[0.005]"
+                className="lg:col-span-8 p-6 md:p-12 overflow-y-auto lg:h-full custom-scrollbar bg-foreground/[0.005]"
                 onWheel={(e) => {
                   const now = Date.now();
                   if (now - scrollThrottleRef.current < 1000) return;
@@ -493,7 +527,7 @@ export default function Home() {
 
 
         {/* Tech Stack Section */}
-        <section id="skills" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
+        <section id="skills" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(180px,auto)]">
             <div className="md:col-span-12 mb-10">
               <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">04 / Proficiencies</span>
@@ -518,7 +552,7 @@ export default function Home() {
                     }
                   }
                 }}
-                className="md:col-span-4 p-8 md:p-10 rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group flex flex-col"
+                className="md:col-span-4 p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group flex flex-col"
               >
                 <div className="w-16 h-16 rounded-3xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-10 group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500">
                   <ThemeIcon icon={skill.icon as React.ElementType} size={24} />
@@ -551,8 +585,8 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always">
-          <div className="p-16 md:p-32 rounded-[4rem] bg-accent text-white relative overflow-hidden group">
+        <section id="contact" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
+          <div className="p-10 md:p-32 rounded-[2.5rem] md:rounded-[4rem] bg-accent text-white relative overflow-hidden group">
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -561,7 +595,7 @@ export default function Home() {
 
             <div className="relative z-10 text-center flex flex-col items-center">
               <span className="text-[10px] font-black tracking-[0.4em] uppercase mb-12 opacity-60">Get in touch</span>
-              <h2 className="text-5xl md:text-9xl font-black tracking-tighter mb-16 leading-[0.9] md:leading-[0.8] mix-blend-overlay">
+              <h2 className="text-5xl md:text-9xl font-black tracking-tighter mb-16 leading-[1.0] md:leading-[0.8] mix-blend-overlay uppercase">
                 LET&apos;S GO <br /> BEYOND
               </h2>
               <div className="flex flex-wrap justify-center gap-8">

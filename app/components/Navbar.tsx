@@ -63,19 +63,19 @@ export default function Navbar() {
           damping: 20,
           delay: 0.6
         }}
-        className={`glass rounded-2xl px-2 md:px-4 py-2 flex items-center gap-1 md:gap-2 transition-all duration-500 ${
+        className={`glass rounded-2xl px-1 md:px-4 py-2 flex items-center gap-0.5 md:gap-2 transition-all duration-500 ${
           scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
         }`}
       >
         <Magnetic strength={0.3}>
-          <a href="/" className="px-2 md:px-4 text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
+          <a href="/" className="px-3 md:px-4 text-lg md:text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
             HB<span className="text-accent">.</span>
           </a>
         </Magnetic>
 
-        <div className="h-4 w-px bg-foreground/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
         <PhaseToggle />
-        <div className="h-4 w-px bg-foreground/10 mx-2" />
+        <div className="h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
@@ -123,11 +123,11 @@ export default function Navbar() {
                 href={link.href}
                 whileHover="hover"
                 initial="initial"
-                className={`relative h-10 flex items-center px-3 transition-all duration-300 rounded-xl group ${
+                className={`relative h-10 flex items-center px-2.5 md:px-3 transition-all duration-300 rounded-xl group ${
                   isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/5"
                 }`}
               >
-                <Icon size={18} className="flex-shrink-0" />
+                <Icon size={16} className="flex-shrink-0" />
                 <motion.span
                   variants={{
                     initial: { width: 0, opacity: 0, marginLeft: 0 },
