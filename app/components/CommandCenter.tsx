@@ -94,6 +94,10 @@ export default function CommandCenter() {
           const el = document.getElementById(section);
           if (el) {
             setIsOpen(false);
+            // Trigger Quantum Phase Shift on jump
+            if ((window as any).triggerQuantumPhase) {
+              (window as any).triggerQuantumPhase();
+            }
             el.scrollIntoView({ behavior: "smooth" });
             setHistory((prev) => [...prev, { type: "result", content: `QUANTUM_LEAP: NAVIGATING TO SECTOR_${section.toUpperCase()}` }]);
           } else {
