@@ -68,7 +68,7 @@ export default function Navbar() {
         }`}
       >
         <Magnetic strength={0.3}>
-          <a href="/" className="px-1.5 md:px-4 text-lg md:text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
+          <a href="/" className="px-3 md:px-4 text-lg md:text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
             HB<span className="text-accent">.</span>
           </a>
         </Magnetic>
