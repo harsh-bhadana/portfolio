@@ -31,6 +31,7 @@ import TextReveal from "./components/TextReveal";
 import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
+import ArchitectureGraph from "./components/ArchitectureGraph";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./context/ThemeContext";
@@ -97,7 +98,20 @@ const githubProjects = [
       { role: "Admin", email: "admin@example.com", password: "password123", icon: Shield },
       { role: "Staff", email: "staff@example.com", password: "password123", icon: Users },
       { role: "User", email: "user@example.com", password: "password123", icon: User }
-    ]
+    ],
+    graph: {
+      nodes: [
+        { id: "ui", label: "Client UI", type: "client", desc: "React 19 + Framer Motion + Recharts" },
+        { id: "actions", label: "Server Actions", type: "server", desc: "Secure 'Defensive Layer' with Input Validation" },
+        { id: "db", label: "MongoDB", type: "db", desc: "High-scale Event & User Metadata" },
+        { id: "cron", label: "Vercel Cron", type: "service", desc: "Automated Ticket & Event Lifecycle Sync" }
+      ],
+      edges: [
+        { from: "ui", to: "actions", label: "INVOCATION" },
+        { from: "actions", to: "db", label: "QUERY/MUTATE" },
+        { from: "cron", to: "actions", label: "TRIGGER" }
+      ]
+    }
   },
   {
     name: "Clicks",
@@ -111,7 +125,18 @@ const githubProjects = [
     highlight: "Optimized LCP by 40% through intelligent image priority and lazy-loading strategies.",
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
     github: "https://github.com/harsh-bhadana/clicks",
-    demo: "https://clicks-nine.vercel.app"
+    demo: "https://clicks-nine.vercel.app",
+    graph: {
+      nodes: [
+        { id: "ui", label: "Gallery UI", type: "client", desc: "Infinite Scroll + Motion Transitions" },
+        { id: "api", label: "Processing", type: "server", desc: "Image Priority & Optimization Layer" },
+        { id: "blob", label: "Vercel Blob", type: "db", desc: "Global Asset Distribution" }
+      ],
+      edges: [
+        { from: "ui", to: "api", label: "FETCH" },
+        { from: "api", to: "blob", label: "STREAM" }
+      ]
+    }
   }
 ];
 
@@ -151,6 +176,7 @@ const featureLabs = [
 export default function Home() {
   const { theme } = useTheme();
   const [activeLabIndex, setActiveLabIndex] = useState(0);
+  const [activeProjectGraph, setActiveProjectGraph] = useState<any>(null);
   const scrollThrottleRef = useRef<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -627,6 +653,15 @@ export default function Home() {
           <Footer />
         </section>
       </main>
+
+      <AnimatePresence>
+        {activeProjectGraph && (
+          <ArchitectureGraph 
+            project={activeProjectGraph} 
+            onClose={() => setActiveProjectGraph(null)} 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
