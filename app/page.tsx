@@ -21,6 +21,7 @@ import {
   Shield,
   User,
   Users,
+  Share2,
 } from "lucide-react";
 import ThemeIcon from "./components/ThemeIcon";
 import Navbar from "./components/Navbar";
@@ -349,7 +350,7 @@ export default function Home() {
                     </div>
 
 
-                    <div className="flex gap-8 mt-auto">
+                    <div className="flex flex-wrap gap-8 mt-auto">
                       <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
                         Repo <ThemeIcon icon={Github} size={20} />
                       </a>
@@ -357,6 +358,14 @@ export default function Home() {
                         <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors">
                           Demo <ThemeIcon icon={ExternalLink} size={20} />
                         </a>
+                      )}
+                      {project.graph && (
+                        <button 
+                          onClick={() => setActiveProjectGraph(project)}
+                          className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-accent hover:text-white transition-all bg-accent/5 hover:bg-accent px-4 py-2 rounded-xl border border-accent/20"
+                        >
+                          Inspect Architecture <Share2 size={16} />
+                        </button>
                       )}
                     </div>
                   </div>
