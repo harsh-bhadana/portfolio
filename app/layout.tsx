@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import LoadingScreen from "./components/LoadingScreen";
+import CommandCenter from "./components/CommandCenter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <LoadingScreen />
+          <CommandCenter />
           {children}
         </ThemeProvider>
       </body>
