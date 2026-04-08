@@ -21,6 +21,7 @@ import {
   Shield,
   User,
   Users,
+  Share2,
 } from "lucide-react";
 import ThemeIcon from "./components/ThemeIcon";
 import Navbar from "./components/Navbar";
@@ -31,6 +32,7 @@ import TextReveal from "./components/TextReveal";
 import Magnetic from "./components/Magnetic";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDock from "./components/FloatingDock";
+import ArchitectureGraph from "./components/ArchitectureGraph";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./context/ThemeContext";
@@ -97,7 +99,22 @@ const githubProjects = [
       { role: "Admin", email: "admin@example.com", password: "password123", icon: Shield },
       { role: "Staff", email: "staff@example.com", password: "password123", icon: Users },
       { role: "User", email: "user@example.com", password: "password123", icon: User }
-    ]
+    ],
+    graph: {
+      nodes: [
+        { id: "ui", label: "Client UI", type: "client", desc: "React 19 + Framer Motion + Recharts" },
+        { id: "security", label: "Security Layer", type: "server", desc: "Jose + Bcrypt JWT Encryption" },
+        { id: "actions", label: "Server Actions", type: "server", desc: "Secure 'Defensive Layer' with Zod Validation" },
+        { id: "db", label: "MongoDB", type: "db", desc: "High-scale Event & User Metadata" },
+        { id: "worker", label: "Vercel Cron", type: "service", desc: "Automated Ticket & Event Lifecycle Sync" }
+      ],
+      edges: [
+        { from: "ui", to: "security", label: "AUTH" },
+        { from: "security", to: "actions", label: "AUTHORIZE" },
+        { from: "actions", to: "db", label: "QUERY/MUTATE" },
+        { from: "worker", to: "actions", label: "TRIGGER" }
+      ]
+    }
   },
   {
     name: "Clicks",
@@ -111,7 +128,18 @@ const githubProjects = [
     highlight: "Optimized LCP by 40% through intelligent image priority and lazy-loading strategies.",
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
     github: "https://github.com/harsh-bhadana/clicks",
-    demo: "https://clicks-nine.vercel.app"
+    demo: "https://clicks-nine.vercel.app",
+    graph: {
+      nodes: [
+        { id: "ui", label: "Gallery UI", type: "client", desc: "Infinite Scroll + Motion Transitions" },
+        { id: "optimization", label: "Priority Engine", type: "server", desc: "LCP Optimization & Lazy Loading Logic" },
+        { id: "storage", label: "Vercel Blob", type: "db", desc: "Native SDK Global Asset Distribution" }
+      ],
+      edges: [
+        { from: "ui", to: "optimization", label: "RENDER" },
+        { from: "optimization", to: "storage", label: "STREAM" }
+      ]
+    }
   }
 ];
 
@@ -151,6 +179,7 @@ const featureLabs = [
 export default function Home() {
   const { theme } = useTheme();
   const [activeLabIndex, setActiveLabIndex] = useState(0);
+  const [activeProjectGraph, setActiveProjectGraph] = useState<any>(null);
   const scrollThrottleRef = useRef<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -321,27 +350,33 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-
-
-                    <div className="flex gap-8 mt-auto">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
+                    <div className="flex flex-wrap gap-6 mt-auto pt-10 border-t border-foreground/5 relative z-20">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-all hover:translate-y-[-2px]">
                         Repo <ThemeIcon icon={Github} size={20} />
                       </a>
                       {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-colors">
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/60 hover:text-accent transition-all hover:translate-y-[-2px]">
                           Demo <ThemeIcon icon={ExternalLink} size={20} />
                         </a>
+                      )}
+                      {project.graph && (
+                        <button 
+                          onClick={() => setActiveProjectGraph(project)}
+                          className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-accent hover:text-white transition-all bg-accent/10 hover:bg-accent px-6 py-3 rounded-2xl border border-accent/20 shadow-lg shadow-accent/5 hover:shadow-accent/20"
+                        >
+                          Inspect Architecture <Share2 size={18} />
+                        </button>
                       )}
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-10">
-                    <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block">Architecture Highlights</span>
-                      <ul className="space-y-4">
+                    <div className="bg-foreground/[0.03] p-8 md:p-10 rounded-[2rem] border border-foreground/5">
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-8 block">Architecture Highlights</span>
+                      <ul className="space-y-6">
                         {project.features.map((feature: string, i: number) => (
-                          <li key={i} className="flex items-start gap-4 text-sm md:text-base text-foreground/50 font-medium leading-normal">
-                            <span className="w-2 h-2 rounded-full bg-accent mt-2 shrink-0" />
+                          <li key={i} className="flex items-start gap-4 text-sm md:text-base text-foreground/60 font-medium leading-normal">
+                            <ThemeIcon icon={ChevronRight} size={14} className="text-accent mt-1 shrink-0" />
                             {feature}
                           </li>
                         ))}
@@ -349,34 +384,35 @@ export default function Home() {
                     </div>
 
                     {project.highlight && (
-                      <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10 relative overflow-hidden group/highlight">
+                      <div className="p-8 md:p-10 rounded-[2rem] bg-foreground/5 border border-foreground/10 relative overflow-hidden group/highlight">
                         <div className="absolute top-0 right-0 p-6 opacity-10 group-hover/highlight:rotate-12 transition-transform">
                           <Sparkles size={32} className="text-accent" />
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 mb-3 block">Technical Deep Dive</span>
-                        <p className="text-sm md:text-lg text-foreground/80 font-black leading-tight">
-                          {project.highlight}
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 mb-4 block leading-none">Engineering Specimen</span>
+                        <p className="text-base md:text-xl text-foreground/90 font-black leading-tight tracking-tight italic">
+                          &quot;{project.highlight}&quot;
                         </p>
                       </div>
                     )}
 
                     {project.demoCredentials && (
-                      <div className="p-6 rounded-3xl bg-accent/5 border border-accent/20 relative overflow-hidden group/creds">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/creds:rotate-12 transition-transform">
-                          <Key size={24} className="text-accent" />
+                      <div className="p-8 md:p-10 rounded-[2rem] bg-accent/5 border border-accent/20 relative overflow-hidden group/creds">
+                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover/creds:rotate-12 transition-transform">
+                          <Key size={32} className="text-accent" />
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block font-bold">Demo Access Portal</span>
-                        <div className="space-y-3">
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8 block font-black leading-none">Access Protocols</span>
+                        <div className="grid grid-cols-1 gap-4">
                           {project.demoCredentials.map((cred: any, i: number) => (
-                            <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-all border border-transparent hover:border-accent/20">
-                              <div className="flex items-center gap-3">
-                                <cred.icon size={12} className="text-accent" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-foreground/50">{cred.role}</span>
+                            <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.08] transition-all border border-transparent hover:border-accent/20">
+                              <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-xl bg-accent/10 text-accent">
+                                   <cred.icon size={16} />
+                                </div>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-foreground/60">{cred.role}</span>
                               </div>
-                              <div className="flex items-center gap-3 text-[10px] font-mono">
-                                <span className="text-foreground/70">{cred.email}</span>
-                                <span className="text-foreground/30">•</span>
-                                <span className="text-foreground/70">{cred.password}</span>
+                              <div className="flex items-center gap-4 text-[11px] font-mono">
+                                <span className="text-foreground/80 bg-foreground/5 px-2 py-1 rounded-md">{cred.email}</span>
+                                <span className="text-foreground/80 bg-foreground/5 px-2 py-1 rounded-md">{cred.password}</span>
                               </div>
                             </div>
                           ))}
@@ -627,6 +663,15 @@ export default function Home() {
           <Footer />
         </section>
       </main>
+
+      <AnimatePresence>
+        {activeProjectGraph && (
+          <ArchitectureGraph 
+            project={activeProjectGraph} 
+            onClose={() => setActiveProjectGraph(null)} 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
