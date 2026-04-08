@@ -322,29 +322,6 @@ export default function Home() {
                       ))}
                     </div>
 
-                    {project.demoCredentials && (
-                      <div className="mb-10 p-6 rounded-3xl bg-accent/5 border border-accent/20 relative overflow-hidden group/creds">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/creds:rotate-12 transition-transform">
-                          <Key size={24} className="text-accent" />
-                        </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block font-bold">Demo Access Portal</span>
-                        <div className="space-y-3">
-                          {project.demoCredentials.map((cred: any, i: number) => (
-                            <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-all border border-transparent hover:border-accent/20">
-                              <div className="flex items-center gap-3">
-                                <cred.icon size={12} className="text-accent" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-foreground/50">{cred.role}</span>
-                              </div>
-                              <div className="flex items-center gap-3 text-[10px] font-mono">
-                                <span className="text-foreground/70">{cred.email}</span>
-                                <span className="text-foreground/30">•</span>
-                                <span className="text-foreground/70">{cred.password}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
 
                     <div className="flex gap-8 mt-auto">
                       <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors">
@@ -380,6 +357,30 @@ export default function Home() {
                         <p className="text-sm md:text-lg text-foreground/80 font-black leading-tight">
                           {project.highlight}
                         </p>
+                      </div>
+                    )}
+
+                    {project.demoCredentials && (
+                      <div className="p-6 rounded-3xl bg-accent/5 border border-accent/20 relative overflow-hidden group/creds">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/creds:rotate-12 transition-transform">
+                          <Key size={24} className="text-accent" />
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6 block font-bold">Demo Access Portal</span>
+                        <div className="space-y-3">
+                          {project.demoCredentials.map((cred: any, i: number) => (
+                            <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-all border border-transparent hover:border-accent/20">
+                              <div className="flex items-center gap-3">
+                                <cred.icon size={12} className="text-accent" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-foreground/50">{cred.role}</span>
+                              </div>
+                              <div className="flex items-center gap-3 text-[10px] font-mono">
+                                <span className="text-foreground/70">{cred.email}</span>
+                                <span className="text-foreground/30">•</span>
+                                <span className="text-foreground/70">{cred.password}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
