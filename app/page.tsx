@@ -103,14 +103,16 @@ const githubProjects = [
     graph: {
       nodes: [
         { id: "ui", label: "Client UI", type: "client", desc: "React 19 + Framer Motion + Recharts" },
-        { id: "actions", label: "Server Actions", type: "server", desc: "Secure 'Defensive Layer' with Input Validation" },
+        { id: "security", label: "Security Layer", type: "server", desc: "Jose + Bcrypt JWT Encryption" },
+        { id: "actions", label: "Server Actions", type: "server", desc: "Secure 'Defensive Layer' with Zod Validation" },
         { id: "db", label: "MongoDB", type: "db", desc: "High-scale Event & User Metadata" },
-        { id: "cron", label: "Vercel Cron", type: "service", desc: "Automated Ticket & Event Lifecycle Sync" }
+        { id: "worker", label: "Vercel Cron", type: "service", desc: "Automated Ticket & Event Lifecycle Sync" }
       ],
       edges: [
-        { from: "ui", to: "actions", label: "INVOCATION" },
+        { from: "ui", to: "security", label: "AUTH" },
+        { from: "security", to: "actions", label: "AUTHORIZE" },
         { from: "actions", to: "db", label: "QUERY/MUTATE" },
-        { from: "cron", to: "actions", label: "TRIGGER" }
+        { from: "worker", to: "actions", label: "TRIGGER" }
       ]
     }
   },
@@ -130,12 +132,12 @@ const githubProjects = [
     graph: {
       nodes: [
         { id: "ui", label: "Gallery UI", type: "client", desc: "Infinite Scroll + Motion Transitions" },
-        { id: "api", label: "Processing", type: "server", desc: "Image Priority & Optimization Layer" },
-        { id: "blob", label: "Vercel Blob", type: "db", desc: "Global Asset Distribution" }
+        { id: "optimization", label: "Priority Engine", type: "server", desc: "LCP Optimization & Lazy Loading Logic" },
+        { id: "storage", label: "Vercel Blob", type: "db", desc: "Native SDK Global Asset Distribution" }
       ],
       edges: [
-        { from: "ui", to: "api", label: "FETCH" },
-        { from: "api", to: "blob", label: "STREAM" }
+        { from: "ui", to: "optimization", label: "RENDER" },
+        { from: "optimization", to: "storage", label: "STREAM" }
       ]
     }
   }
