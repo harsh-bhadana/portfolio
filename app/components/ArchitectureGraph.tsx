@@ -30,18 +30,20 @@ interface ArchitectureGraphProps {
 
 export default function ArchitectureGraph({ project, onClose }: ArchitectureGraphProps) {
   const { nodes, edges } = project.graph;
-  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
-  const isMobile = windowSize.width < 768;
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [hasMounted, setHasMounted] = useState(false);
+  const isMobile = windowSize.width < 768 && windowSize.width !== 0;
 
   useEffect(() => {
+    setHasMounted(true);
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
+    handleResize();
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     
-    handleResize();
     window.addEventListener("resize", handleResize);
     window.addEventListener("keydown", handleEsc);
     return () => {
@@ -52,6 +54,7 @@ export default function ArchitectureGraph({ project, onClose }: ArchitectureGrap
 
   // Calculate node positions dynamically
   const nodePositions = useMemo(() => {
+    if (windowSize.width === 0) return {};
     const positions: Record<string, { x: number; y: number }> = {};
     const types = ["client", "server", "service", "db"];
     
@@ -93,6 +96,8 @@ export default function ArchitectureGraph({ project, onClose }: ArchitectureGrap
       default: return Box;
     }
   };
+
+  if (!hasMounted || windowSize.width === 0) return null;
 
   return (
     <motion.div
