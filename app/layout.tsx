@@ -5,7 +5,6 @@ import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import LoadingScreen from "./components/LoadingScreen";
 import CommandCenter from "./components/CommandCenter";
-import QuantumPhaseShift from "./components/QuantumPhaseShift";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +39,6 @@ export default function RootLayout({
         <ThemeProvider>
           <LoadingScreen />
           <CommandCenter />
-          <QuantumPhaseShift />
           {children}
         </ThemeProvider>
       </body>
