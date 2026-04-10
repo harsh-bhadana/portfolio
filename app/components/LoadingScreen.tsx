@@ -29,13 +29,13 @@ export default function LoadingScreen() {
       id: i,
       Icon: icons[Math.floor(Math.random() * icons.length)],
       x: Math.random() * 80 + 10, // 10% to 90%
-      delay: Math.random() * 3,
+      delay: Math.random() * 1,
     }));
     setActiveIcons(newIcons);
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 5500);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -68,7 +68,7 @@ export default function LoadingScreen() {
                 filter: ["blur(4px)", "blur(0px)", "blur(0px)", "blur(2px)"]
               }}
               transition={{ 
-                duration: 4, 
+                duration: 2.5, 
                 delay: item.delay,
                 ease: "easeOut"
               }}
@@ -88,7 +88,7 @@ export default function LoadingScreen() {
                 scale: [0, 1.2, 1],
                 opacity: [0, 1]
               }}
-              transition={{ delay: 3.5, duration: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               className="p-10 rounded-[3rem] bg-accent/5 border border-accent/20 backdrop-blur-3xl relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -105,7 +105,7 @@ export default function LoadingScreen() {
                 <motion.span 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 3.9 }}
+                  transition={{ delay: 0.7 }}
                   className="text-[10px] font-black tracking-[0.6em] text-accent/60 uppercase"
                 >
                   Compiling Portfolio
@@ -114,7 +114,7 @@ export default function LoadingScreen() {
                   <motion.div 
                     initial={{ x: "-100%" }}
                     animate={{ x: "0%" }}
-                    transition={{ delay: 3.8, duration: 1.2, ease: "easeInOut" }}
+                    transition={{ delay: 0.6, duration: 1.2, ease: "easeInOut" }}
                     className="w-full h-full bg-accent"
                   />
                 </div>
