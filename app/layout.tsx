@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Epilogue, Manrope, Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -13,6 +13,21 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const epilogue = Epilogue({
+  variable: "--font-epilogue",
+  subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -34,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${fontSuperFunky.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fontSuperFunky.variable} ${epilogue.variable} ${manrope.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider>
           <LoadingScreen />

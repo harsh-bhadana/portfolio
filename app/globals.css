@@ -20,22 +20,28 @@
 }
 
 [data-theme="aurora"] {
-  --background: #1a0b2e;
-  --foreground: #f8f8ff;
-  --accent: #ff2a5f;
-  --accent-secondary: #00e5ff;
-  --accent-tertiary: #ffaa00;
-  --card: #241442;
-  --border: rgba(255, 255, 255, 0.1);
-  --selection: rgba(255, 42, 95, 0.3);
-  --glass-bg: rgba(26, 11, 46, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --blob-blend: screen;
-  --gh-l0: #1a0b2e;
-  --gh-l1: #4a154b;
-  --gh-l2: #7b1d69;
-  --gh-l3: #bd2773;
-  --gh-l4: #ff2a5f;
+  --background: #fffcf7;
+  --foreground: #383835;
+  --accent: #c1242c;
+  --accent-secondary: #005ed6;
+  --accent-tertiary: #776300;
+  --card: #fcf9f4;
+  --border: #eae8e2;
+  --selection: rgba(255, 118, 113, 0.3);
+  --glass-bg: rgba(255, 252, 247, 0.8);
+  --glass-border: rgba(56, 56, 53, 0.1);
+  --blob-blend: multiply;
+  
+  /* PaperPortfolio Specific */
+  --surface-dim: #e5e2dc;
+  --surface-container: #f6f3ee;
+  --surface-container-high: #f0eee8;
+  --surface-container-highest: #eae8e2;
+  --primary-container: #ff7671;
+  --on-primary-container: #4e0007;
+  --tertiary-container: #fdd400;
+  --secondary-container: #c0d1ff;
+  --outline-variant: #bbb9b4;
 }
 
 @theme inline {
@@ -46,13 +52,20 @@
   --color-accent-tertiary: var(--accent-tertiary);
   --color-card: var(--card);
   --color-border: var(--border);
-  --color-gh-0: var(--gh-l0);
-  --color-gh-1: var(--gh-l1);
-  --color-gh-2: var(--gh-l2);
-  --color-gh-3: var(--gh-l3);
-  --color-gh-4: var(--gh-l4);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-secondary-container: var(--secondary-container);
+  --color-outline-variant: var(--outline-variant);
+
+  --font-headline: var(--font-epilogue);
+  --font-body: var(--font-manrope);
+  --font-label: var(--font-space-grotesk);
 }
 
 html {
@@ -97,6 +110,34 @@ body {
     filter: blur(80px);
     opacity: 0.4;
     mix-blend-mode: var(--blob-blend);
+  }
+
+  /* PaperPortfolio Utilities */
+  .aperture-text {
+    color: var(--foreground);
+    text-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--surface-container);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 2px 4px rgba(56, 56, 53, 0.15);
+  }
+
+  .paper-grain {
+    background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIS3P3h6oqHB8O_s0bkrMgQCZLNeAglSZWV7w1c8owNlTgKlku1yuVz4Ge-98k-kA-H91-yWqKLpWjDc4lvKa_qMaUS8UXj8AnIT4ZZ9CCs27c1oGlc0ObqylS1DjRtnH0gRxJsDo3v9XEB31f1RN8aXF6wgrCPnx2H9hVOqEjErw7-lhnQy6h_eCgZ7Ce-mIsQFY06ugH9s_HEn1reObU5TQ6Vdenn2OYdHvyrUpriTpdPFyk86VPrw7_kX-A4ziOrrT96tlg8dsl");
+    mix-blend-mode: multiply;
+    opacity: 0.05;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+  }
+
+  [data-theme="aurora"] .paper-grain {
+    display: block;
+  }
+  
+  :not([data-theme="aurora"]) .paper-grain {
+    display: none;
   }
 
   .crt-overlay {
