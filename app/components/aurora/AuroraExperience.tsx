@@ -23,7 +23,7 @@ interface AuroraExperienceProps {
 
 export default function AuroraExperience({ experiences }: AuroraExperienceProps) {
   return (
-    <section id="experience" className="py-24 px-6 lg:pl-48 bg-surface-dim relative overflow-hidden">
+    <section id="experience" className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
       {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent opacity-[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       

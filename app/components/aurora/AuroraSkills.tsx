@@ -16,7 +16,7 @@ interface AuroraSkillsProps {
 
 export default function AuroraSkills({ skills }: AuroraSkillsProps) {
   return (
-    <section id="skills" className="py-24 px-6 lg:pl-48 bg-white relative overflow-hidden">
+    <section id="skills" className="py-24 px-6 lg:pl-96 bg-white relative overflow-hidden">
       {/* Decorative Grid Pattern Background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(circle, #c1242c 1px, transparent 1px)', backgroundSize: '32px 32px' }} />

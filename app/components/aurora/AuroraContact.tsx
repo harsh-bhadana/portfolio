@@ -7,7 +7,7 @@ import Magnetic from "../Magnetic";
 
 export default function AuroraContact() {
   return (
-    <section id="contact" className="py-24 px-6 lg:pl-48 bg-surface-dim relative overflow-hidden">
+    <section id="contact" className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
       {/* Background Decorative "Paper Cutout" */}
       <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-accent opacity-[0.02] -rotate-12 translate-y-1/2 translate-x-1/4 hidden lg:block" />
       

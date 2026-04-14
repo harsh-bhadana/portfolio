@@ -668,9 +668,13 @@ export default function Home() {
           <main className="relative z-10 pt-20">
             <AuroraHero />
             <AuroraExperience experiences={experiences} />
-            <AuroraBentoGrid projects={githubProjects} />
+            <AuroraBentoGrid 
+              projects={githubProjects} 
+              labs={featureLabs} 
+              onInspectArchitecture={(project) => setActiveProjectGraph(project)}
+            />
             <AuroraSkills skills={skills} />
-            <section className="py-24 px-6 lg:pl-48 bg-surface-dim relative overflow-hidden">
+            <section className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
                <div className="container mx-auto max-w-6xl">
                   <div className="mb-12">
                     <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">03 / Contributions</span>

@@ -40,6 +40,14 @@ export default function AuroraHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
+            <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white border-2 border-accent text-accent font-label text-[10px] font-black tracking-[0.2em] uppercase mb-10 shadow-[0_8px_0_#c1242c10] rotate-[-1deg]">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+              </span>
+              Available for Research & Dev
+            </div>
+
             <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground">
               <span className="block italic opacity-90 underline decoration-accent/20">HARSH</span>
               <span className="inline-block px-8 py-3 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)] rounded-2xl text-accent transform -rotate-3 my-4 border border-border/50">
