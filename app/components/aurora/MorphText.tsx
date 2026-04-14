@@ -31,7 +31,10 @@ const MorphLetter = ({ char, fontClass, isActive }: { char: string; fontClass: s
   if (char === " ") return <span className="inline-block w-[0.25em]">&nbsp;</span>;
 
   return (
-    <span className="inline-flex items-center justify-center w-[0.65em] flex-shrink-0 align-baseline">
+    <span 
+      className="relative inline-block flex-shrink-0 align-baseline overflow-visible"
+      style={{ width: "0.75em", height: "1.1em" }}
+    >
       <motion.span
         animate={{ 
           rotate: isActive ? [0, -3, 3, 0] : rotation,
@@ -41,7 +44,7 @@ const MorphLetter = ({ char, fontClass, isActive }: { char: string; fontClass: s
           duration: isActive ? 0.4 : 1,
           ease: "easeInOut"
         }}
-        className={`inline-block transition-all duration-700 min-w-full text-center font-medium pointer-events-none whitespace-nowrap ${fontClass}`}
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-700 font-medium pointer-events-none whitespace-nowrap ${fontClass}`}
       >
         {char}
       </motion.span>
