@@ -38,7 +38,6 @@ import AuroraBentoGrid from "./components/aurora/AuroraBentoGrid";
 import AuroraExperience from "./components/aurora/AuroraExperience";
 import AuroraSkills from "./components/aurora/AuroraSkills";
 import AuroraContact from "./components/aurora/AuroraContact";
-import AuroraFooter from "./components/aurora/AuroraFooter";
 import { useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "./context/ThemeContext";
@@ -695,7 +694,7 @@ export default function Home() {
                </div>
             </section>
             <AuroraContact />
-            <AuroraFooter />
+            <Footer />
           </main>
         </>
       )}
