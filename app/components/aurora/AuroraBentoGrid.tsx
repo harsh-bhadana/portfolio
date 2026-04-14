@@ -44,18 +44,33 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
           initial={{ opacity: 0, rotate: 10 }}
           whileInView={{ opacity: 1, rotate: 25 }}
           transition={{ duration: 2.5 }}
-          className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary rounded-none rotate-12" 
+          className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary" 
+          style={{ clipPath: "polygon(0 20%, 100% 0, 80% 100%, 20% 80%)" }}
         />
         <motion.div 
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent rounded-full blur-3xl" 
+          className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent blur-3xl" 
+          style={{ clipPath: "polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)" }}
         />
         <motion.div 
-          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent-secondary rounded-full opacity-40" 
+          animate={{ x: [0, 40, 0], y: [0, 20, 0], rotate: [0, 90, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/4 w-32 h-32 bg-accent-secondary opacity-40" 
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        />
+        <motion.div 
+          animate={{ rotate: [0, -45, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] right-[10%] w-48 h-48 bg-accent opacity-30" 
+          style={{ clipPath: "polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)" }}
+        />
+        <motion.div 
+          animate={{ x: [0, -30, 0], y: [0, -50, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[30%] w-64 h-64 bg-accent-tertiary opacity-25" 
+          style={{ clipPath: "polygon(10% 0, 100% 20%, 80% 100%, 0 80%)" }}
         />
       </div>
       {/* Editorial Header */}
