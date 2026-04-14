@@ -63,12 +63,12 @@ export default function GitHubContribution() {
 
   // Explicitly mapped to Tailwind theme colors for v4 compiler visibility
   const getLevelClass = (level: number) => {
-    if (level === 0) return "bg-gh-0";
-    if (level === 1) return "bg-gh-1";
-    if (level === 2) return "bg-gh-2";
-    if (level === 3) return "bg-gh-3";
-    if (level === 4) return "bg-gh-4";
-    return "bg-gh-0";
+    if (level === 0) return "bg-[var(--gh-l0)]";
+    if (level === 1) return "bg-[var(--gh-l1)]";
+    if (level === 2) return "bg-[var(--gh-l2)]";
+    if (level === 3) return "bg-[var(--gh-l3)]";
+    if (level === 4) return "bg-[var(--gh-l4)]";
+    return "bg-[var(--gh-l0)]";
   };
 
   // Calculate padding for the first week to align with Sunday
