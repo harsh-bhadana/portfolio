@@ -148,7 +148,7 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
           })}
 
           {/* Labs Header Card - Scrapbook Style */}
-          <div className="md:col-span-12 mt-20 mb-10">
+          <div id="labs" className="md:col-span-12 mt-20 mb-10 scroll-mt-32">
             <h2 className="font-headline font-black text-4xl md:text-6xl tracking-tighter uppercase italic opacity-20">The Research Specimen Archive</h2>
           </div>
 

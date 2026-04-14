@@ -7,7 +7,7 @@ import MorphText from "./MorphText";
 
 export default function AuroraHero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-24 pb-40 overflow-hidden">
+    <section id="about" className="relative min-h-[90vh] flex items-center pt-24 pb-40 overflow-hidden">
       {/* Collage Geometry Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Large Primary Triangle */}
