@@ -24,9 +24,20 @@ export default function AuroraContact() {
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
         <motion.div 
-          animate={{ rotate: 360 }}
+          animate={{ 
+            rotate: [0, 90, 0],
+            borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"] 
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-40 -left-20 w-[800px] h-[800px] bg-accent/20 blur-3xl opacity-50" 
+        />
+        <motion.div 
+          animate={{ 
+            rotate: [0, -90, 0],
+            borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+          }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 right-1/4 w-96 h-96 border border-accent/10 rounded-full opacity-40" 
+          className="absolute top-1/4 right-1/4 w-96 h-96 border border-accent/10 opacity-40 mix-blend-overlay" 
         />
       </div>
       
