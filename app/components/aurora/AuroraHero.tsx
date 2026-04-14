@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import ThemeIcon from "../ThemeIcon";
 import MorphText from "./MorphText";
 
@@ -70,12 +70,6 @@ export default function AuroraHero() {
                 Start Exploring
                 <ThemeIcon icon={ArrowRight} size={20} className="group-hover:translate-x-2 transition-transform" />
               </a>
-              <button className="group flex items-center gap-3 font-label text-accent font-black uppercase tracking-widest px-6 py-3 rounded-xl hover:bg-accent/5 transition-all">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
-                  <ThemeIcon icon={Play} size={16} />
-                </div>
-                Showreel
-              </button>
             </div>
           </motion.div>
         </div>
@@ -97,6 +91,19 @@ export default function AuroraHero() {
                 </div>
               </div>
             </motion.div>
+
+            <motion.a 
+              href="#contact"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="absolute top-[440px] right-4 bg-white px-8 py-5 rounded-2xl shadow-xl font-label text-sm uppercase font-black tracking-widest text-accent border-2 border-accent/10 hover:border-accent hover:scale-105 active:scale-95 transition-all flex items-center gap-3 pointer-events-auto rotate-[-3deg] z-40"
+            >
+              <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center">
+                <ThemeIcon icon={Mail} size={14} />
+              </div>
+              Contact me
+            </motion.a>
 
             <motion.div 
               initial={{ rotate: -20, y: 60, opacity: 0 }}
