@@ -16,25 +16,25 @@ interface AuroraSkillsProps {
 
 export default function AuroraSkills({ skills }: AuroraSkillsProps) {
   return (
-    <section id="skills" className="py-24 px-6 lg:pr-96 bg-white relative overflow-hidden">
+    <section id="skills" className="py-24 px-6 lg:pr-96 relative overflow-hidden">
       {/* Immersive Background Shapes */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <motion.div 
           initial={{ opacity: 0, scale: 0.5, x: 100 }}
-          whileInView={{ opacity: 0.05, scale: 1, x: 0 }}
+          whileInView={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1.5 }}
           className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-accent-secondary rounded-full" 
         />
         <motion.div 
           initial={{ opacity: 0, rotate: -30 }}
-          whileInView={{ opacity: 0.08, rotate: -15 }}
+          whileInView={{ opacity: 1, rotate: -15 }}
           transition={{ duration: 2, delay: 0.4 }}
           className="absolute bottom-[-10%] -right-20 w-[500px] h-96 bg-accent-tertiary rounded-3xl" 
         />
         <motion.div 
           animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/4 w-32 h-32 bg-accent rounded-xl opacity-5" 
+          className="absolute top-1/3 left-1/4 w-32 h-32 bg-accent rounded-xl opacity-20" 
         />
       </div>
       {/* Decorative Grid Pattern Background */}

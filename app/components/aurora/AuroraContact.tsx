@@ -7,18 +7,18 @@ import Magnetic from "../Magnetic";
 
 export default function AuroraContact() {
   return (
-    <section id="contact" className="py-24 px-6 lg:pr-96 bg-surface-dim relative overflow-hidden">
+    <section id="contact" className="py-24 px-6 lg:pr-96 relative overflow-hidden">
       {/* Immersive Background Shapes */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 0.1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2 }}
           className="absolute -bottom-40 -left-20 w-[800px] h-[800px] bg-accent/20 rounded-full blur-3xl" 
         />
         <motion.div 
           initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 0.05, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.5, delay: 0.3 }}
           className="absolute top-0 left-0 w-[40%] h-[60%] bg-accent-tertiary" 
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
@@ -26,11 +26,11 @@ export default function AuroraContact() {
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 right-1/4 w-96 h-96 border border-accent/10 rounded-full opacity-30" 
+          className="absolute top-1/4 right-1/4 w-96 h-96 border border-accent/10 rounded-full opacity-40" 
         />
       </div>
       
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="bg-white p-12 md:p-24 rounded-[3rem] border-2 border-border shadow-2xl relative overflow-hidden group">
           {/* Subtle Shine Effect */}
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none" />

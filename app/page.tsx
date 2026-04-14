@@ -674,17 +674,17 @@ export default function Home() {
               onInspectArchitecture={(project) => setActiveProjectGraph(project)}
             />
             <AuroraSkills skills={skills} />
-            <section className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
+            <section className="py-24 px-6 lg:pl-96 relative overflow-hidden">
                {/* Immersive Background Shape */}
-               <div className="absolute inset-0 -z-10 pointer-events-none">
+               <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.8 }}
-                   whileInView={{ opacity: 0.05, scale: 1 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
                    transition={{ duration: 2 }}
                    className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent rounded-full" 
                  />
                </div>
-               <div className="container mx-auto max-w-6xl">
+               <div className="container mx-auto max-w-6xl relative z-10">
                   <div className="mb-12">
                     <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">03 / Contributions</span>
                     <h2 className="font-headline font-black text-5xl md:text-8xl tracking-tighter leading-none mb-4 uppercase">

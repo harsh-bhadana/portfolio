@@ -37,29 +37,29 @@ interface AuroraBentoGridProps {
 
 export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture }: AuroraBentoGridProps) {
   return (
-    <section id="projects" className="py-32 px-6 lg:pl-96 bg-white relative overflow-hidden">
+    <section id="projects" className="py-32 px-6 lg:pl-96 relative overflow-hidden">
       {/* Immersive Background Shapes */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <motion.div 
           initial={{ opacity: 0, rotate: 10 }}
-          whileInView={{ opacity: 0.04, rotate: 25 }}
+          whileInView={{ opacity: 1, rotate: 25 }}
           transition={{ duration: 2.5 }}
           className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary rounded-none rotate-12" 
         />
         <motion.div 
           initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 0.06, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
           className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent rounded-full blur-3xl" 
         />
         <motion.div 
           animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent-secondary rounded-full opacity-10" 
+          className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent-secondary rounded-full opacity-40" 
         />
       </div>
       {/* Editorial Header */}
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
           <div className="max-w-xl">
             <span className="font-label text-accent uppercase font-black tracking-[0.4em] text-xs mb-4 block">03 / Inventory</span>
