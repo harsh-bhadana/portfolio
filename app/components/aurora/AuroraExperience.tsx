@@ -23,9 +23,28 @@ interface AuroraExperienceProps {
 
 export default function AuroraExperience({ experiences }: AuroraExperienceProps) {
   return (
-    <section id="experience" className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
-      {/* Background Decorative Element */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent opacity-[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+    <section id="experience" className="py-24 px-6 lg:pr-96 bg-surface-dim relative overflow-hidden">
+      {/* Immersive Background Shapes */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <motion.div 
+          initial={{ opacity: 0, rotate: -15 }}
+          whileInView={{ opacity: 0.05, rotate: -5 }}
+          transition={{ duration: 2 }}
+          className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-accent rounded-none" 
+          style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.08, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+          className="absolute top-40 -right-20 w-96 h-96 bg-accent-secondary rounded-full" 
+        />
+        <motion.div 
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 left-1/3 w-64 h-32 bg-accent-tertiary rounded-t-full opacity-[0.05]" 
+        />
+      </div>
       
       <div className="container mx-auto max-w-6xl">
         <div className="mb-20">

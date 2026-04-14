@@ -37,7 +37,27 @@ interface AuroraBentoGridProps {
 
 export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture }: AuroraBentoGridProps) {
   return (
-    <section id="projects" className="py-32 px-6 lg:pl-96 bg-white relative">
+    <section id="projects" className="py-32 px-6 lg:pl-96 bg-white relative overflow-hidden">
+      {/* Immersive Background Shapes */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <motion.div 
+          initial={{ opacity: 0, rotate: 10 }}
+          whileInView={{ opacity: 0.04, rotate: 25 }}
+          transition={{ duration: 2.5 }}
+          className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary rounded-none rotate-12" 
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 0.06, scale: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent rounded-full blur-3xl" 
+        />
+        <motion.div 
+          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent-secondary rounded-full opacity-10" 
+        />
+      </div>
       {/* Editorial Header */}
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">

@@ -7,9 +7,28 @@ import Magnetic from "../Magnetic";
 
 export default function AuroraContact() {
   return (
-    <section id="contact" className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
-      {/* Background Decorative "Paper Cutout" */}
-      <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-accent opacity-[0.02] -rotate-12 translate-y-1/2 translate-x-1/4 hidden lg:block" />
+    <section id="contact" className="py-24 px-6 lg:pr-96 bg-surface-dim relative overflow-hidden">
+      {/* Immersive Background Shapes */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.1, scale: 1 }}
+          transition={{ duration: 2 }}
+          className="absolute -bottom-40 -left-20 w-[800px] h-[800px] bg-accent/20 rounded-full blur-3xl" 
+        />
+        <motion.div 
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 0.05, x: 0 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+          className="absolute top-0 left-0 w-[40%] h-[60%] bg-accent-tertiary" 
+          style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+        />
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/4 right-1/4 w-96 h-96 border border-accent/10 rounded-full opacity-30" 
+        />
+      </div>
       
       <div className="container mx-auto max-w-6xl">
         <div className="bg-white p-12 md:p-24 rounded-[3rem] border-2 border-border shadow-2xl relative overflow-hidden group">

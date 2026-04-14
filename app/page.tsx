@@ -675,6 +675,15 @@ export default function Home() {
             />
             <AuroraSkills skills={skills} />
             <section className="py-24 px-6 lg:pl-96 bg-surface-dim relative overflow-hidden">
+               {/* Immersive Background Shape */}
+               <div className="absolute inset-0 -z-10 pointer-events-none">
+                 <motion.div 
+                   initial={{ opacity: 0, scale: 0.8 }}
+                   whileInView={{ opacity: 0.05, scale: 1 }}
+                   transition={{ duration: 2 }}
+                   className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent rounded-full" 
+                 />
+               </div>
                <div className="container mx-auto max-w-6xl">
                   <div className="mb-12">
                     <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">03 / Contributions</span>
