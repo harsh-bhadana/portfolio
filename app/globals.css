@@ -12,11 +12,11 @@
   --glass-bg: rgba(15, 15, 15, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --blob-blend: screen;
-  --gh-l0: #161b22;
-  --gh-l1: #0e4429;
-  --gh-l2: #006d32;
-  --gh-l3: #26a641;
-  --gh-l4: #39d353;
+  --gh-l0: color-mix(in srgb, var(--accent) 10%, transparent);
+  --gh-l1: color-mix(in srgb, var(--accent) 30%, transparent);
+  --gh-l2: color-mix(in srgb, var(--accent) 55%, transparent);
+  --gh-l3: color-mix(in srgb, var(--accent) 80%, transparent);
+  --gh-l4: var(--accent);
 }
 
 [data-theme="aurora"] {
