@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { User, Briefcase, Layout, Beaker, Zap, Mail } from "lucide-react";
 import Magnetic from "./Magnetic";
 import PhaseToggle from "./PhaseToggle";
+import { useTheme } from "../context/ThemeContext";
+import Logo from "./Logo";
 
 const navLinks = [
   { name: "About", href: "#about", Icon: User },
@@ -18,6 +20,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +29,7 @@ export default function Navbar() {
 
     const observerOptions = {
       root: null,
-      rootMargin: "-40% 0px -40% 0px",
+      rootMargin: "-20% 0px -70% 0px", // More sensitive to top entries
       threshold: 0,
     };
 
@@ -50,52 +53,49 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [theme]);
+
+  const isAurora = theme === "aurora";
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 md:px-6">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-                transition={{ 
+        transition={{ 
           type: "spring", 
           stiffness: 100, 
           damping: 20,
           delay: 0.6
         }}
-        className={`glass rounded-2xl px-1 md:px-4 py-2 flex items-center gap-0.5 md:gap-2 transition-all duration-500 ${
-          scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"
+        className={`rounded-2xl px-1 md:px-4 py-2 flex items-center gap-0.5 md:gap-2 transition-all duration-500 ${
+          isAurora
+            ? "bg-white border-2 border-accent shadow-xl"
+            : `glass ${scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"}`
         }`}
       >
-        <Magnetic strength={0.3}>
-          <a href="/" className="px-3 md:px-4 text-lg md:text-xl font-black tracking-tighter hover:scale-110 transition-transform md:mr-4 flex-shrink-0">
-            HB<span className="text-accent">.</span>
-          </a>
-        </Magnetic>
+        <div className="flex items-center gap-2 px-3 md:px-4">
+          <Logo />
+          <div className="hidden md:block h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
+          <PhaseToggle />
+        </div>
 
-        <div className="h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
-        <PhaseToggle />
-        <div className="h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop Links Container */}
+        <div className="hidden md:flex items-center gap-1 ml-2 border-l border-foreground/5 pl-2">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
               <Magnetic key={link.name} strength={0.25}>
                 <a
                   href={link.href}
-                  className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 flex items-center gap-2 ${
-                    isActive ? "text-white" : "text-foreground/40 hover:text-foreground/70"
+                  className={`relative px-5 py-2 text-[10px] font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group ${
+                    isActive 
+                      ? "text-white" 
+                      : (isAurora ? "text-foreground/60 hover:text-accent" : "text-foreground/40 hover:text-foreground/70")
                   }`}
                 >
-                  {isActive && (
-                    <>
-                      <motion.div
-                        layoutId="nav-bg"
-                        className="absolute inset-0 bg-accent rounded-xl -z-10 shadow-[0_0_20px_rgba(255,70,85,0.4)]"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
+                  <span className="relative z-10 flex items-center gap-2">
+                    {isActive && (
                       <motion.span
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
@@ -103,9 +103,21 @@ export default function Navbar() {
                       >
                         <link.Icon size={14} />
                       </motion.span>
-                    </>
+                    )}
+                    {link.name}
+                  </span>
+
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-bg"
+                      className={`absolute inset-0 rounded-xl z-0 ${
+                        isAurora 
+                          ? "bg-accent shadow-lg shadow-accent/20" 
+                          : "bg-accent shadow-[0_0_20px_rgba(255,70,85,0.4)]"
+                      }`}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
                   )}
-                  {link.name}
                 </a>
               </Magnetic>
             );
@@ -113,7 +125,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Links (Icons Only) */}
-        <div className="flex md:hidden items-center gap-1">
+        <div className="flex md:hidden items-center gap-0.5 ml-1 border-l border-foreground/5 pl-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             const Icon = link.Icon;
@@ -123,18 +135,19 @@ export default function Navbar() {
                 href={link.href}
                 whileHover="hover"
                 initial="initial"
-                className={`relative h-10 flex items-center px-2.5 md:px-3 transition-all duration-300 rounded-xl group ${
-                  isActive ? "text-white bg-accent shadow-[0_0_15px_rgba(255,70,85,0.3)]" : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/5"
+                className={`relative h-9 w-9 flex items-center justify-center transition-all duration-300 rounded-lg ${
+                  isActive 
+                    ? "text-white bg-accent shadow-lg" 
+                    : (isAurora ? "text-foreground/60 hover:text-accent hover:bg-accent/5" : "text-foreground/40 hover:text-foreground/70 hover:bg-foreground/5")
                 }`}
               >
-                <Icon size={16} className="flex-shrink-0" />
+                <Icon size={16} />
                 <motion.span
                   variants={{
-                    initial: { width: 0, opacity: 0, marginLeft: 0 },
-                    hover: { width: "auto", opacity: 1, marginLeft: 8 }
+                    initial: { opacity: 0, y: 10, scale: 0.8 },
+                    hover: { opacity: 1, y: 0, scale: 1 }
                   }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden whitespace-nowrap text-[10px] font-black uppercase tracking-widest"
+                  className="absolute -bottom-10 bg-white text-accent border border-accent/20 px-2 py-1 rounded text-[8px] font-black uppercase tracking-tighter whitespace-nowrap pointer-events-none shadow-xl z-[100]"
                 >
                   {link.name}
                 </motion.span>
