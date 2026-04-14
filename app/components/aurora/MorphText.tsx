@@ -11,7 +11,6 @@ interface MorphTextProps {
 }
 
 const FONTS = [
-  "font-headline", // Normal (Epilogue)
   "font-body",     // Normal (Manrope)
   "font-dancing",  // Dancing Script
 ];
@@ -41,7 +40,7 @@ const MorphLetter = ({ char, fontClass, isActive }: { char: string; fontClass: s
         duration: isActive ? 0.4 : 1,
         ease: "easeInOut"
       }}
-      className={`inline-block transition-all duration-700 min-w-[0.55em] text-center ${fontClass}`}
+      className={`inline-block transition-all duration-700 min-w-[0.55em] text-center font-medium ${fontClass}`}
     >
       {char}
     </motion.span>
