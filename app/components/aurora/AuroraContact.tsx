@@ -1,11 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Linkedin, Github, ArrowUpRight, Sparkles } from "lucide-react";
 import ThemeIcon from "../ThemeIcon";
 import Magnetic from "../Magnetic";
 
 export default function AuroraContact() {
+  const words = ["Beyond.", "Together.", "The Future.", "Differently."];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="contact" className="py-24 px-6 lg:pr-96 relative overflow-hidden">
       {/* Immersive Background Shapes */}
@@ -53,8 +64,22 @@ export default function AuroraContact() {
               <Sparkles size={14} />
             </span>
             
-            <h2 className="font-headline font-black text-6xl md:text-[10rem] tracking-tighter mb-16 leading-[0.85] uppercase text-foreground">
-              Let&apos;s build <br /> <span className="text-accent underline decoration-accent/10 underline-offset-8">Beyond.</span>
+            <h2 className="font-headline font-black text-6xl md:text-[10rem] tracking-tighter mb-16 leading-[0.85] uppercase text-foreground flex flex-col items-center">
+              <span>Let&apos;s build</span>
+              <div className="h-[1.2em] relative w-full flex justify-center mt-2 md:mt-6 overflow-visible">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={index}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -50, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "backOut" }}
+                    className="absolute text-accent underline decoration-accent/10 underline-offset-8 transform-gpu"
+                  >
+                    {words[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </h2>
 
             <div className="flex flex-wrap justify-center gap-10">
