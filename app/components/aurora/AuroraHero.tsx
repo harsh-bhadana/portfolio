@@ -49,11 +49,11 @@ export default function AuroraHero() {
               Available for Research & Dev
             </div>
 
-            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground">
-              <span className="block italic opacity-90 underline decoration-accent/20">
+            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground relative z-50">
+              <span className="block italic opacity-90 underline decoration-accent/20 relative z-50">
                 <MorphText text="HARSH" />
               </span>
-              <span className="inline-block px-8 py-3 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)] rounded-2xl text-accent transform -rotate-3 my-4 border border-border/50">
+              <span className="relative z-50 inline-block px-8 py-3 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)] rounded-2xl text-accent transform -rotate-3 my-4 border border-border/50">
                 <MorphText text="BHADANA" />
               </span>
             </h1>
