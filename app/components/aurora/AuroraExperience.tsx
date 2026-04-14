@@ -34,15 +34,20 @@ export default function AuroraExperience({ experiences }: AuroraExperienceProps)
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-          className="absolute top-40 -right-20 w-96 h-96 bg-accent-secondary rounded-full" 
+          animate={{ 
+            scale: [0.8, 1, 0.8],
+            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"] 
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-40 -right-20 w-96 h-96 bg-accent-secondary opacity-30" 
         />
         <motion.div 
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 left-1/3 w-64 h-32 bg-accent-tertiary rounded-t-full opacity-30" 
+          animate={{ 
+            y: [0, -20, 0],
+            borderRadius: ["73% 27% 26% 74% / 73% 46% 54% 27%", "27% 73% 74% 26% / 27% 54% 46% 73%", "73% 27% 26% 74% / 73% 46% 54% 27%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-accent-tertiary opacity-30 blur-2xl" 
         />
       </div>
       

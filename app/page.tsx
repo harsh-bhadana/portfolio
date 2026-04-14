@@ -222,26 +222,29 @@ export default function Home() {
                 x: [0, 100, 0],
                 y: [0, -50, 0],
                 rotate: [0, 45, 0],
+                borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"]
               }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-accent/15 bg-blob animate-float"
+              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-accent/15 bg-blob animate-float"
             />
             <motion.div
               animate={{
                 x: [0, -100, 0],
                 y: [0, 100, 0],
                 rotate: [0, -45, 0],
+                borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
               }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] rounded-full bg-accent-secondary/15 bg-blob"
+              className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] bg-accent-secondary/15 bg-blob"
             />
             <motion.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 150, 0],
+                borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"]
               }}
               transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-              className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-accent-tertiary/15 bg-blob"
+              className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-accent-tertiary/15 bg-blob"
             />
           </div>
 
@@ -623,9 +626,12 @@ export default function Home() {
             <section id="contact" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
               <div className="p-10 md:p-32 rounded-[2.5rem] md:rounded-[4rem] bg-accent text-white relative overflow-hidden group">
                 <motion.div
-                  animate={{ rotate: [0, 360] }}
+                  animate={{ 
+                    rotate: [0, 360],
+                    borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"]
+                  }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-foreground/10 blur-3xl"
+                  className="absolute -top-20 -right-20 w-80 h-80 bg-foreground/10 blur-3xl"
                 />
 
                 <div className="relative z-10 text-center flex flex-col items-center">
@@ -679,8 +685,11 @@ export default function Home() {
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.8 }}
                    whileInView={{ opacity: 1, scale: 1 }}
-                   transition={{ duration: 2 }}
-                   className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent rounded-full" 
+                   animate={{ 
+                     borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+                   }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent" 
                  />
                </div>
                <div className="container mx-auto max-w-6xl relative z-10">

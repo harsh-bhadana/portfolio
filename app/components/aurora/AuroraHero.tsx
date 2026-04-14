@@ -18,19 +18,25 @@ export default function AuroraHero() {
           className="absolute -top-20 -left-20 w-[70%] h-[90%] bg-accent rounded-none" 
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
-        {/* Tertiary Semi-Circle */}
+        {/* Tertiary Object */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.5, x: 100 }}
-          animate={{ opacity: 0.1, scale: 1, x: 50 }}
-          transition={{ duration: 1.8, ease: "easeOut", delay: 0.2 }}
-          className="absolute top-[10%] -right-40 w-[600px] h-[600px] bg-accent-tertiary rounded-full" 
+          animate={{ 
+             opacity: [0.05, 0.1, 0.05], 
+             scale: [0.9, 1, 0.9], 
+             borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] -right-40 w-[600px] h-[600px] bg-accent-tertiary" 
         />
         {/* Secondary Overlapping Shape */}
         <motion.div 
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 0.08, y: 0 }}
-          transition={{ duration: 2, ease: "easeOut", delay: 0.4 }}
-          className="absolute bottom-20 left-1/4 w-[500px] h-[500px] bg-accent-secondary rounded-full" 
+          animate={{ 
+             opacity: [0.05, 0.08, 0.05], 
+             y: [0, -30, 0],
+             borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 left-1/4 w-[500px] h-[500px] bg-accent-secondary" 
         />
       </div>
 
