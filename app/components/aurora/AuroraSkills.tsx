@@ -44,7 +44,7 @@ export default function AuroraSkills({ skills }: AuroraSkillsProps) {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="mb-20 text-center lg:text-left">
           <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">02 / Gear</span>
-          <h2 className="font-headline font-black text-5xl md:text-8xl tracking-tighter leading-none mb-4 uppercase">
+          <h2 className="font-headline font-black text-4xl sm:text-5xl md:text-8xl tracking-tighter leading-none mb-4 uppercase">
             The Tool <span className="italic text-accent">Belt.</span>
           </h2>
           <p className="font-body text-xl text-foreground/40 font-medium italic">A curated collection of digital precision instruments.</p>

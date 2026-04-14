@@ -58,7 +58,7 @@ export default function Navbar() {
   const isAurora = theme === "aurora";
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 md:px-6">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-2 md:px-6">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -68,13 +68,13 @@ export default function Navbar() {
           damping: 20,
           delay: 0.6
         }}
-        className={`rounded-2xl px-1 md:px-4 py-2 flex items-center gap-0.5 md:gap-2 transition-all duration-500 ${
+        className={`rounded-2xl px-0.5 md:px-4 py-2 flex items-center gap-0 md:gap-2 transition-all duration-500 ${
           isAurora
             ? "bg-white border-2 border-accent shadow-xl"
             : `glass ${scrolled ? "shadow-2xl shadow-accent/10 border-foreground/20" : "border-foreground/10"}`
         }`}
       >
-        <div className="flex items-center gap-2 px-3 md:px-4">
+        <div className="flex items-center gap-1 md:gap-2 px-2 md:px-4">
           <Logo />
           <div className="hidden md:block h-4 w-px bg-foreground/10 mx-1 md:mx-2" />
           <PhaseToggle />

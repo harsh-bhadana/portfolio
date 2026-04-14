@@ -261,21 +261,21 @@ export default function Home() {
                   Available for new projects
                 </div>
 
-                <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-4 md:gap-x-8 items-baseline mix-blend-difference py-4">
-                  <TextReveal text="Harsh" wordByWord={false} className="text-6xl sm:text-7xl md:text-[10rem]" />
+                <h1 className="text-4xl sm:text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-4 md:gap-x-8 items-center justify-center md:justify-start md:items-baseline mix-blend-difference py-4 text-center md:text-left">
+                  <TextReveal text="Harsh" wordByWord={false} className="text-5xl sm:text-7xl md:text-[10rem]" />
                   <TextReveal
                     text="Bhadana"
                     wordByWord={false}
                     delay={0.5}
-                    className="text-6xl sm:text-7xl md:text-[10rem] text-gradient pb-2"
+                    className="text-5xl sm:text-7xl md:text-[10rem] text-gradient pb-2"
                   />
                 </h1>
 
-                <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12">
+                <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12 text-center md:text-left mx-auto md:mx-0">
                   Senior <span className="text-accent italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
                 </p>
 
-                <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 items-center justify-center md:justify-start">
                   <Magnetic strength={0.2}>
                     <a
                       href="#experience"
@@ -300,7 +300,7 @@ export default function Home() {
             {/* Experience Section */}
             <section id="experience" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-                <div>
+                <div className="text-center md:text-left">
                   <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
                   <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Professional <br className="md:hidden" /> <span className="animate-gradient">Journey</span></h2>
                 </div>
@@ -315,7 +315,7 @@ export default function Home() {
 
             {/* Latest Works Section */}
             <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
-              <div className="mb-20">
+              <div className="mb-20 text-center md:text-left">
                 <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Creation</span>
                 <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Latest <br /> <span className="animate-gradient">Works</span></h2>
               </div>

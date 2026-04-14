@@ -60,10 +60,10 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
       </div>
       {/* Editorial Header */}
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center lg:items-end mb-24 gap-8 text-center lg:text-left">
           <div className="max-w-xl">
             <span className="font-label text-accent uppercase font-black tracking-[0.4em] text-xs mb-4 block">03 / Inventory</span>
-            <h2 className="font-headline font-black text-6xl md:text-8xl text-foreground tracking-tighter leading-none">
+            <h2 className="font-headline font-black text-4xl sm:text-6xl md:text-8xl text-foreground tracking-tighter leading-none">
               Selected <br /> <span className="italic underline decoration-accent/10">Architecture.</span>
             </h2>
           </div>

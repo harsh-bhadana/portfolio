@@ -34,8 +34,8 @@ export default function AuroraHero() {
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:pl-96 relative z-10">
-        <div className="max-w-4xl">
+      <div className="container mx-auto px-6 lg:pl-96 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="max-w-4xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export default function AuroraHero() {
               Available for Research & Dev
             </div>
 
-            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground relative z-50">
+            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground relative z-50 flex flex-col items-center lg:items-start">
               <span className="block italic opacity-90 underline decoration-accent/20 relative z-50">
                 <MorphText text="HARSH" />
               </span>
@@ -58,11 +58,11 @@ export default function AuroraHero() {
               </span>
             </h1>
             
-            <p className="font-body text-xl md:text-2xl text-foreground/70 max-w-xl mb-14 leading-relaxed font-medium italic">
+            <p className="font-body text-xl md:text-2xl text-foreground/70 max-w-xl mx-auto lg:mx-0 mb-14 leading-relaxed font-medium italic">
               Senior <span className="text-accent">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
             </p>
 
-            <div className="flex flex-wrap items-center gap-8">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8">
               <a 
                 href="#projects" 
                 className="group relative inline-flex items-center gap-4 bg-accent px-10 py-6 rounded-full text-white font-label font-black text-lg uppercase tracking-widest shadow-[0_20px_50px_rgba(193,36,44,0.3)] hover:scale-105 active:scale-95 transition-all"

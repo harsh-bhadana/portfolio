@@ -49,7 +49,7 @@ export default function AuroraExperience({ experiences }: AuroraExperienceProps)
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="mb-20">
           <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">01 / Archeology</span>
-          <h2 className="font-headline font-black text-5xl md:text-8xl tracking-tighter leading-none mb-8">
+          <h2 className="font-headline font-black text-4xl sm:text-5xl md:text-8xl tracking-tighter leading-none mb-8">
             Professional <br /> <span className="italic underline decoration-accent/20">Exhibitions.</span>
           </h2>
         </div>
@@ -64,7 +64,7 @@ export default function AuroraExperience({ experiences }: AuroraExperienceProps)
               className="relative"
             >
               {/* Timeline Ribbon */}
-              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-accent/10 md:-left-12">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent/10 md:-left-12">
                 <div className="sticky top-1/2 w-4 h-4 rounded-full bg-accent -left-1.5 shadow-lg border-4 border-white" />
               </div>
 
