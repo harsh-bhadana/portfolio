@@ -1,47 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
+  --background: #030303;
   --foreground: #ffffff;
-  --accent: #ff4655;
-  --accent-secondary: #7000ff;
-  --accent-tertiary: #00d4ff;
-  --card: #0f0f0f;
-  --border: rgba(255, 255, 255, 0.08);
-  --selection: rgba(255, 70, 85, 0.3);
-  --glass-bg: rgba(15, 15, 15, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent: #ff1e56;
+  --accent-secondary: #a600ff;
+  --accent-tertiary: #00f0ff;
+  --card: #0a0a0a;
+  --border: rgba(255, 255, 255, 0.1);
+  --selection: rgba(255, 30, 86, 0.4);
+  --glass-bg: rgba(10, 10, 10, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.15);
   --blob-blend: screen;
-  --gh-l0: #161b22;
-  --gh-l1: #0e4429;
-  --gh-l2: #006d32;
-  --gh-l3: #26a641;
-  --gh-l4: #39d353;
+  --gh-l0: color-mix(in srgb, var(--accent) 15%, transparent);
+  --gh-l1: color-mix(in srgb, var(--accent) 40%, transparent);
+  --gh-l2: color-mix(in srgb, var(--accent) 65%, transparent);
+  --gh-l3: color-mix(in srgb, var(--accent) 90%, transparent);
+  --gh-l4: var(--accent);
 }
 
 [data-theme="aurora"] {
-  --background: #fffcf7;
-  --foreground: #383835;
-  --accent: #c1242c;
-  --accent-secondary: #005ed6;
-  --accent-tertiary: #776300;
-  --card: #fcf9f4;
-  --border: #eae8e2;
-  --selection: rgba(255, 118, 113, 0.3);
-  --glass-bg: rgba(255, 252, 247, 0.8);
-  --glass-border: rgba(56, 56, 53, 0.1);
+  --background: #ffffff;
+  --foreground: #000000;
+  --accent: #ff00ff; /* Neon Magenta */
+  --accent-secondary: #00ffff; /* Neon Cyan */
+  --accent-tertiary: #ffff00; /* Neon Yellow */
+  --card: #f4f4f4;
+  --border: #cccccc;
+  --selection: rgba(255, 0, 255, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.2);
   --blob-blend: multiply;
   
   /* PaperPortfolio Specific */
-  --surface-dim: #e5e2dc;
-  --surface-container: #f6f3ee;
-  --surface-container-high: #f0eee8;
-  --surface-container-highest: #eae8e2;
-  --primary-container: #ff7671;
-  --on-primary-container: #4e0007;
-  --tertiary-container: #fdd400;
-  --secondary-container: #c0d1ff;
-  --outline-variant: #bbb9b4;
+  --surface-dim: #d9d9d9;
+  --surface-container: #ebebeb;
+  --surface-container-high: #f0f0f0;
+  --surface-container-highest: #fafafa;
+  --primary-container: #ff00ff;
+  --on-primary-container: #ffffff;
+  --tertiary-container: #ffff00;
+  --secondary-container: #00ffff;
+  --outline-variant: #aaaaaa;
 }
 
 @theme inline {

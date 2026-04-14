@@ -34,22 +34,27 @@ export default function AuroraExperience({ experiences }: AuroraExperienceProps)
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-          className="absolute top-40 -right-20 w-96 h-96 bg-accent-secondary rounded-full" 
+          animate={{ 
+            scale: [0.8, 1, 0.8],
+            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"] 
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-40 -right-20 w-96 h-96 bg-accent-secondary opacity-30" 
         />
         <motion.div 
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 left-1/3 w-64 h-32 bg-accent-tertiary rounded-t-full opacity-30" 
+          animate={{ 
+            y: [0, -20, 0],
+            borderRadius: ["73% 27% 26% 74% / 73% 46% 54% 27%", "27% 73% 74% 26% / 27% 54% 46% 73%", "73% 27% 26% 74% / 73% 46% 54% 27%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-accent-tertiary opacity-30 blur-2xl" 
         />
       </div>
       
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="mb-20">
           <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">01 / Archeology</span>
-          <h2 className="font-headline font-black text-5xl md:text-8xl tracking-tighter leading-none mb-8">
+          <h2 className="font-headline font-black text-4xl sm:text-5xl md:text-8xl tracking-tighter leading-none mb-8">
             Professional <br /> <span className="italic underline decoration-accent/20">Exhibitions.</span>
           </h2>
         </div>
@@ -64,7 +69,7 @@ export default function AuroraExperience({ experiences }: AuroraExperienceProps)
               className="relative"
             >
               {/* Timeline Ribbon */}
-              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-accent/10 md:-left-12">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent/10 md:-left-12">
                 <div className="sticky top-1/2 w-4 h-4 rounded-full bg-accent -left-1.5 shadow-lg border-4 border-white" />
               </div>
 

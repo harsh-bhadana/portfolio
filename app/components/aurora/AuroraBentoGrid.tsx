@@ -41,29 +41,54 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
       {/* Immersive Background Shapes */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <motion.div 
-          initial={{ opacity: 0, rotate: 10 }}
-          whileInView={{ opacity: 1, rotate: 25 }}
-          transition={{ duration: 2.5 }}
-          className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary rounded-none rotate-12" 
+          animate={{ 
+            rotate: [10, 30, 10],
+            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"] 
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] -right-40 w-[800px] h-96 bg-accent-tertiary mix-blend-overlay" 
         />
         <motion.div 
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent rounded-full blur-3xl" 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0],
+            borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[20%] -left-20 w-[500px] h-[500px] bg-accent blur-[80px] opacity-60" 
         />
         <motion.div 
-          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent-secondary rounded-full opacity-40" 
+          animate={{ 
+            x: [0, 40, 0], y: [0, 20, 0], rotate: [0, -90, 0],
+            borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/4 w-64 h-64 bg-accent-secondary opacity-40 shadow-2xl backdrop-blur-xl" 
+        />
+        <motion.div 
+          animate={{ 
+            rotate: [0, 180, 360], 
+            scale: [1, 1.2, 1],
+            borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"]
+          }}
+          transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[30%] right-[10%] w-60 h-48 bg-accent opacity-30 shadow-xl" 
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -30, 0], y: [0, -50, 0],
+            borderRadius: ["73% 27% 26% 74% / 73% 46% 54% 27%", "27% 73% 74% 26% / 27% 54% 46% 73%", "73% 27% 26% 74% / 73% 46% 54% 27%"]
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[10%] right-[30%] w-72 h-64 bg-accent-tertiary opacity-30 blur-sm shadow-md" 
         />
       </div>
       {/* Editorial Header */}
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center lg:items-end mb-24 gap-8 text-center lg:text-left">
           <div className="max-w-xl">
             <span className="font-label text-accent uppercase font-black tracking-[0.4em] text-xs mb-4 block">03 / Inventory</span>
-            <h2 className="font-headline font-black text-6xl md:text-8xl text-foreground tracking-tighter leading-none">
+            <h2 className="font-headline font-black text-4xl sm:text-6xl md:text-8xl text-foreground tracking-tighter leading-none">
               Selected <br /> <span className="italic underline decoration-accent/10">Architecture.</span>
             </h2>
           </div>

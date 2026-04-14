@@ -18,24 +18,30 @@ export default function AuroraHero() {
           className="absolute -top-20 -left-20 w-[70%] h-[90%] bg-accent rounded-none" 
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
-        {/* Tertiary Semi-Circle */}
+        {/* Tertiary Object */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.5, x: 100 }}
-          animate={{ opacity: 0.1, scale: 1, x: 50 }}
-          transition={{ duration: 1.8, ease: "easeOut", delay: 0.2 }}
-          className="absolute top-[10%] -right-40 w-[600px] h-[600px] bg-accent-tertiary rounded-full" 
+          animate={{ 
+             opacity: [0.05, 0.1, 0.05], 
+             scale: [0.9, 1, 0.9], 
+             borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] -right-40 w-[600px] h-[600px] bg-accent-tertiary" 
         />
         {/* Secondary Overlapping Shape */}
         <motion.div 
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 0.08, y: 0 }}
-          transition={{ duration: 2, ease: "easeOut", delay: 0.4 }}
-          className="absolute bottom-20 left-1/4 w-[500px] h-[500px] bg-accent-secondary rounded-full" 
+          animate={{ 
+             opacity: [0.05, 0.08, 0.05], 
+             y: [0, -30, 0],
+             borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 left-1/4 w-[500px] h-[500px] bg-accent-secondary" 
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:pl-96 relative z-10">
-        <div className="max-w-4xl">
+      <div className="container mx-auto px-6 lg:pl-96 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="max-w-4xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -49,7 +55,7 @@ export default function AuroraHero() {
               Available for Research & Dev
             </div>
 
-            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground relative z-50">
+            <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground relative z-50 flex flex-col items-center lg:items-start">
               <span className="block italic opacity-90 underline decoration-accent/20 relative z-50">
                 <MorphText text="HARSH" />
               </span>
@@ -58,11 +64,11 @@ export default function AuroraHero() {
               </span>
             </h1>
             
-            <p className="font-body text-xl md:text-2xl text-foreground/70 max-w-xl mb-14 leading-relaxed font-medium italic">
+            <p className="font-body text-xl md:text-2xl text-foreground/70 max-w-xl mx-auto lg:mx-0 mb-14 leading-relaxed font-medium italic">
               Senior <span className="text-accent">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
             </p>
 
-            <div className="flex flex-wrap items-center gap-8">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8">
               <a 
                 href="#projects" 
                 className="group relative inline-flex items-center gap-4 bg-accent px-10 py-6 rounded-full text-white font-label font-black text-lg uppercase tracking-widest shadow-[0_20px_50px_rgba(193,36,44,0.3)] hover:scale-105 active:scale-95 transition-all"

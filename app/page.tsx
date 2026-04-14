@@ -222,26 +222,29 @@ export default function Home() {
                 x: [0, 100, 0],
                 y: [0, -50, 0],
                 rotate: [0, 45, 0],
+                borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"]
               }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-accent/15 bg-blob animate-float"
+              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-accent/15 bg-blob animate-float"
             />
             <motion.div
               animate={{
                 x: [0, -100, 0],
                 y: [0, 100, 0],
                 rotate: [0, -45, 0],
+                borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
               }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] rounded-full bg-accent-secondary/15 bg-blob"
+              className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] bg-accent-secondary/15 bg-blob"
             />
             <motion.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 150, 0],
+                borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"]
               }}
               transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-              className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-accent-tertiary/15 bg-blob"
+              className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-accent-tertiary/15 bg-blob"
             />
           </div>
 
@@ -261,21 +264,21 @@ export default function Home() {
                   Available for new projects
                 </div>
 
-                <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-4 md:gap-x-8 items-baseline mix-blend-difference py-4">
-                  <TextReveal text="Harsh" wordByWord={false} className="text-6xl sm:text-7xl md:text-[10rem]" />
+                <h1 className="text-4xl sm:text-5xl md:text-[10rem] font-black tracking-tighter mb-10 leading-[1.1] md:leading-[1.0] flex flex-wrap gap-x-4 md:gap-x-8 items-center justify-center md:justify-start md:items-baseline mix-blend-difference py-4 text-center md:text-left">
+                  <TextReveal text="Harsh" wordByWord={false} className="text-5xl sm:text-7xl md:text-[10rem]" />
                   <TextReveal
                     text="Bhadana"
                     wordByWord={false}
                     delay={0.5}
-                    className="text-6xl sm:text-7xl md:text-[10rem] text-gradient pb-2"
+                    className="text-5xl sm:text-7xl md:text-[10rem] text-gradient pb-2"
                   />
                 </h1>
 
-                <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12">
+                <p className="max-w-xl text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed mb-12 text-center md:text-left mx-auto md:mx-0">
                   Senior <span className="text-accent italic">Frontend Developer</span> crafting high-performance, secure, and user-centric digital experiences.
                 </p>
 
-                <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 items-center justify-center md:justify-start">
                   <Magnetic strength={0.2}>
                     <a
                       href="#experience"
@@ -300,7 +303,7 @@ export default function Home() {
             {/* Experience Section */}
             <section id="experience" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-                <div>
+                <div className="text-center md:text-left">
                   <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">01 / History</span>
                   <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Professional <br className="md:hidden" /> <span className="animate-gradient">Journey</span></h2>
                 </div>
@@ -315,7 +318,7 @@ export default function Home() {
 
             {/* Latest Works Section */}
             <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
-              <div className="mb-20">
+              <div className="mb-20 text-center md:text-left">
                 <span className="text-accent font-black tracking-widest uppercase text-xs mb-4 block">02 / Creation</span>
                 <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight">Latest <br /> <span className="animate-gradient">Works</span></h2>
               </div>
@@ -623,9 +626,12 @@ export default function Home() {
             <section id="contact" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
               <div className="p-10 md:p-32 rounded-[2.5rem] md:rounded-[4rem] bg-accent text-white relative overflow-hidden group">
                 <motion.div
-                  animate={{ rotate: [0, 360] }}
+                  animate={{ 
+                    rotate: [0, 360],
+                    borderRadius: ["35% 65% 65% 35% / 40% 45% 55% 60%", "65% 35% 35% 65% / 60% 55% 45% 40%", "35% 65% 65% 35% / 40% 45% 55% 60%"]
+                  }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-foreground/10 blur-3xl"
+                  className="absolute -top-20 -right-20 w-80 h-80 bg-foreground/10 blur-3xl"
                 />
 
                 <div className="relative z-10 text-center flex flex-col items-center">
@@ -679,8 +685,11 @@ export default function Home() {
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.8 }}
                    whileInView={{ opacity: 1, scale: 1 }}
-                   transition={{ duration: 2 }}
-                   className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent rounded-full" 
+                   animate={{ 
+                     borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+                   }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-accent" 
                  />
                </div>
                <div className="container mx-auto max-w-6xl relative z-10">

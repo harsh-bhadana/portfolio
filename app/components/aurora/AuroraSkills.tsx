@@ -20,21 +20,30 @@ export default function AuroraSkills({ skills }: AuroraSkillsProps) {
       {/* Immersive Background Shapes */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.5, x: 100 }}
-          whileInView={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 1.5 }}
-          className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-accent-secondary rounded-full" 
+          animate={{
+             scale: [0.5, 1, 0.5],
+             x: [100, 0, 100],
+             borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-accent-secondary opacity-50" 
         />
         <motion.div 
-          initial={{ opacity: 0, rotate: -30 }}
-          whileInView={{ opacity: 1, rotate: -15 }}
-          transition={{ duration: 2, delay: 0.4 }}
-          className="absolute bottom-[-10%] -right-20 w-[500px] h-96 bg-accent-tertiary rounded-3xl" 
+          animate={{
+             rotate: [-30, -15, -30],
+             borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 60% 40% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] -right-20 w-[500px] h-96 bg-accent-tertiary opacity-40 mix-blend-overlay" 
         />
         <motion.div 
-          animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/4 w-32 h-32 bg-accent rounded-xl opacity-20" 
+          animate={{ 
+            scale: [1, 1.1, 1], 
+            rotate: [0, 5, 0],
+            borderRadius: ["50% 50% 20% 80% / 25% 80% 20% 75%", "80% 20% 50% 50% / 75% 20% 80% 25%", "50% 50% 20% 80% / 25% 80% 20% 75%"]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 left-1/4 w-48 h-48 bg-accent opacity-30 shadow-2xl" 
         />
       </div>
       {/* Decorative Grid Pattern Background */}
@@ -44,7 +53,7 @@ export default function AuroraSkills({ skills }: AuroraSkillsProps) {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="mb-20 text-center lg:text-left">
           <span className="font-label text-xs uppercase font-black tracking-[0.4em] text-accent/60 mb-4 block">02 / Gear</span>
-          <h2 className="font-headline font-black text-5xl md:text-8xl tracking-tighter leading-none mb-4 uppercase">
+          <h2 className="font-headline font-black text-4xl sm:text-5xl md:text-8xl tracking-tighter leading-none mb-4 uppercase">
             The Tool <span className="italic text-accent">Belt.</span>
           </h2>
           <p className="font-body text-xl text-foreground/40 font-medium italic">A curated collection of digital precision instruments.</p>
