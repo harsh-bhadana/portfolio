@@ -68,6 +68,15 @@
   --font-label: var(--font-space-grotesk);
 }
 
+@layer utilities {
+  .font-dancing {
+    font-family: 'Dancing Script', cursive;
+  }
+  .font-bitcount {
+    font-family: 'Bitcount Grid Double', sans-serif;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;

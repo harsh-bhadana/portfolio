@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import ThemeIcon from "../ThemeIcon";
+import MorphText from "./MorphText";
 
 export default function AuroraHero() {
   return (
@@ -49,9 +50,11 @@ export default function AuroraHero() {
             </div>
 
             <h1 className="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-[0.9] mb-10 text-foreground">
-              <span className="block italic opacity-90 underline decoration-accent/20">HARSH</span>
+              <span className="block italic opacity-90 underline decoration-accent/20">
+                <MorphText text="HARSH" />
+              </span>
               <span className="inline-block px-8 py-3 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)] rounded-2xl text-accent transform -rotate-3 my-4 border border-border/50">
-                BHADANA
+                <MorphText text="BHADANA" />
               </span>
             </h1>
             
