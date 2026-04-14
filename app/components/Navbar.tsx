@@ -53,7 +53,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [theme]);
 
   const isAurora = theme === "aurora";
 

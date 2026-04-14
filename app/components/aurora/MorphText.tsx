@@ -31,19 +31,21 @@ const MorphLetter = ({ char, fontClass, isActive }: { char: string; fontClass: s
   if (char === " ") return <span className="inline-block w-[0.25em]">&nbsp;</span>;
 
   return (
-    <motion.span
-      animate={{
-        rotate: isActive ? [0, -3, 3, 0] : rotation,
-        scale: isActive ? [1, 1.15, 1] : 1,
-      }}
-      transition={{
-        duration: isActive ? 0.4 : 1,
-        ease: "easeInOut"
-      }}
-      className={`inline-block transition-all duration-700 min-w-[0.55em] text-center font-medium ${fontClass}`}
-    >
-      {char}
-    </motion.span>
+    <span className="inline-flex items-center justify-center w-[0.65em] flex-shrink-0 align-baseline">
+      <motion.span
+        animate={{ 
+          rotate: isActive ? [0, -3, 3, 0] : rotation,
+          scale: isActive ? [1, 1.15, 1] : 1,
+        }}
+        transition={{ 
+          duration: isActive ? 0.4 : 1,
+          ease: "easeInOut"
+        }}
+        className={`inline-block transition-all duration-700 min-w-full text-center font-medium pointer-events-none whitespace-nowrap ${fontClass}`}
+      >
+        {char}
+      </motion.span>
+    </span>
   );
 };
 
