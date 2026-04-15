@@ -178,87 +178,117 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
             );
           })}
 
-          {/* Labs Header Card - Scrapbook Style */}
-          <div id="labs" className="md:col-span-12 mt-20 mb-10 scroll-mt-32">
-            <h2 className="font-headline font-black text-4xl md:text-6xl tracking-tighter uppercase italic opacity-20">The Research Specimen Archive</h2>
+          {/* Labs Header Card - High-Density Archive Style */}
+          <div id="labs" className="md:col-span-12 mt-32 mb-16 scroll-mt-32 relative">
+             <div className="flex items-center gap-6 mb-8 group">
+                <div className="h-px bg-foreground/10 flex-1 group-hover:bg-accent/30 transition-colors" />
+                <h2 className="font-headline font-black text-2xl md:text-4xl tracking-[0.2em] uppercase text-foreground/20 selection:bg-accent/10 whitespace-nowrap">
+                  Experimental <span className="text-accent/40 italic">Specimen</span> Archive
+                </h2>
+                <div className="h-px bg-foreground/10 flex-1 group-hover:bg-accent/30 transition-colors" />
+             </div>
+             
+             <div className="flex flex-wrap gap-4 justify-center opacity-40">
+                {labs.map((lb, i) => (
+                   <span key={i} className="font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      {lb.category.replace(' Lab', '')}
+                   </span>
+                ))}
+             </div>
           </div>
 
-          {/* Labs Items Loop */}
-          {labs.map((lab, lIndex) => {
-            const rotations = [-1, 2, -2, 1];
-            const rot = rotations[lIndex % rotations.length];
-            
-            return (
-              <div key={lIndex} className="md:col-span-6 lg:col-span-4 self-stretch">
+          {/* Labs Items Loop - Redesigned Bento Mosaic */}
+          <div className="md:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {labs.map((lab, lIndex) => {
+              // Staggered grid spans for exactly 4 items to create a high-end mosaic
+              const spans = [
+                "lg:col-span-7", 
+                "lg:col-span-5", 
+                "lg:col-span-5", 
+                "lg:col-span-7"
+              ];
+              const spanClass = spans[lIndex % spans.length] || "lg:col-span-6";
+              
+              return (
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ rotate: 0, scale: 1.02, zIndex: 10 }}
-                  className="bg-white p-10 rounded-none border-2 border-border shadow-md h-full flex flex-col relative group"
-                  style={{ rotate: `${rot}deg` }}
+                  key={lIndex}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: lIndex * 0.1 }}
+                  className={`${spanClass} flex flex-col`}
                 >
-                  {/* Adhesive tape effect */}
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-accent/5 border border-accent/10 backdrop-blur-sm z-20 rotate-1 shadow-sm" />
-                  
-                  <div className="flex items-center gap-4 mb-8">
-                     <div className="w-12 h-12 rounded-xl bg-accent text-white flex items-center justify-center shadow-lg">
-                        <ThemeIcon icon={lab.icon} size={24} />
-                     </div>
-                     <h4 className="font-headline font-black text-xl uppercase tracking-tight">{lab.category}</h4>
-                  </div>
+                  <div className="bg-white/40 backdrop-blur-md rounded-[3rem] border border-border/40 p-10 md:p-14 h-full relative group overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500">
+                    {/* Interactive "Scanning" Border Animation */}
+                    <motion.div 
+                      className="absolute inset-0 border-2 border-accent opacity-0 group-hover:opacity-100 rounded-[3rem] pointer-events-none z-20"
+                      initial={false}
+                      animate={{ 
+                        clipPath: ["inset(0 0 95% 0)", "inset(0 0 0 95%)", "inset(95% 0 0 0)", "inset(0 95% 0 0)", "inset(0 0 95% 0)"]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    />
 
-                  <p className="font-body text-sm font-bold text-foreground/40 mb-10 italic leading-relaxed">
-                    {lab.tagline}
-                  </p>
+                    {/* Background Pattern */}
+                    <div className="absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+                       <ThemeIcon icon={lab.icon} size={200} />
+                    </div>
 
-                  <div className="space-y-4">
-                    {lab.items.map((item, iIndex) => (
-                      <a 
-                        key={iIndex} 
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-6 rounded-2xl border border-border/50 bg-surface-dim hover:bg-white hover:border-accent transition-all group/item block relative overflow-hidden"
-                      >
-                        <div className="flex flex-wrap items-center gap-2 mb-3">
-                           <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-accent bg-accent/10 px-2 py-1 rounded-md">
-                              {item.badge}
-                           </span>
-                           {item.is_experimental && (
-                             <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-red-500 bg-red-500/10 px-2 py-1 rounded-md">
-                                Exp
-                             </span>
-                           )}
-                           <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-foreground/30 ml-auto bg-foreground/5 px-2 py-1 rounded-md italic">
-                              {item.included_in}
-                           </span>
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                        <div className="flex items-center gap-6">
+                           <div className="w-16 h-16 rounded-2xl bg-accent text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                              <ThemeIcon icon={lab.icon} size={32} />
+                           </div>
+                           <div>
+                              <h4 className="font-headline font-black text-2xl md:text-3xl uppercase tracking-tight leading-none group-hover:text-accent transition-colors">{lab.category}</h4>
+                              <p className="font-body text-xs font-black text-accent uppercase tracking-[0.2em] mt-2 opacity-60">Archive Sector: {lIndex + 1}</p>
+                           </div>
                         </div>
                         
-                        <div className="flex justify-between items-start mb-2">
-                           <h5 className="font-headline font-black text-sm uppercase tracking-tight group-hover:text-accent transition-colors">{item.name}</h5>
-                           <ArrowUpRight size={14} className="text-foreground/20 group-hover/item:text-accent group-hover/item:translate-x-1 transition-all" />
+                        <div className="px-6 py-2 rounded-full bg-surface-dim border border-border/50 font-label text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">
+                          {lab.tagline}
                         </div>
-                        
-                        <p className="font-body text-[10px] text-accent font-black uppercase tracking-widest mb-2 opacity-60 line-clamp-1">{item.purpose}</p>
-                        <p className="font-body text-[11px] text-foreground/50 font-medium leading-relaxed mb-4">{item.summary}</p>
-                        
-                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border/10">
-                          {item.tech_used.slice(0, 3).map((tech, k) => (
-                            <span key={k} className="text-[10px] font-body italic text-foreground/30">
-                              #{tech.replace(/\s+/g, '').toLowerCase()}
-                            </span>
-                          ))}
-                          {item.tech_used.length > 3 && (
-                            <span className="text-[10px] font-body italic text-foreground/30">+{item.tech_used.length - 3}</span>
-                          )}
-                        </div>
-                      </a>
-                    ))}
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-auto">
+                        {lab.items.map((item, iIndex) => (
+                          <a 
+                            key={iIndex} 
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/item relative p-6 rounded-[2rem] bg-surface-dim/30 border border-border/30 hover:bg-white hover:border-accent hover:shadow-xl transition-all block overflow-hidden"
+                          >
+                            <div className="absolute top-0 right-0 p-4 opacity-0 group-hover/item:opacity-100 transition-opacity">
+                               <ArrowUpRight size={16} className="text-accent" />
+                            </div>
+
+                            <div className="flex items-center gap-2 mb-4">
+                               <span className="font-label text-[8px] font-black uppercase tracking-widest text-accent bg-accent/5 px-2 py-1 rounded-md">
+                                  {item.badge}
+                               </span>
+                               {item.is_experimental && (
+                                 <span className="flex items-center gap-1.5 font-label text-[8px] font-black uppercase tracking-widest text-red-500 bg-red-500/5 px-2 py-1 rounded-md">
+                                    <span className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
+                                    Exp
+                                 </span>
+                               )}
+                            </div>
+                            
+                            <h5 className="font-headline font-black text-sm uppercase tracking-tight mb-2 group-hover/item:text-accent transition-colors">{item.name}</h5>
+                            <p className="font-body text-[11px] text-foreground/50 leading-relaxed line-clamp-2">{item.summary}</p>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
 
           {/* Fun Highlight Card */}
           <div className="md:col-span-12 lg:col-span-12 mt-12 bg-surface-dim p-12 rounded-[3.5rem] border-2 border-border border-dashed flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">

@@ -20,148 +20,173 @@ export default function EclipseLabs({ labs }: { labs: FeatureLab[] }) {
 
   return (
     <section id="labs" className="min-h-screen flex flex-col justify-center py-24 snap-start snap-always max-w-6xl mx-auto overflow-hidden scroll-mt-32">
-      <div className="mb-12">
-        <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
-        <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Specimen <span className="animate-gradient not-italic">Exploration</span></h2>
-        <p className="text-foreground/50 text-xl font-medium leading-relaxed max-w-2xl">
-          Exploring the architectural frontier of <span className="text-foreground font-black">Next.js 16</span> and <span className="text-foreground font-black">React 19</span> through isolated research specimens.
-        </p>
-      </div>
-
-      <div className="rounded-[2.5rem] md:rounded-[3rem] bg-black/40 border border-foreground/10 overflow-hidden shadow-2xl relative group h-auto md:h-[700px] flex flex-col">
-        <div className="flex items-center justify-between px-8 py-5 border-b border-foreground/5 bg-foreground/[0.03] shrink-0">
-          <div className="flex items-center gap-6">
-            <div className="flex gap-2">
-              <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56]" />
-              <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]" />
-              <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f]" />
-            </div>
+      <div className="mb-16 relative">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <span className="text-accent font-black tracking-[0.4em] uppercase text-xs mb-4 block">03 / Lab Phase</span>
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">Specimen <span className="animate-gradient not-italic">Exploration</span></h2>
+            <p className="text-foreground/50 text-xl font-medium leading-relaxed max-w-2xl">
+              Exploring the architectural frontier of <span className="text-foreground font-black">Next.js 16</span> and <span className="text-foreground font-black">React 19</span> through isolated research specimens.
+            </p>
+          </div>
+          
+          <div className="hidden lg:flex flex-col items-end text-right font-mono text-[10px] text-foreground/20 font-bold uppercase tracking-[0.3em]">
+             <span>System_Mode: Research_Active</span>
+             <span className="text-accent">Sector: {labs[activeLabIndex].category.split(' ').pop()}</span>
+             <span>Freq: 2.4GHz_PPR_V1</span>
           </div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-hidden items-stretch">
-          <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-foreground/5 bg-foreground/[0.01] p-4 md:p-6 flex lg:flex-col gap-4 lg:gap-8 overflow-x-auto lg:overflow-y-auto custom-scrollbar shrink-0">
-            {labs.map((lab, i) => {
-              const isActive = activeLabIndex === i;
-              return (
-                <div key={i} className="space-y-4 shrink-0 lg:shrink">
+      <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-black/60 border border-foreground/10 overflow-hidden shadow-2xl relative group flex flex-col border-b-4 border-b-accent/20">
+        {/* Command Dock - Top Navigation */}
+        <div className="flex flex-col md:flex-row items-center border-b border-foreground/5 bg-foreground/[0.03] backdrop-blur-3xl shrink-0 z-20">
+           <div className="flex items-center gap-2 px-8 py-5 border-r border-foreground/5 shrink-0">
+              <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56]/20 border border-[#ff5f56]/50 shadow-[0_0_10px_rgba(255,95,86,0.3)]" />
+              <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]/20 border border-[#ffbd2e]/50" />
+              <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f]/20 border border-[#27c93f]/50" />
+           </div>
+
+           <div className="flex-1 flex overflow-x-auto no-scrollbar scroll-smooth px-4">
+              {labs.map((lab, i) => {
+                const isActive = activeLabIndex === i;
+                return (
                   <button 
+                    key={i}
                     onClick={() => setActiveLabIndex(i)}
-                    className={`flex items-center gap-3 md:gap-4 w-full text-left transition-all group py-2 ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
+                    className={`flex items-center gap-3 px-8 py-5 transition-all relative shrink-0 group/btn ${isActive ? "text-accent" : "text-foreground/30 hover:text-foreground/60"}`}
                   >
-                    <ThemeIcon icon={lab.icon} size={20} />
-                    <span className="text-[10px] md:text-sm font-black uppercase tracking-[0.2em] whitespace-nowrap">{lab.category}</span>
+                    <ThemeIcon icon={lab.icon} size={18} className={isActive ? "animate-pulse" : ""} />
+                    <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] whitespace-nowrap">{lab.category}</span>
+                    
                     {isActive && (
-                      <motion.div layoutId="active-lab-dot" className="hidden lg:block w-2 h-2 rounded-full bg-accent ml-auto" />
+                      <motion.div 
+                        layoutId="active-lab-link" 
+                        className="absolute bottom-0 left-0 right-0 h-1 bg-accent shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)]" 
+                      />
                     )}
                   </button>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+           </div>
 
-          <div 
-            ref={scrollContainerRef}
-            className="lg:col-span-8 p-6 md:p-12 overflow-y-auto lg:h-full custom-scrollbar bg-foreground/[0.005]"
-            onWheel={(e) => {
-              const now = Date.now();
-              if (now - scrollThrottleRef.current < 1000) return;
+           <div className="hidden md:flex px-8 py-5 border-l border-foreground/5 font-mono text-[10px] text-accent/50 font-bold tracking-widest animate-pulse">
+              [ ACCESS_GRANTED ]
+           </div>
+        </div>
 
-              const el = e.currentTarget;
-              if (e.deltaY > 0) {
-                if (el.scrollHeight - el.scrollTop - el.clientHeight < 5) {
-                  if (activeLabIndex < labs.length - 1) {
-                    scrollThrottleRef.current = now;
-                    setActiveLabIndex(prev => prev + 1);
-                  }
-                }
-              } else if (e.deltaY < 0) {
-                if (el.scrollTop < 5) {
-                  if (activeLabIndex > 0) {
-                    scrollThrottleRef.current = now;
-                    setActiveLabIndex(prev => prev - 1);
-                  }
-                }
-              }
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeLabIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="space-y-10"
-              >
-                <div className="border-l-4 border-accent pl-8 py-2">
-                  <h3 className="text-3xl font-black italic tracking-tighter mb-4 uppercase">{labs[activeLabIndex].category}</h3>
-                  <p className="text-foreground/40 font-medium text-lg leading-none">{labs[activeLabIndex].tagline}</p>
+        {/* Technical Viewport */}
+        <div className="relative flex-1 min-h-[500px] md:min-h-[600px] bg-[url('/grid-dark.svg')] bg-[length:40px_40px] overflow-hidden">
+          {/* Scanning Line Animation */}
+          <motion.div 
+            animate={{ top: ["-10%", "110%"] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 right-0 h-24 bg-gradient-to-b from-transparent via-accent/5 to-transparent z-10 pointer-events-none"
+          />
+
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeLabIndex}
+              initial={{ opacity: 0, scale: 0.98, filter: "blur(10px) brightness(2)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px) brightness(1)" }}
+              exit={{ opacity: 0, scale: 1.02, filter: "blur(5px) grayscale(1)" }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="p-8 md:p-14 h-full overflow-y-auto custom-scrollbar relative z-20"
+            >
+              <div className="max-w-4xl mx-auto space-y-12">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-foreground/5 pb-12">
+                  <div className="space-y-4">
+                    <h3 className="text-4xl md:text-6xl font-black italic tracking-tighter uppercase leading-none">{labs[activeLabIndex].category}</h3>
+                    <p className="text-foreground/40 font-medium text-xl leading-none italic">{labs[activeLabIndex].tagline}</p>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="px-5 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-[10px] font-mono text-accent font-bold">
+                       0x7FE_{activeLabIndex}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {labs[activeLabIndex].items.map((item, j) => (
                     <motion.a 
                       key={j}
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: j * 0.1 }}
-                      whileHover={{ y: -5 }}
-                      className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden flex flex-col cursor-pointer"
+                      className="group/card relative rounded-[2.5rem] bg-foreground/[0.02] border border-foreground/5 hover:border-accent/40 hover:bg-foreground/[0.04] transition-all p-8 flex flex-col overflow-hidden"
                     >
-                      <div className="absolute top-0 right-0 p-8 opacity-0 group-hover/card:opacity-100 transition-opacity">
-                         <ArrowUpRight size={24} className="text-accent" />
+                      {/* Interactive Data Fragment Background */}
+                      <div className="absolute top-0 right-0 p-8 opacity-5 group-hover/card:opacity-20 transition-opacity">
+                         <span className="font-mono text-[40px] font-black">{j + 1}</span>
                       </div>
-                      <div className="flex items-center gap-3 mb-6 flex-wrap">
-                         <span className="text-[10px] font-black tracking-widest uppercase bg-accent/20 px-3 py-1.5 rounded-md text-accent">{item.badge}</span>
+
+                      <div className="flex items-center gap-3 mb-8 flex-wrap">
+                         <span className="text-[10px] font-black tracking-widest uppercase bg-accent/10 px-3 py-1.5 rounded-lg text-accent border border-accent/20">
+                            {item.badge}
+                         </span>
                          {item.is_experimental && (
-                           <span className="text-[10px] font-black tracking-widest uppercase bg-red-500/10 px-3 py-1.5 rounded-md text-red-500 flex items-center gap-1.5">
-                              <span className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
+                           <span className="text-[10px] font-black tracking-widest uppercase bg-red-500/10 px-3 py-1.5 rounded-lg text-red-500 flex items-center gap-1.5 border border-red-500/20">
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
                               Experimental
                            </span>
                          )}
-                         <span className="text-[10px] font-mono font-bold text-foreground/30 italic bg-foreground/5 px-3 py-1.5 rounded-md">{item.included_in}</span>
+                         <span className="text-[10px] font-mono font-bold text-foreground/20 italic ml-auto group-hover/card:text-accent/40 transition-colors">
+                            CORE::{item.included_in.replace(' ', '_').toUpperCase()}
+                         </span>
                       </div>
                       
-                      <h4 className="text-xl md:text-2xl font-black mb-2 group-hover/card:text-white transition-colors tracking-tight leading-tight">{item.name}</h4>
-                      <p className="text-accent font-black text-[10px] uppercase tracking-widest mb-4 opacity-60">{item.purpose}</p>
+                      <h4 className="text-2xl md:text-3xl font-black mb-3 group-hover/card:text-white transition-colors tracking-tight leading-tight uppercase group-hover/card:translate-x-1 transition-transform">
+                        {item.name}
+                      </h4>
+                      <p className="text-accent font-black text-[11px] uppercase tracking-[0.2em] mb-6 opacity-60">
+                        {item.purpose}
+                      </p>
                       
-                      <p className="text-foreground/50 text-sm font-medium leading-relaxed mb-8 italic">{item.summary}</p>
+                      <p className="text-foreground/50 text-base font-medium leading-relaxed mb-8 italic">
+                        {item.summary}
+                      </p>
                       
-                      <div className="flex flex-wrap gap-2 mb-8">
+                      <div className="flex flex-wrap gap-2 mb-10">
                         {item.tech_used.map((tech, k) => (
-                          <span key={k} className="text-[9px] font-black uppercase tracking-widest border border-foreground/10 px-2 py-1 rounded bg-foreground/[0.02] text-foreground/40 group-hover/card:border-accent/30 group-hover/card:text-accent transition-colors">
+                          <span key={k} className="text-[9px] font-black uppercase tracking-widest border border-foreground/10 px-2 py-1 rounded-md bg-foreground/[0.02] text-foreground/30 group-hover/card:border-accent/30 group-hover/card:text-accent transition-colors">
                             {tech}
                           </span>
                         ))}
                       </div>
 
-                      <div className="text-[10px] font-mono text-foreground/30 flex items-center gap-3 font-bold cursor-default mt-auto">
-                         <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                         specimens/{item.path}
+                      <div className="mt-auto flex items-center justify-between">
+                        <div className="text-[10px] font-mono text-foreground/20 font-bold uppercase tracking-widest flex items-center gap-3">
+                           <div className="w-2 h-2 rounded-full bg-accent/30" />
+                           view_specimen
+                        </div>
+                        <ArrowUpRight size={20} className="text-foreground/10 group-hover/card:text-accent group-hover/card:scale-110 transition-all" />
                       </div>
                     </motion.a>
                   ))}
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <div className="p-4 border-t border-foreground/5 bg-foreground/[0.02] flex items-center justify-between text-[9px] font-mono font-bold text-foreground/20 tracking-widest px-10 backdrop-blur-3xl shrink-0">
-          <div className="flex items-center gap-6">
-            <span className="text-accent animate-pulse uppercase">active_sector: {labs[activeLabIndex].category.split(' ').pop()}</span>
-            <span>STATUS: 200 OK</span>
-            <span className="hidden md:inline">COMPILER: REACT_FORGET_V19</span>
+        <div className="p-5 border-t border-foreground/5 bg-foreground/[0.03] flex items-center justify-between text-[10px] font-mono font-bold text-foreground/40 tracking-widest px-10 backdrop-blur-3xl shrink-0">
+          <div className="flex items-center gap-8">
+            <span className="text-accent flex items-center gap-2">
+               <span className="inline-block w-1.5 h-1.5 bg-accent rounded-full animate-ping" />
+               SYSTEM_LIVE: OK
+            </span>
+            <span className="hidden md:inline">ARCHITECTURE: NEXT_PPR_V16</span>
+            <span className="hidden lg:inline text-foreground/20">MEM: 0x00FF821_{activeLabIndex}</span>
           </div>
-          <div className="flex items-center gap-2 text-foreground/40 italic">
-            &quot;use cache&quot;; <Sparkles size={10} className="text-accent" />
+          <div className="flex items-center gap-3 text-foreground/40 italic">
+            &quot;use cache&quot; directive active <Sparkles size={12} className="text-accent animate-pulse" />
           </div>
         </div>
       </div>
+
       
       <Magnetic strength={0.2}>
         <a href="https://github.com/harsh-bhadana/next-labs" target="_blank" rel="noopener noreferrer" className="group mt-12 mx-auto px-10 py-5 rounded-full bg-foreground text-background font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-6 hover:bg-accent hover:text-white transition-all transform hover:scale-[1.02] border-2 border-transparent hover:border-white/20">
