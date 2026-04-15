@@ -101,13 +101,16 @@ export default function EclipseLabs({ labs }: { labs: FeatureLab[] }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {labs[activeLabIndex].items.map((item, j) => (
-                    <motion.div 
+                    <motion.a 
                       key={j}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: j * 0.1 }}
                       whileHover={{ y: -5 }}
-                      className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden flex flex-col"
+                      className="p-8 rounded-[2rem] bg-foreground/5 border border-foreground/10 hover:border-accent/40 transition-all group/card relative overflow-hidden flex flex-col cursor-pointer"
                     >
                       <div className="absolute top-0 right-0 p-8 opacity-0 group-hover/card:opacity-100 transition-opacity">
                          <ArrowUpRight size={24} className="text-accent" />
@@ -122,7 +125,7 @@ export default function EclipseLabs({ labs }: { labs: FeatureLab[] }) {
                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                          specimens/{item.path}
                       </div>
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </div>
               </motion.div>

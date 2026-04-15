@@ -63,6 +63,7 @@ export interface FeatureLabItem {
   path: string;
   badge: string;
   desc: string;
+  url?: string;
 }
 
 export interface FeatureLab {

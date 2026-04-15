@@ -119,17 +119,16 @@ export const githubProjects: GithubProject[] = [
   }
 ];
 
+const BASE = "https://next-labs-one.vercel.app";
+
 export const featureLabs: FeatureLab[] = [
   {
-    category: "The Rendering Lab",
-    icon: Cpu,
-    tagline: "Breaking the core of Next.js data fetching.",
+    category: "Interactive & UI Lab",
+    icon: Paintbrush,
+    tagline: "Bridging the gap to native experience.",
     items: [
-      { name: "Zero-JS Data Table", path: "app/the-rendering/zero-js-table/page.tsx", badge: "0KB CLIENT JS", desc: "High-performance grid using Server Components and asynchronous searchParams for fetching and filtering." },
-      { name: "PPR Dashboard", path: "app/the-rendering/ppr-dashboard/page.tsx", badge: "EXPERIMENTAL PPR", desc: "Utilizing Partial Prerendering to serve static shells instantly while streaming dynamic user data into Suspense holes." },
-      { name: "The use cache Specimen", path: "app/the-rendering/use-cache-specimen/page.tsx", badge: "V16.0.0", desc: "Exploring component-level caching with the new \"use cache\" directive and granular cacheLife profiles." },
-      { name: "Specimen 03: The proxy.ts Interceptor", path: "app/the-rendering/proxy-specimen/page.tsx", badge: "SECURITY HOOK", desc: "Centralized layer for JWT rotation, geo-fencing, and request fingerprinting using the Next.js Proxy layer." },
-      { name: "Infinite Scroll Native", path: "app/the-rendering/infinite-scroll/page.tsx", badge: "SERVER ACTIONS", desc: "Server-side infinite scrolling implemented with Server Actions and useActionState without external libraries." }
+      { name: "View Transition Gallery", path: "app/interactive-ui-lab/view-transitions/page.tsx", badge: "NATIVE API", desc: "Seamless layout morphing across Next.js routing using the native CSS View Transitions API.", url: `${BASE}/interactive-ui-lab/view-transitions` },
+      { name: "Modal Gallery", path: "app/routing-lab/modal-gallery/page.tsx", badge: "NEW", desc: "Sub-frame modal experience built with Parallel & Intercepting Routes for zero-layout-shift overlays without a full page navigation.", url: `${BASE}/routing-lab/modal-gallery` }
     ]
   },
   {
@@ -137,17 +136,23 @@ export const featureLabs: FeatureLab[] = [
     icon: Zap,
     tagline: "Pushing responsiveness to 60fps limits.",
     items: [
-      { name: "Specimen 06: The Memo-Free UI", path: "app/performance-lab/memo-free/page.tsx", badge: "REACT COMPILER", desc: "A high-density dashboard proving 60fps performance via the React Compiler Babel plugin without useMemo or useCallback." },
-      { name: "Search-as-you-go", path: "app/performance-lab/search-as-you-go/page.tsx", badge: "CONCURRENT REACT", desc: "Maintaining a snappy UI during heavy 10,000+ item filtering using useDeferredValue with initialValue support." },
-      { name: "Optimistic \"Like\" Button", path: "app/performance-lab/optimistic-like/page.tsx", badge: "NO LATENCY", desc: "Leveraging useOptimistic to create instantaneous feedback loops for database mutations." }
+      { name: "Specimen 07: Zero-State Server CRUD", path: "app/performance-lab/server-crud/page.tsx", badge: "NEW · 0KB STATE", desc: "A full CRUD application with 0kb of client-side state, powered entirely by Server Actions and revalidatePath() for instant cache invalidation.", url: `${BASE}/performance-lab/server-crud` },
+      { name: "Optimistic \"Like\" Button", path: "app/performance-lab/optimistic-like/page.tsx", badge: "NO LATENCY", desc: "Leveraging useOptimistic to create instantaneous feedback loops for database mutations.", url: `${BASE}/performance-lab/optimistic-like` },
+      { name: "Search-as-you-go", path: "app/performance-lab/search-as-you-go/page.tsx", badge: "CONCURRENT REACT", desc: "Maintaining a snappy UI during heavy 10,000+ item filtering using useDeferredValue with initialValue support.", url: `${BASE}/performance-lab/search-as-you-go` },
+      { name: "Specimen 06: The Memo-Free UI", path: "app/performance-lab/memo-free/page.tsx", badge: "REACT COMPILER", desc: "A high-density dashboard proving 60fps performance via the React Compiler Babel plugin without useMemo or useCallback.", url: `${BASE}/performance-lab/memo-free` }
     ]
   },
   {
-    category: "Interactive & UI Lab",
-    icon: Paintbrush,
-    tagline: "Bridging the gap to native experience.",
+    category: "The Rendering Lab",
+    icon: Cpu,
+    tagline: "Breaking the core of Next.js data fetching.",
     items: [
-      { name: "View Transition Gallery", path: "app/interactive-ui-lab/view-transitions/page.tsx", badge: "NATIVE API", desc: "Seamless layout morphing across Next.js routing using the native CSS View Transitions API." }
+      { name: "Specimen 08: BFF Stock Ticker", path: "app/the-rendering/bff-stocks/page.tsx", badge: "NEW · REAL-TIME", desc: "Backend-for-Frontend pattern using useSyncExternalStore to subscribe to a real-time aggregated stock feed from a Next.js Route Handler.", url: `${BASE}/the-rendering/bff-stocks` },
+      { name: "Zero-JS Data Table", path: "app/the-rendering/zero-js-table/page.tsx", badge: "0KB CLIENT JS", desc: "High-performance grid using Server Components and asynchronous searchParams for fetching and filtering.", url: `${BASE}/the-rendering/zero-js-table` },
+      { name: "PPR Dashboard", path: "app/the-rendering/ppr-dashboard/page.tsx", badge: "EXPERIMENTAL PPR", desc: "Utilizing Partial Prerendering to serve static shells instantly while streaming dynamic user data into Suspense holes.", url: `${BASE}/the-rendering/ppr-dashboard` },
+      { name: "The use cache Specimen", path: "app/the-rendering/use-cache-specimen/page.tsx", badge: "V16.0.0", desc: "Exploring component-level caching with the new \"use cache\" directive and granular cacheLife profiles.", url: `${BASE}/the-rendering/use-cache-specimen` },
+      { name: "Infinite Scroll Native", path: "app/the-rendering/infinite-scroll/page.tsx", badge: "SERVER ACTIONS", desc: "Server-side infinite scrolling implemented with Server Actions and useActionState without external libraries.", url: `${BASE}/the-rendering/infinite-scroll` },
+      { name: "Specimen 03: The proxy.ts Interceptor", path: "app/the-rendering/proxy-specimen/page.tsx", badge: "SECURITY HOOK", desc: "Centralized layer for JWT rotation, geo-fencing, and request fingerprinting using the Next.js Proxy layer.", url: `${BASE}/the-rendering/proxy-specimen` }
     ]
   }
 ];
