@@ -64,6 +64,11 @@ export interface FeatureLabItem {
   badge: string;
   desc: string;
   url?: string;
+  purpose: string;
+  tech_used: string[];
+  included_in: string;
+  is_experimental: boolean;
+  summary: string;
 }
 
 export interface FeatureLab {

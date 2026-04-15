@@ -20,6 +20,12 @@ interface LabItem {
   path: string;
   badge: string;
   desc: string;
+  url?: string;
+  purpose: string;
+  tech_used: string[];
+  included_in: string;
+  is_experimental: boolean;
+  summary: string;
 }
 
 interface LabCategory {
@@ -207,16 +213,46 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
 
                   <div className="space-y-4">
                     {lab.items.map((item, iIndex) => (
-                      <div key={iIndex} className="p-4 rounded-xl border border-border/50 bg-surface-dim hover:bg-white hover:border-accent transition-all group/item cursor-default">
-                        <div className="flex justify-between items-start mb-2">
-                           <span className="font-label text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-2 py-0.5 rounded-md">
+                      <a 
+                        key={iIndex} 
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-6 rounded-2xl border border-border/50 bg-surface-dim hover:bg-white hover:border-accent transition-all group/item block relative overflow-hidden"
+                      >
+                        <div className="flex flex-wrap items-center gap-2 mb-3">
+                           <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-accent bg-accent/10 px-2 py-1 rounded-md">
                               {item.badge}
                            </span>
+                           {item.is_experimental && (
+                             <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-red-500 bg-red-500/10 px-2 py-1 rounded-md">
+                                Exp
+                             </span>
+                           )}
+                           <span className="font-label text-[8px] font-black uppercase tracking-[0.2em] text-foreground/30 ml-auto bg-foreground/5 px-2 py-1 rounded-md italic">
+                              {item.included_in}
+                           </span>
+                        </div>
+                        
+                        <div className="flex justify-between items-start mb-2">
+                           <h5 className="font-headline font-black text-sm uppercase tracking-tight group-hover:text-accent transition-colors">{item.name}</h5>
                            <ArrowUpRight size={14} className="text-foreground/20 group-hover/item:text-accent group-hover/item:translate-x-1 transition-all" />
                         </div>
-                        <h5 className="font-headline font-black text-sm uppercase mb-1">{item.name}</h5>
-                        <p className="font-body text-[11px] text-foreground/50 font-medium leading-normal">{item.desc}</p>
-                      </div>
+                        
+                        <p className="font-body text-[10px] text-accent font-black uppercase tracking-widest mb-2 opacity-60 line-clamp-1">{item.purpose}</p>
+                        <p className="font-body text-[11px] text-foreground/50 font-medium leading-relaxed mb-4">{item.summary}</p>
+                        
+                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border/10">
+                          {item.tech_used.slice(0, 3).map((tech, k) => (
+                            <span key={k} className="text-[10px] font-body italic text-foreground/30">
+                              #{tech.replace(/\s+/g, '').toLowerCase()}
+                            </span>
+                          ))}
+                          {item.tech_used.length > 3 && (
+                            <span className="text-[10px] font-body italic text-foreground/30">+{item.tech_used.length - 3}</span>
+                          )}
+                        </div>
+                      </a>
                     ))}
                   </div>
                 </motion.div>

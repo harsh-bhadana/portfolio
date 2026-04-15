@@ -117,10 +117,28 @@ export default function EclipseLabs({ labs }: { labs: FeatureLab[] }) {
                       </div>
                       <div className="flex items-center gap-3 mb-6 flex-wrap">
                          <span className="text-[10px] font-black tracking-widest uppercase bg-accent/20 px-3 py-1.5 rounded-md text-accent">{item.badge}</span>
-                         <span className="text-[10px] font-mono font-bold text-foreground/30 italic">{item.path.split('/').pop()}</span>
+                         {item.is_experimental && (
+                           <span className="text-[10px] font-black tracking-widest uppercase bg-red-500/10 px-3 py-1.5 rounded-md text-red-500 flex items-center gap-1.5">
+                              <span className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
+                              Experimental
+                           </span>
+                         )}
+                         <span className="text-[10px] font-mono font-bold text-foreground/30 italic bg-foreground/5 px-3 py-1.5 rounded-md">{item.included_in}</span>
                       </div>
-                      <h4 className="text-xl md:text-2xl font-black mb-4 group-hover/card:text-white transition-colors tracking-tight leading-tight">{item.name}</h4>
-                      <p className="text-foreground/50 text-sm font-bold leading-relaxed mb-8 italic">{item.desc}</p>
+                      
+                      <h4 className="text-xl md:text-2xl font-black mb-2 group-hover/card:text-white transition-colors tracking-tight leading-tight">{item.name}</h4>
+                      <p className="text-accent font-black text-[10px] uppercase tracking-widest mb-4 opacity-60">{item.purpose}</p>
+                      
+                      <p className="text-foreground/50 text-sm font-medium leading-relaxed mb-8 italic">{item.summary}</p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {item.tech_used.map((tech, k) => (
+                          <span key={k} className="text-[9px] font-black uppercase tracking-widest border border-foreground/10 px-2 py-1 rounded bg-foreground/[0.02] text-foreground/40 group-hover/card:border-accent/30 group-hover/card:text-accent transition-colors">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
                       <div className="text-[10px] font-mono text-foreground/30 flex items-center gap-3 font-bold cursor-default mt-auto">
                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                          specimens/{item.path}
