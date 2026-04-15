@@ -45,6 +45,28 @@ export async function getGitHubContributions(username: string, year: number) {
   }
 }
 
+export async function getGitHubEngagement(username: string) {
+  try {
+    const currentYear = new Date().getFullYear();
+    const { data, error } = await getGitHubContributions(username, currentYear);
+    
+    if (error || !data) return { engagement: 0, latestRepo: "portfolio", error };
+
+    // Calculate weekly average engagement (last 4 weeks)
+    const recentData = data.slice(-28);
+    const totalRecent = recentData.reduce((sum, day) => sum + day.count, 0);
+    const weeklyAverage = Math.round(totalRecent / 4);
+
+    return { 
+      engagement: weeklyAverage, 
+      latestRepo: "portfolio", // Mocked as we don't have a full repo list fetcher yet
+      totalYearly: data.reduce((sum, day) => sum + day.count, 0)
+    };
+  } catch (err) {
+    return { engagement: 0, latestRepo: "portfolio", error: "Failed to calculate engagement" };
+  }
+}
+
 function generateMatchingPattern(year: number): ContributionDay[] {
   const days: ContributionDay[] = [];
   const start = new Date(year, 0, 1);
