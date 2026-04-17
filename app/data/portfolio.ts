@@ -72,9 +72,9 @@ export const githubProjects: GithubProject[] = [
     github: "https://github.com/harsh-bhadana/event-logix",
     demo: "https://event-logix.vercel.app",
     demoCredentials: [
-      { role: "Admin", email: "admin@example.com", password: "password123", icon: Shield },
-      { role: "Staff", email: "staff@example.com", password: "password123", icon: Users },
-      { role: "User", email: "user@example.com", password: "password123", icon: User }
+      { role: "Admin", email: "admin@eventlogix.com", password: "password123", icon: Shield },
+      { role: "Staff", email: "staff@eventlogix.com", password: "password123", icon: Users },
+      { role: "Public", email: "public@eventlogix.com", password: "password123", icon: User }
     ],
     graph: {
       nodes: [
