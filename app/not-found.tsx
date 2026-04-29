@@ -3,28 +3,42 @@
 import { motion } from "framer-motion";
 import { Hammer, RefreshCcw, Home, AlertCircle } from "lucide-react";
 import Link from "next/link";
-import ThemeIcon from "./components/ThemeIcon";
+import { useState, useEffect } from "react";
 
 export default function NotFound() {
+  const [shards, setShards] = useState<{ top: string; left: string; width: string; height: string; clipPath: string; transform: string }[]>([]);
+  const [monitorBars, setMonitorBars] = useState<{ duration: number; delay: number }[]>([]);
+
+  useEffect(() => {
+    const newShards = [...Array(6)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      width: `${Math.random() * 300 + 100}px`,
+      height: `${Math.random() * 300 + 100}px`,
+      clipPath: `polygon(${Math.random() * 100}% 0%, 100% ${Math.random() * 100}%, ${Math.random() * 100}% 100%, 0% ${Math.random() * 100}%)`,
+      transform: `rotate(${Math.random() * 360}deg)`,
+    }));
+    setShards(newShards);
+
+    const newBars = [...Array(20)].map(() => ({
+      duration: Math.random() * 2 + 1,
+      delay: Math.random() * 2
+    }));
+    setMonitorBars(newBars);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
       {/* Shattered Glass Effect Background */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {shards.map((shard, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1, duration: 2, repeat: Infinity, repeatType: "reverse" }}
             className="absolute border border-white/10 bg-white/5 backdrop-blur-sm"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
-              clipPath: `polygon(${Math.random() * 100}% 0%, 100% ${Math.random() * 100}%, ${Math.random() * 100}% 100%, 0% ${Math.random() * 100}%)`,
-              transform: `rotate(${Math.random() * 360}deg)`,
-            }}
+            style={shard}
           />
         ))}
       </div>
@@ -91,7 +105,7 @@ export default function NotFound() {
 
         <div className="pt-20">
           <div className="flex items-center justify-center gap-2 overflow-hidden px-10">
-            {[...Array(20)].map((_, i) => (
+            {monitorBars.map((bar, i) => (
               <motion.div
                 key={i}
                 animate={{ 
@@ -100,8 +114,8 @@ export default function NotFound() {
                 }}
                 transition={{ 
                   repeat: Infinity, 
-                  duration: Math.random() * 2 + 1,
-                  delay: Math.random() * 2
+                  duration: bar.duration,
+                  delay: bar.delay
                 }}
                 className="w-1 bg-accent/50 rounded-full"
               />

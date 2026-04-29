@@ -3,15 +3,17 @@
 import { motion } from "framer-motion";
 import { ChevronRight, ExternalLink, Github, Key, Share2, Sparkles } from "lucide-react";
 import ThemeIcon from "../ThemeIcon";
+import DynamicIcon from "../DynamicIcon";
 import { GithubProject } from "../../types/portfolio";
+import { useProjectGraph } from "../../context/ProjectGraphContext";
 
 export default function EclipseProjects({
-  projects,
-  onInspectArchitecture
+  projects
 }: {
   projects: GithubProject[];
-  onInspectArchitecture: (project: GithubProject) => void;
 }) {
+  const { setActiveProjectGraph } = useProjectGraph();
+
   return (
     <section id="projects" className="min-h-screen flex flex-col justify-center py-20 snap-start snap-always scroll-mt-32">
       <div className="mb-20 text-center md:text-left">
@@ -66,7 +68,7 @@ export default function EclipseProjects({
                   )}
                   {project.graph && (
                     <button 
-                      onClick={() => onInspectArchitecture(project)}
+                      onClick={() => setActiveProjectGraph(project)}
                       className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-accent hover:text-white transition-all bg-accent/10 hover:bg-accent px-6 py-3 rounded-2xl border border-accent/20 shadow-lg shadow-accent/5 hover:shadow-accent/20"
                     >
                       Inspect Architecture <Share2 size={18} />
@@ -111,7 +113,7 @@ export default function EclipseProjects({
                         <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-foreground/[0.03] hover:bg-foreground/[0.08] transition-all border border-transparent hover:border-accent/20">
                           <div className="flex items-center gap-4">
                             <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                               <cred.icon size={16} />
+                               <DynamicIcon name={cred.icon} size={16} />
                             </div>
                             <span className="text-[10px] font-black uppercase tracking-widest text-foreground/60">{cred.role}</span>
                           </div>

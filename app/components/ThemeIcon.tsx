@@ -19,8 +19,10 @@ import {
   AnimatedExternalLink
 } from "./AnimatedTechnicalIcons";
 
+import * as LucideIcons from "lucide-react";
+
 interface ThemeIconProps {
-  icon: React.ElementType;
+  icon: React.ElementType | string;
   size?: number;
   className?: string;
   delay?: number;
@@ -64,7 +66,8 @@ function getBgLuminance(el: HTMLElement): number {
   return 0.05;
 }
 
-export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay = 0 }: ThemeIconProps) {
+export default function ThemeIcon({ icon: IconOrName, size = 24, className = "", delay = 0 }: ThemeIconProps) {
+  const Icon = typeof IconOrName === 'string' ? (LucideIcons as any)[IconOrName] : IconOrName;
   const { theme } = useTheme();
   const [iconColor, setIconColor] = useState(DARK_BG_COLORS[0]);
   const ref = useRef<HTMLDivElement>(null);
@@ -78,7 +81,7 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
   }, [theme]);
 
   if (theme === "aurora") {
-    const iconName = (Icon as any)?.displayName || (Icon as any)?.name || "";
+    const iconName = typeof IconOrName === 'string' ? IconOrName : (Icon as any)?.displayName || (Icon as any)?.name || "";
     const nameLower = iconName.toLowerCase();
 
     let CustomAnimComp = null;
@@ -121,5 +124,5 @@ export default function ThemeIcon({ icon: Icon, size = 24, className = "", delay
     );
   }
 
-  return <Icon size={size} className={className} />;
+  return Icon ? <Icon size={size} className={className} /> : null;
 }

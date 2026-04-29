@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, use, useTransition } from "react";
 import { getGitHubContributions } from "@/app/actions/github";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
 
@@ -11,12 +11,32 @@ interface ContributionDay {
   level: number;
 }
 
-export default function GitHubContribution() {
-  const [mounted, setMounted] = useState(false);
+interface GitHubContributionProps {
+  promise?: Promise<{ data: ContributionDay[], error: string | null }>;
+}
+
+export default function GitHubContribution({ promise }: GitHubContributionProps) {
   const [data, setData] = useState<ContributionDay[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [isPending, startTransition] = useTransition();
+
+  // If a promise is provided (from the server), use it for initial data
+  const initialResult = promise ? use(promise) : null;
+
+  useEffect(() => {
+    if (initialResult) {
+      if (initialResult.error) {
+        setError(initialResult.error);
+      } else {
+        setData(initialResult.data);
+      }
+    } else {
+      // Fallback if no promise provided
+      fetchContributions(currentDate.getFullYear());
+    }
+  }, [initialResult]);
 
   const fetchContributions = useCallback(async (year: number) => {
     setLoading(true);
@@ -32,22 +52,25 @@ export default function GitHubContribution() {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-    fetchContributions(currentDate.getFullYear());
-  }, [currentDate.getFullYear(), fetchContributions]);
-
   const nextMonth = () => {
-    const next = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-    setCurrentDate(next);
+    startTransition(() => {
+      const next = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+      setCurrentDate(next);
+      if (next.getFullYear() !== currentDate.getFullYear()) {
+        fetchContributions(next.getFullYear());
+      }
+    });
   };
 
   const prevMonth = () => {
-    const prev = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-    setCurrentDate(prev);
+    startTransition(() => {
+      const prev = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+      setCurrentDate(prev);
+      if (prev.getFullYear() !== currentDate.getFullYear()) {
+        fetchContributions(prev.getFullYear());
+      }
+    });
   };
-
-  if (!mounted) return null;
 
   const monthRange = `${new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1).toLocaleString("default", { month: "short" })} - ${currentDate.toLocaleString("default", { month: "short", year: "numeric" })}`;
 
@@ -61,7 +84,6 @@ export default function GitHubContribution() {
 
   const totalCommits = filteredContributions.reduce((sum, day) => sum + day.count, 0);
 
-  // Explicitly mapped to Tailwind theme colors for v4 compiler visibility
   const getLevelClass = (level: number) => {
     if (level === 0) return "bg-[var(--gh-l0)]";
     if (level === 1) return "bg-[var(--gh-l1)]";
@@ -71,16 +93,12 @@ export default function GitHubContribution() {
     return "bg-[var(--gh-l0)]";
   };
 
-  // Calculate padding for the first week to align with Sunday
   const firstDay = filteredContributions.length > 0 ? new Date(filteredContributions[0].date) : new Date();
-  const firstDayOfWeek = firstDay.getDay(); // 0 is Sunday, 6 is Saturday
+  const firstDayOfWeek = firstDay.getDay(); 
   
   const paddedContributions: (ContributionDay | { level: 0; count: 0; date: string; isPadding: true })[] = [];
   
-  // Add padding for the start of the first week
   for (let i = 0; i < firstDayOfWeek; i++) {
-    const d = new Date(firstDay);
-    d.setDate(d.getDate() - (firstDayOfWeek - i));
     paddedContributions.push({
       level: 0,
       count: 0,
@@ -89,10 +107,8 @@ export default function GitHubContribution() {
     });
   }
   
-  // Add actual contributions
   paddedContributions.push(...filteredContributions);
   
-  // Add padding for the end of the last week
   const lastContribution = filteredContributions[filteredContributions.length - 1];
   const lastDay = lastContribution ? new Date(lastContribution.date) : new Date();
   const lastDayOfWeek = lastDay.getDay();
@@ -108,7 +124,7 @@ export default function GitHubContribution() {
   }
 
   return (
-    <div className="w-full p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col items-center">
+    <div className={`w-full p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-foreground/10 bg-foreground/[0.02] hover:bg-foreground/[0.05] transition-all relative overflow-hidden flex flex-col items-center ${isPending ? 'opacity-50' : ''}`}>
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
       <div className="mb-8 text-center w-full">
@@ -124,14 +140,16 @@ export default function GitHubContribution() {
           <div className="flex gap-2">
             <button
               onClick={prevMonth}
-              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors"
+              disabled={isPending || loading}
+              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors disabled:opacity-50"
               aria-label="Previous Period"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextMonth}
-              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors"
+              disabled={isPending || loading}
+              className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-colors disabled:opacity-50"
               aria-label="Next Period"
             >
               <ChevronRight size={20} />

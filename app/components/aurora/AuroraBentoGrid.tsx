@@ -35,13 +35,15 @@ interface LabCategory {
   items: LabItem[];
 }
 
+import { useProjectGraph } from "../../context/ProjectGraphContext";
+
 interface AuroraBentoGridProps {
   projects: Project[];
   labs: LabCategory[];
-  onInspectArchitecture?: (project: Project) => void;
 }
 
-export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture }: AuroraBentoGridProps) {
+export default function AuroraBentoGrid({ projects, labs }: AuroraBentoGridProps) {
+  const { setActiveProjectGraph } = useProjectGraph();
   return (
     <section id="projects" className="py-32 px-6 lg:pl-96 relative overflow-hidden">
       {/* Immersive Background Shapes */}
@@ -164,9 +166,9 @@ export default function AuroraBentoGrid({ projects, labs, onInspectArchitecture 
                         <ExternalLink size={18} /> Demo
                       </a>
                     )}
-                    {project.graph && onInspectArchitecture && (
+                    {project.graph && (
                       <button 
-                        onClick={() => onInspectArchitecture(project)}
+                        onClick={() => setActiveProjectGraph(project)}
                         className="text-accent hover:text-foreground transition-all flex items-center gap-2 font-label text-xs uppercase font-black"
                       >
                         <Share2 size={18} /> Inspect Engine

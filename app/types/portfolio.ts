@@ -1,5 +1,3 @@
-import { LucideIcon } from "lucide-react";
-
 export interface ProjectHighlight {
   name: string;
   description: string;
@@ -16,7 +14,7 @@ export interface Experience {
 export interface Skill {
   category: string;
   items: string[];
-  icon: LucideIcon | React.ElementType;
+  icon: string;
 }
 
 export interface ProjectGraphNode {
@@ -41,12 +39,12 @@ export interface ProjectDemoCredential {
   role: string;
   email: string;
   password: string;
-  icon: LucideIcon | React.ElementType;
+  icon: string;
 }
 
 export interface GithubProject {
   name: string;
-  icon: LucideIcon | React.ElementType;
+  icon: string;
   description: string;
   features: string[];
   highlight?: string;
@@ -73,7 +71,7 @@ export interface FeatureLabItem {
 
 export interface FeatureLab {
   category: string;
-  icon: LucideIcon | React.ElementType;
+  icon: string;
   tagline: string;
   items: FeatureLabItem[];
 }

@@ -1,16 +1,3 @@
-import {
-  Database,
-  Globe,
-  Layers,
-  LayoutDashboard,
-  Shield,
-  User,
-  Users,
-  Camera,
-  Cpu,
-  Zap,
-  Paintbrush,
-} from "lucide-react";
 import { Experience, Skill, GithubProject, FeatureLab } from "../types/portfolio";
 
 export const experiences: Experience[] = [
@@ -51,30 +38,33 @@ export const experiences: Experience[] = [
 ];
 
 export const skills: Skill[] = [
-  { category: "Frontend", items: ["Next.js (App Router)", "React", "Redux Toolkit", "Tailwind CSS", "JavaScript (ES6+)"], icon: Globe },
-  { category: "Tools & Backend", items: ["Firebase", "Git & GitHub", "REST APIs", "Content Security Policy"], icon: Database },
-  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: Layers }
+  { category: "Frontend", items: ["Next.js 16", "React 19", "Tailwind CSS 4", "Redux Toolkit", "Recharts", "Framer Motion"], icon: "Globe" },
+  { category: "Security & Validation", items: ["Zod", "Jose (JWT)", "Bcrypt", "Content Security Policy (CSP)"], icon: "Lock" },
+  { category: "Architecture & Tools", items: ["BFF Pattern", "Edge Runtime", "Partial Prerendering (PPR)", "Instrumentation", "Git & GitHub", "REST APIs"], icon: "Database" },
+  { category: "Fullstack & Test", items: ["Mongoose", "Firebase", "Vitest", "Vercel Blob"], icon: "Terminal" },
+  { category: "Deployment", items: ["Vercel", "Firebase Hosting"], icon: "Layers" }
 ];
 
 export const githubProjects: GithubProject[] = [
   {
     name: "Event Logix",
-    icon: LayoutDashboard,
+    icon: "LayoutDashboard",
     description: "A premium, role-based event orchestration ecosystem designed to bridge the gap between high-scale coordination, specialized staffing, and attendee engagement.",
     features: [
       "Triple-Role Adaptive Experience (Admin / Staff / Attendee)",
       "Real-time Logic-Driven Analytics with Recharts Integrated Engine",
-      "Automated Background Workflows via Vercel Cron Jobs"
+      "Automated Background Workflows via Vercel Cron Jobs",
+      "Secure Ticket Generation with QR Code Integration"
     ],
     highlight: "Engineered a robust 'Defensive Data Layer' with null-safety guards across Server Actions, achieving 100% stability against asynchronous data-drifting.",
     status: "In Progress",
-    tech: ["NEXT.JS 16", "MONGODB", "TYPESCRIPT", "FRAMER MOTION"],
+    tech: ["NEXT.JS 16", "MONGODB", "TYPESCRIPT", "TAILWIND 4", "FRAMER MOTION"],
     github: "https://github.com/harsh-bhadana/event-logix",
     demo: "https://event-logix.vercel.app",
     demoCredentials: [
-      { role: "Admin", email: "admin@eventlogix.com", password: "password123", icon: Shield },
-      { role: "Staff", email: "staff@eventlogix.com", password: "password123", icon: Users },
-      { role: "Public", email: "public@eventlogix.com", password: "password123", icon: User }
+      { role: "Admin", email: "admin@eventlogix.com", password: "password123", icon: "Shield" },
+      { role: "Staff", email: "staff@eventlogix.com", password: "password123", icon: "Users" },
+      { role: "Public", email: "public@eventlogix.com", password: "password123", icon: "User" }
     ],
     graph: {
       nodes: [
@@ -94,12 +84,12 @@ export const githubProjects: GithubProject[] = [
   },
   {
     name: "Clicks",
-    icon: Camera,
+    icon: "Camera",
     description: "A high-performance, dark-themed photography gallery featuring infinite scroll and a premium lightbox experience. Built with a content-first philosophy.",
     features: [
       "Infinite scroll with optimized image loading",
       "Premium lightbox gallery with custom transitions",
-      "Integration with Vercel Blob for cloud storage"
+      "Vercel Blob Global Asset Distribution for cloud storage"
     ],
     highlight: "Optimized LCP by 40% through intelligent image priority and lazy-loading strategies.",
     tech: ["Next.js 15", "Tailwind CSS", "Framer Motion", "Vercel Blob"],
@@ -124,7 +114,7 @@ const BASE = "https://next-labs-one.vercel.app";
 export const featureLabs: FeatureLab[] = [
   {
     category: "Interactive & UI Lab",
-    icon: Paintbrush,
+    icon: "Paintbrush",
     tagline: "Bridging the gap to native experience.",
     items: [
       {
@@ -143,7 +133,7 @@ export const featureLabs: FeatureLab[] = [
   },
   {
     category: "Routing Lab",
-    icon: Layers,
+    icon: "Layers",
     tagline: "Advanced navigational architectural patterns.",
     items: [
       {
@@ -157,14 +147,38 @@ export const featureLabs: FeatureLab[] = [
         included_in: "Next 13.3+",
         is_experimental: false,
         summary: "A sophisticated routing pattern that allows displaying a modal while keeping the underlying page interactive and accessible via its own URL."
+      },
+      {
+        name: "Pure Next.js i18n",
+        path: "app/routing-lab/i18n/page.tsx",
+        badge: "NATIVE i18n",
+        desc: "Scalable multi-language routing without external libraries.",
+        url: `${BASE}/routing-lab/i18n`,
+        purpose: "Scalable multi-language routing managed at the edge.",
+        tech_used: ["[locale] segments", "headers()", "Server-side Dictionaries"],
+        included_in: "Next 13+",
+        is_experimental: false,
+        summary: "Demonstrates internationalization using native Next.js features like dynamic route segments and localized dictionaries."
       }
     ]
   },
   {
     category: "The Performance Lab",
-    icon: Zap,
+    icon: "Zap",
     tagline: "Pushing responsiveness to 60fps limits.",
     items: [
+      {
+        name: "Edge Runtime RSC",
+        path: "app/i18n-edge-lab/edge-runtime/page.tsx",
+        badge: "EDGE RENDER",
+        desc: "Sub-50ms TTFB using globally distributed Edge Runtime.",
+        url: `${BASE}/i18n-edge-lab/edge-runtime`,
+        purpose: "Global distribution emphasizing instant TTFB.",
+        tech_used: ["runtime = 'edge'", "Geo-detection", "headers()"],
+        included_in: "Next 13+",
+        is_experimental: false,
+        summary: "Exposes the power of the Edge Runtime for instant localized rendering and geo-header detection."
+      },
       {
         name: "Zero-State Server CRUD",
         path: "app/performance-lab/server-crud/page.tsx",
@@ -217,7 +231,7 @@ export const featureLabs: FeatureLab[] = [
   },
   {
     category: "The Rendering Lab",
-    icon: Cpu,
+    icon: "Cpu",
     tagline: "Breaking the core of Next.js data fetching.",
     items: [
       {
@@ -291,6 +305,25 @@ export const featureLabs: FeatureLab[] = [
         included_in: "Next 16+",
         is_experimental: true,
         summary: "Explores bleeding-edge proxying capabilities in Next.js 16 for intercepting and modifying requests at the framework level before they reach the application logic."
+      }
+    ]
+  },
+  {
+    category: "DevX & Tooling Lab",
+    icon: "Activity",
+    tagline: "Maximizing observability and development velocity.",
+    items: [
+      {
+        name: "Instrumentation & Tracing",
+        path: "app/devx-lab/instrumentation/page.tsx",
+        badge: "OBSERVABILITY",
+        desc: "Server-side observability and lifecycle hooking.",
+        url: `${BASE}/devx-lab/instrumentation`,
+        purpose: "Server-side monitoring and error capturing.",
+        tech_used: ["instrumentation.ts", "register()", "onRequestError()"],
+        included_in: "Next 15+ (Stable)",
+        is_experimental: false,
+        summary: "Hooks into the Next.js server lifecycle to monitor performance and capture server-side errors into an observability stream."
       }
     ]
   }

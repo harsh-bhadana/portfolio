@@ -1,5 +1,8 @@
 "use server";
 
+// @ts-ignore - "use cache" is a new experimental directive in Next.js 16
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
+
 interface ContributionDay {
   count: number;
   date: string;
@@ -14,10 +17,12 @@ interface ApiResponse {
 }
 
 export async function getGitHubContributions(username: string, year: number) {
+  "use cache";
+  cacheLife("hours");
+
   try {
     const response = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`,
-      { next: { revalidate: 3600 } }
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`
     );
     
     if (!response.ok) {
@@ -46,6 +51,9 @@ export async function getGitHubContributions(username: string, year: number) {
 }
 
 export async function getGitHubEngagement(username: string) {
+  "use cache";
+  cacheLife("hours");
+
   try {
     const currentYear = new Date().getFullYear();
     const { data, error } = await getGitHubContributions(username, currentYear);
